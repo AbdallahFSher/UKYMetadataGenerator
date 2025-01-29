@@ -1,0 +1,3661 @@
+{
+	"Metadata": {
+		"Data Citation": {
+			"Title": "TEAMS Grant",
+			"doi": "pending",
+			"Principal Investigator": [
+				{
+					"Name": "Bjoern Bauer",
+					"ORCID": "0000-0003-3867-2251",
+					"email": "bjoern.bauer@uky.edu"
+				},
+				{
+					"Name": "Anika Hartz",
+					"ORCID": "0000-0001-9276-0688",
+					"email": "anika.hartz@uky.edu"
+				},
+				{
+					"Name": "Zhan",
+					"ORCID": "",
+					"email": ""
+				}
+			],
+			"Depositor": [
+				{
+					"Name": "Bryan Maloney",
+					"email": "bjma@uky.edu"
+				}
+			],
+			"Date of Deposit": "pending",
+			"Institution": "University of Kentucky",
+			"Keywords": "Epilepsy drug discovery anti-inflammatory",
+			"Abstract": "pending",
+			"Funding Agency": "UK",
+			"Grant Number": "x"
+		},
+		"Publications": [
+			{
+				"Authors": "",
+				"Year": "",
+				"Journal": "",
+				"Title": ""
+			}
+		],
+		"Projects": [
+			{
+				"Name": "Novel mPGES Inhibitors",
+				"Workers": [
+					{
+						"Name": "Zhan",
+						"ORCID": "",
+						"email": ""
+					},
+					{
+						"Name": "Bjoern Bauer",
+						"ORCID": "0000-0003-3867-2251",
+						"email": "bjoern.bauer@uky.edu"
+					}
+				],
+				"Aims": [
+					{
+						"Name": "Design, synthesis, & in vitro activity",
+						"Workers": [
+							{
+								"Name": "Zhan",
+								"ORCID": "",
+								"email": ""
+							},
+							{
+								"Name": "Bjoern Bauer",
+								"ORCID": "0000-0003-3867-2251",
+								"email": "bjoern.bauer@uky.edu"
+							}
+						],
+						"Studies": [
+							{
+								"Name": "Design/Synthesis",
+								"Workers": [
+									{
+										"Name": "Zhan",
+										"ORCID": "",
+										"email": ""
+									}
+								],
+								"Design": "",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "",
+										"Line/Strain": "",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Lapitinib Template",
+										"Workers": [
+											{
+												"Name": "Zhan",
+												"ORCID": "",
+												"email": ""
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Compound Synthesis",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "",
+												"Substrate": "",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "BAR002 Template",
+										"Workers": [
+											{
+												"Name": "Zhan",
+												"ORCID": "",
+												"email": ""
+											}
+										],
+										"Assays": [
+											{
+												"Name": "",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "",
+												"Substrate": "",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"Name": "In vitro activity",
+								"Workers": [
+									{
+										"Name": "Bjoern Bauer",
+										"ORCID": "0000-0003-3867-2251",
+										"email": "bjoern.bauer@uky.edu"
+									}
+								],
+								"Design": "",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "",
+										"Line/Strain": "",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Lapinitib Template",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Uncharacterized assays",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "",
+												"Substrate": "Cell cultures",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "BAR002 Template",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Uncharacterized assays",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "",
+												"Substrate": "Cell Cultures",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"Name": "Evaluation of mPGES inhibitors",
+						"Workers": [
+							{
+								"Name": "Bjoern Bauer",
+								"ORCID": "0000-0003-3867-2251",
+								"email": "bjoern.bauer@uky.edu"
+							}
+						],
+						"Studies": [
+							{
+								"Name": "PK Assessment",
+								"Workers": [
+									{
+										"Name": "Bjoern Bauer",
+										"ORCID": "0000-0003-3867-2251",
+										"email": "bjoern.bauer@uky.edu"
+									}
+								],
+								"Design": "Randomized controlled",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "Rattus norvegicus",
+										"Line/Strain": "",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "Acute SE, Acute SE + Drug",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Blood detection",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@ukuy.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "GC?",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "",
+												"Substrate": "Plasma?",
+												"Target": "Drug",
+												"Outcome Measure": "Drug levels?",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "GC?",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Brain Detection",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoen.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "GC?",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "GC?",
+												"Substrate": "Brain",
+												"Target": "Drug",
+												"Outcome Measure": "Drug level?",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"Name": "Potency of mPGES-1 inhibitor",
+								"Workers": [
+									{
+										"Name": "Bjoern Bauer",
+										"ORCID": "0000-0003-3867-2251",
+										"email": "bjoern.bauer@uky.edu"
+									}
+								],
+								"Design": "Randomized controlled",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "Rattus norvegicus",
+										"Line/Strain": "",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "SE, SE + Drug",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Acute SE Rat",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Rat Piezo",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Piezo",
+												"Substrate": "Whole Rat",
+												"Target": "Seizure Frequency",
+												"Outcome Measure": "Count of Siezures",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "Piezo",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Rat Video",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Videography",
+												"Substrate": "Whole Rat",
+												"Target": "Seizure Frequency",
+												"Outcome Measure": "Count of Siezures",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "Piezo",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "PGE2 ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "PGE2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "PGE2 ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Brain",
+												"Target": "PGE2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Preclinical Testing of mPEG-1 Inhibitors",
+				"Workers": [
+					{
+						"Name": "Bjoern Bauer",
+						"ORCID": "0000-0003-3867-2251",
+						"email": "bjoern.bauer@uky.edu"
+					}
+				],
+				"Aims": [
+					{
+						"Name": "In vivo effects of mPGES-1 inhibitors on BBB",
+						"Workers": [
+							{
+								"Name": "Bjoern Bauer",
+								"ORCID": "0000-0003-3867-2251",
+								"email": "bjoern.bauer@uky.edu"
+							}
+						],
+						"Studies": [
+							{
+								"Name": "Acute SE Rat",
+								"Workers": [
+									{
+										"Name": "Bjoern Bauer",
+										"ORCID": "0000-0003-3867-2251",
+										"email": "bjoern.bauer@uky.edu"
+									}
+								],
+								"Design": "",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "Rattus norvegicus",
+										"Line/Strain": "",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Inflammation",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Plasma",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "PGE2 ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "PGE2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Brain Capillary Leakage",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Leakage Assay",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Capillary Leakage Assay",
+												"Substrate": "Brain capillaries",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Drug Level",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Plasma GC",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "GC",
+												"Substrate": "Plasma",
+												"Target": "Drug",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Brain GC",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "GC",
+												"Substrate": "Brain",
+												"Target": "Drug",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "BBB Biomarkers",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Brain capillaries",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "S100B ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "S100B",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "P-gp Actity Assay",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Activity Assay",
+												"Substrate": "Capillaries",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "P-gp WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "P-gp",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp1 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp1",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp2 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp4 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp4",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "BCRP WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "BCRP",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"Name": "Therapeutic benefits of mPGES-1 inhibitors",
+						"Workers": [
+							{
+								"Name": "Bjoern Bauer",
+								"ORCID": "0000-0003-3867-2251",
+								"email": "bjoern.bauer@uky.edu"
+							}
+						],
+						"Studies": [
+							{
+								"Name": "Chronic SE Rats",
+								"Workers": [
+									{
+										"Name": "Bjoern Bauer",
+										"ORCID": "0000-0003-3867-2251",
+										"email": "bjoern.bauer@uky.edu"
+									}
+								],
+								"Design": "",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "Rattus Norvegicus",
+										"Line/Strain": "",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Siezure Effects",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Piezo Seizure Assessment",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Piezo",
+												"Substrate": "Whole animal",
+												"Target": "Siezure Counts",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Video Assessment",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Videography",
+												"Substrate": "Whole Animal",
+												"Target": "Siezure counts and severity",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "EEG",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "EEG",
+												"Substrate": "Brain",
+												"Target": "Seizure count and severity",
+												"Outcome Measure": "EEG Traces",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Capillary Leakage",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Capillary Leakage",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Capillary leakage",
+												"Substrate": "Brain capillaries",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Drug Level",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Plasma Assay",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "GC",
+												"Substrate": "Plasma",
+												"Target": "Drug",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Brain Level",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "GC",
+												"Substrate": "Brain",
+												"Target": "Drug",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Inflammation",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Plasma",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "PGE2 ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "PGE2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "BBB Biomarkers",
+										"Workers": [
+											{
+												"Name": "Bjoern Bauer",
+												"ORCID": "0000-0003-3867-2251",
+												"email": "bjoern.bauer@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Brain capillaries",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "S100B ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "S100B",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "P-gp Actity Assay",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Activity Assay",
+												"Substrate": "Capillaries",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "P-gp WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "P-gp",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp1 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp1",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp2 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp4 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp4",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "BCRP WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "BCRP",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			},
+			{
+				"Name": "Clinical pilot study with FDA approved LOX/COX inhibitors",
+				"Workers": [
+					{
+						"Name": "Anika Hartz",
+						"ORCID": "0000-0001-9276-0688",
+						"email": "anika.hartz@uky.edu"
+					}
+				],
+				"Aims": [
+					{
+						"Name": "Effects of mPGES-1 inhibitors in human brain capillaries",
+						"Workers": [
+							{
+								"Name": "Anika Hartz",
+								"ORCID": "0000-0001-9276-0688",
+								"email": "anika.hartz@uky.edu"
+							}
+						],
+						"Studies": [
+							{
+								"Name": "Human brain capillaries and plasma",
+								"Workers": [
+									{
+										"Name": "Anika Hartz",
+										"ORCID": "0000-0001-9276-0688",
+										"email": "anika.hartz@uky.edu"
+									}
+								],
+								"Design": "",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "Homo sapiens",
+										"Line/Strain": "",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Capillary leakage",
+										"Workers": [
+											{
+												"Name": "Anika Hartz",
+												"ORCID": "0000-0001-9276-0688",
+												"email": "anika.hartz@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Leakage assay",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Leakage assay",
+												"Substrate": "Brain capillaries",
+												"Target": "",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "P-gp",
+										"Workers": [
+											{
+												"Name": "Anika Hartz",
+												"ORCID": "0000-0001-9276-0688",
+												"email": "anika.hartz@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Brain capillaries",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "P-gp WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "P-gp",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "P-gp activity assay",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "",
+												"Substrate": "Brain capillaries",
+												"Target": "P-gp activity",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "TJ Proteins",
+										"Workers": [
+											{
+												"Name": "Anika Hartz",
+												"ORCID": "0000-0001-9276-0688",
+												"email": "anika.hartz@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Brain capillaries",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp1 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (Automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp1",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp2 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "Mrp4 WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "Mrp4",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "P-gp WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "P-gp",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "BCRP WES",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Western (automated)",
+												"Substrate": "Brain capillaries",
+												"Target": "BCRP",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Inflammation",
+										"Workers": [
+											{
+												"Name": "Anika Hartz",
+												"ORCID": "0000-0001-9276-0688",
+												"email": "anika.hartz@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Plasma",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "PGE2 ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "PGE2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"Name": "Clinical Pilot Study",
+						"Workers": [
+							{
+								"Name": "Anika Hartz",
+								"ORCID": "0000-0001-9276-0688",
+								"email": "anika.hartz@uky.edu"
+							}
+						],
+						"Studies": [
+							{
+								"Name": "Epilepsy Patients",
+								"Workers": [
+									{
+										"Name": "Anika Hartz",
+										"ORCID": "0000-0001-9276-0688",
+										"email": "anika.hartz@uky.edu"
+									}
+								],
+								"Design": "Randomized controlled",
+								"DesignType": "",
+								"Organisms": [
+									{
+										"Genus species": "Homo sapiens",
+										"Line/Strain": "Epilepsy patients",
+										"Age/Passage": ""
+									}
+								],
+								"Treatments/Groups": "",
+								"Start Date": "",
+								"End Date": "",
+								"Equipment": [
+									{
+										"Type": "",
+										"Make": "",
+										"Model": "",
+										"Settings": ""
+									}
+								],
+								"Foci": [
+									{
+										"Name": "Seizure Burden",
+										"Workers": [
+											{
+												"Name": "Anika Hartz",
+												"ORCID": "0000-0001-9276-0688",
+												"email": "anika.hartz@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Engel Classification",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Engel Classification",
+												"Substrate": "Patient",
+												"Target": "Seizure count and severity",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Plasma Drug Levels",
+										"Workers": [
+											{
+												"Name": "Anika Hartz",
+												"ORCID": "0000-0001-9276-0688",
+												"email": "anika.hartz@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Plasma Drug Level Assay",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "GC",
+												"Substrate": "Plasma",
+												"Target": "Drug",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									},
+									{
+										"Name": "Plasma Biomarker Levels",
+										"Workers": [
+											{
+												"Name": "Anika Hartz",
+												"ORCID": "0000-0001-9276-0688",
+												"email": "anika.hartz@uky.edu"
+											}
+										],
+										"Assays": [
+											{
+												"Name": "Bradford",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "Bradford",
+												"Substrate": "Plasma",
+												"Target": "Protein",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "S100B ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "S100B",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											},
+											{
+												"Name": "PGE2 ELISA",
+												"Assayists": [
+													{
+														"Name": "",
+														"ORCID": "",
+														"email": ""
+													}
+												],
+												"Type": "ELISA",
+												"Substrate": "Plasma",
+												"Target": "PGE2",
+												"Outcome Measure": "",
+												"Date": [
+													{
+														"Start": "",
+														"End": ""
+													}
+												],
+												"Equipment": [
+													{
+														"Type": "",
+														"Make": "",
+														"Model": "",
+														"Settings": ""
+													}
+												],
+												"Kit/Reagents": [
+													{
+														"Type": "",
+														"Make": "",
+														"Catalogue #": "",
+														"Parameters": [
+															{
+																"Material": "",
+																"Condition": ""
+															}
+														]
+													}
+												],
+												"Data": [
+													{
+														"data type": "",
+														"data source": "",
+														"file name": "",
+														"file type": "",
+														"file date": "",
+														"file size": "",
+														"recommended software": ""
+													}
+												]
+											}
+										]
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}
