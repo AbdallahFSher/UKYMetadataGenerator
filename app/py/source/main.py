@@ -19,7 +19,7 @@ class Window(QtWidgets.QWidget):
 
         self.jsonText = QtWidgets.QLabel()
         self.jsonText.setWordWrap(True)
-        self.jsonText.setMinimumSize(400, 200)
+        # self.jsonText.setMinimumSize(400, 200)
 
         self.jsonScrollArea = QtWidgets.QScrollArea()
         self.jsonScrollArea.setWidgetResizable(True)
