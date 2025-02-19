@@ -2,19 +2,27 @@
 #define NODE_H
 
 #include <QtWidgets>
+#include <qlineedit.h>
 
-class node
+
+
+class Node : public QLineEdit
 {
+    Q_OBJECT
+
 public:
-    node();
-    node *parent;
+    Node(QWidget *parent = nullptr, const char *name = nullptr);
+    ~Node() {}
+
+    Node *parent;
     QString name;
     QString key;
     QString value;
-    std::vector<node> children;
+    std::vector<Node> children;
+    QTextEdit *widget;
 
-    node* getParent();
-    void setParent(node *newParent);
+    Node* getParent();
+    void setParent(Node *newParent);
 
     QString getName();
     void setName(QString newName);
@@ -25,11 +33,14 @@ public:
     QString getValue();
     void setValue(QString newValue);
 
-    void addChild(node newChild);
-    void removeChild(node oldChild);
+    void addChild(Node newChild);
+    void removeChild(Node oldChild);
     void removeChild(int index);
 
-    bool equals(node node2);
+    bool equals(Node Node2);
+
+private:
+    QLineEdit *lineEdit;
 };
 
 #endif // NODE_H

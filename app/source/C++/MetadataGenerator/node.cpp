@@ -1,64 +1,69 @@
-#include "node.h"
+#include "Node.h"
 
-node::node() {
+Node::Node(QWidget *parent, const char *name)
+    : QLineEdit(parent)
+{
     this->parent;
     this->name = "";
     this->key = "";
     this->value = "";
-    this->children = std::vector<node>();
+    this->children = std::vector<Node>();
+    this->widget = new QTextEdit();
+    widget->setText(name);
 }
 
-node* node::getParent() {
+Node* Node::getParent() {
     return parent;
 }
 
-void node::setParent(node *newParent) {
+void Node::setParent(Node *newParent) {
     parent = newParent;
 }
 
-QString node::getName() {
+QString Node::getName() {
     return name;
 }
 
-void node::setName(QString newName) {
+void Node::setName(QString newName) {
     name = newName;
 }
 
-QString node::getKey() {
+QString Node::getKey() {
     return key;
 }
 
-void node::setKey(QString newKey) {
+void Node::setKey(QString newKey) {
     key = newKey;
 }
 
-QString node::getValue() {
+QString Node::getValue() {
     return value;
 }
 
-void node::setValue(QString newValue) {
+void Node::setValue(QString newValue) {
     value = newValue;
 }
 
-void node::addChild(node newChild) {
-    children.push_back(newChild);
+void Node::addChild(Node newChild) {
+//    children.push_back(newChild);
 }
 
-void node::removeChild(node oldChild) {
-    int index = 0;
-    while (!node(children[index]).equals(oldChild)) {
-        index++;
-    }
-    removeChild(index);
+void Node::removeChild(Node oldChild) {
+//    int index = 0;
+//    while (!children[index].equals(oldChild)) {
+//        index++;
+//    }
+//    removeChild(index);
 }
 
-void node::removeChild(int index) {
-    children.erase(children.begin() + index);
+
+void Node::removeChild(int index) {
+//    children.erase(children.begin() + index);
 }
 
-bool node::equals(node node2) {
-    if (parent == node2.parent && name == node2.name &&
-        key == node2.key && value == node2.value) {
+bool Node::equals(Node Node2) {
+    if (parent == Node2.parent && name == Node2.name &&
+        key == Node2.key && value == Node2.value) {
         return true;
     }
     return false;
