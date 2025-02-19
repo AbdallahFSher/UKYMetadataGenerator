@@ -1,0 +1,25 @@
+# ninja log v6
+17	939	7611048794508341	MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+17	939	7611048794508341	MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+17	939	7611048794508341	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+17	939	7611048794508341	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+944	2972	7611048795555551	CMakeFiles/MetadataGenerator.dir/MetadataGenerator_autogen/mocs_compilation.cpp.obj	5b2cedec7a4f3568
+948	2983	7611048795585591	CMakeFiles/MetadataGenerator.dir/main.cpp.obj	de6cdda9cf39da54
+951	6666	7611048795615620	CMakeFiles/MetadataGenerator.dir/mainwindow.cpp.obj	bad50d460200961b
+53	261	7611049325994016	MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+53	261	7611049325994016	MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+53	261	7611049325994016	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+53	261	7611049325994016	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+267	6276	7611049328136639	CMakeFiles/MetadataGenerator.dir/node.cpp.obj	4be59d26568523ed
+263	6297	7611049328086587	CMakeFiles/MetadataGenerator.dir/mainwindow.cpp.obj	bad50d460200961b
+6297	6692	7611049388432386	MetadataGenerator.exe	5bc553223d054449
+43	245	7611051770114388	MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+43	245	7611051770114388	MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+43	245	7611051770114388	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+43	245	7611051770114388	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+41	232	7611055193866269	MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+41	232	7611055193866269	MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+41	232	7611055193866269	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/timestamp	8dbd1978169f0ffa
+41	232	7611055193866269	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/mocs_compilation.cpp	8dbd1978169f0ffa
+233	5450	7611055195792347	CMakeFiles/MetadataGenerator.dir/mainwindow.cpp.obj	bad50d460200961b
+5450	5769	7611055247956653	MetadataGenerator.exe	5bc553223d054449

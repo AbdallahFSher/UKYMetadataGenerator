@@ -1,0 +1,9 @@
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/MetadataGenerator.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/edit_cache.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/rebuild_cache.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/list_install_components.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/install.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/install/local.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/install/strip.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/MetadataGenerator_autogen_timestamp_deps.dir
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/MetadataGenerator_autogen.dir

@@ -17,20 +17,23 @@ void MainWindow::loadJsonButtonClicked(){
     if (fileName != "") {
         cout << "File Found" << endl;
     }
+
     QFile file(fileName);
-    if(!file.open(QIODevice::ReadOnly)) {
-        QMessageBox::information(0, "error", file.errorString());
+    QString jsonString;
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        jsonString = file.readAll();
+        file.close();
     }
+    else
+        qDebug()<< "file not found";
 
-    QTextStream in(&file);
+    auto jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
+    QJsonValue val;
+    QByteArray byteArray;
+    byteArray = QJsonDocument(jsonDoc).toJson();
 
-    QStringList fields;
-    while(!in.atEnd()) {
-        QString line = in.readLine();
-        fields.append(line);
-    }
     file.close();
-    ui->jsonLabel->setText(fields.join("\n"));
+    ui->jsonLabel->setText(byteArray);
 }
 
 MainWindow::~MainWindow()
