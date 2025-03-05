@@ -9,10 +9,18 @@ using namespace std;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    Node *beans = new Node(this, "bomb");
-    Node *beans2 = new Node(this, "bones");
-    beans->widget->setText("AHAAHAH");
-    beans2->widget->setText("AHAAHAH");
+    //QLayout *layout = this->ui->nodeHolderr;
+
+    Node *beans = new Node(this->ui->nodeHolder, "bomb");
+    Node *beans2 = new Node(this->ui->nodeHolder, "bones");
+    beans->setText("One");
+    beans->adjustSize();
+    beans2->setText("Two");
+    beans->move(200, 200);
+
+
+    //layout->addWidget(beans);
+    //layout->addWidget(beans2);
 }
 
 void MainWindow::loadJsonButtonClicked(){
@@ -33,7 +41,6 @@ void MainWindow::loadJsonButtonClicked(){
         qDebug()<< "file not found";
 
     auto jsonDoc = QJsonDocument::fromJson(jsonString.toUtf8());
-    QJsonValue val;
     QByteArray byteArray;
     byteArray = QJsonDocument(jsonDoc).toJson();
 

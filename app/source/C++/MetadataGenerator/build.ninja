@@ -89,6 +89,14 @@ build CMakeFiles/MetadataGenerator.dir/node.cpp.obj: CXX_COMPILER__MetadataGener
   OBJECT_DIR = CMakeFiles\MetadataGenerator.dir
   OBJECT_FILE_DIR = CMakeFiles\MetadataGenerator.dir
 
+build CMakeFiles/MetadataGenerator.dir/fileparser.cpp.obj: CXX_COMPILER__MetadataGenerator_unscanned_Debug C$:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/fileparser.cpp || cmake_object_order_depends_target_MetadataGenerator
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_SQL_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\MetadataGenerator.dir\fileparser.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/include -isystem C:/Qt/6.8.2/mingw_64/include/QtCore -isystem C:/Qt/6.8.2/mingw_64/include -isystem C:/Qt/6.8.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.8.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.8.2/mingw_64/include/QtGui -isystem C:/Qt/6.8.2/mingw_64/include/QtSql
+  OBJECT_DIR = CMakeFiles\MetadataGenerator.dir
+  OBJECT_FILE_DIR = CMakeFiles\MetadataGenerator.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target MetadataGenerator
@@ -97,7 +105,7 @@ build CMakeFiles/MetadataGenerator.dir/node.cpp.obj: CXX_COMPILER__MetadataGener
 #############################################
 # Link the executable MetadataGenerator.exe
 
-build MetadataGenerator.exe: CXX_EXECUTABLE_LINKER__MetadataGenerator_Debug CMakeFiles/MetadataGenerator.dir/MetadataGenerator_autogen/mocs_compilation.cpp.obj CMakeFiles/MetadataGenerator.dir/main.cpp.obj CMakeFiles/MetadataGenerator.dir/mainwindow.cpp.obj CMakeFiles/MetadataGenerator.dir/databasemanager.cpp.obj CMakeFiles/MetadataGenerator.dir/node.cpp.obj | C$:/Qt/6.8.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.8.2/mingw_64/lib/libQt6Sql.a C$:/Qt/6.8.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.8.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.8.2/mingw_64/lib/libQt6EntryPoint.a || MetadataGenerator_autogen MetadataGenerator_autogen_timestamp_deps
+build MetadataGenerator.exe: CXX_EXECUTABLE_LINKER__MetadataGenerator_Debug CMakeFiles/MetadataGenerator.dir/MetadataGenerator_autogen/mocs_compilation.cpp.obj CMakeFiles/MetadataGenerator.dir/main.cpp.obj CMakeFiles/MetadataGenerator.dir/mainwindow.cpp.obj CMakeFiles/MetadataGenerator.dir/databasemanager.cpp.obj CMakeFiles/MetadataGenerator.dir/node.cpp.obj CMakeFiles/MetadataGenerator.dir/fileparser.cpp.obj | C$:/Qt/6.8.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.8.2/mingw_64/lib/libQt6Sql.a C$:/Qt/6.8.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.8.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.8.2/mingw_64/lib/libQt6EntryPoint.a || MetadataGenerator_autogen MetadataGenerator_autogen_timestamp_deps
   FLAGS = -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.8.2/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.8.2/mingw_64/lib/libQt6Sql.a  C:/Qt/6.8.2/mingw_64/lib/libQt6Gui.a  -ld3d11  -ldxgi  -ldxguid  -ld3d12  C:/Qt/6.8.2/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.8.2/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

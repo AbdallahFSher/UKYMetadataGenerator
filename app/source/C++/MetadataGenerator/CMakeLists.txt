@@ -28,6 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         node.h node.cpp
         databasemanager.h databasemanager.cpp
+        fileparser.h fileparser.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

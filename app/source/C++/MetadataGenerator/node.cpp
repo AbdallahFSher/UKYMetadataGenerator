@@ -1,15 +1,17 @@
 #include "Node.h"
+#include <iostream>
+
+using namespace std;
 
 Node::Node(QWidget *parent, const char *name)
-    : QLineEdit(parent)
+    : QTextEdit(parent)
 {
     this->parent;
     this->name = "";
     this->key = "";
     this->value = "";
     this->children = std::vector<Node>();
-    this->widget = new QTextEdit();
-    widget->setText(name);
+    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
 }
 
 Node* Node::getParent() {
@@ -67,4 +69,34 @@ bool Node::equals(Node Node2) {
         return true;
     }
     return false;
+}
+
+void Node::mousePressEvent(QMouseEvent *event)
+{
+    cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
+    if (event->button() == Qt::LeftButton) {
+
+        QPoint startPos = mapFromGlobal(QCursor::pos());
+
+
+        QDrag *drag = new QDrag(this);
+        QMimeData *mimeData = new QMimeData;
+
+        mimeData->setText("");
+        drag->setMimeData(mimeData);
+
+        Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
+        QPoint endPos = mapFromGlobal(QCursor::pos());
+        QPoint diff = endPos - startPos;
+        //QPoint diff = endPos;
+
+        cout << "INITALPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
+        this->move(this->pos() + diff);
+        cout << "ENDPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
+        cout << "START MOUSE POS: " << (QString("%1x%2").arg(startPos.x()).arg(startPos.y())).toStdString() << endl;
+        cout << "END MOUSE POS: " << (QString("%1x%2").arg(endPos.x()).arg(endPos.y())).toStdString() << endl;
+        cout << "DIFF: " << (QString("%1x%2").arg(diff.x()).arg(diff.y())).toStdString() << endl;
+
+        cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
+    }
 }

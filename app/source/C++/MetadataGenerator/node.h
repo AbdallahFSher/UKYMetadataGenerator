@@ -6,7 +6,7 @@
 
 
 
-class Node : public QLineEdit
+class Node : public QTextEdit
 {
     Q_OBJECT
 
@@ -20,6 +20,7 @@ public:
     QString value;
     std::vector<Node> children;
     QTextEdit *widget;
+    QSpacerItem *spacer;
 
     Node* getParent();
     void setParent(Node *newParent);
@@ -38,6 +39,7 @@ public:
     void removeChild(int index);
 
     bool equals(Node Node2);
+    void mousePressEvent(QMouseEvent *event);
 
 private:
     QLineEdit *lineEdit;

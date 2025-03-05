@@ -77,13 +77,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 67,
+				"line" : 69,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 50,
+				"line" : 52,
 				"parent" : 0
 			},
 			{
@@ -413,7 +413,8 @@
 				1,
 				2,
 				5,
-				8
+				8,
+				10
 			]
 		}
 	],
@@ -543,7 +544,8 @@
 				1,
 				2,
 				5,
-				8
+				8,
+				10
 			]
 		},
 		{
@@ -553,7 +555,8 @@
 				3,
 				6,
 				7,
-				9
+				9,
+				11
 			]
 		},
 		{
@@ -567,14 +570,14 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				10
+				12
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				11
+				13
 			]
 		}
 	],
@@ -629,6 +632,17 @@
 			"backtrace" : 4,
 			"compileGroupIndex" : 0,
 			"path" : "node.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "fileparser.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "fileparser.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
