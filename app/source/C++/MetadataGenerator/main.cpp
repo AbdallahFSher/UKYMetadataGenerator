@@ -1,11 +1,12 @@
-#include <QCoreApplication>
+#include <QApplication>
 #include <QSqlQuery>
 #include <QDebug>
 #include <QSqlError>
 #include "DatabaseManager.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[]) {
-    QCoreApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     // Open the database
     DatabaseManager& dbManager = DatabaseManager::instance();
@@ -39,6 +40,9 @@ int main(int argc, char *argv[]) {
         QString name = query.value(1).toString();
         qDebug() << "ID:" << id << "Name:" << name;
     }
+
+    MainWindow mw = new MainWindow();
+    mw.show();
 
     return app.exec();
 }

@@ -45,7 +45,7 @@
          <x>0</x>
          <y>0</y>
          <width>780</width>
-         <height>507</height>
+         <height>68</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -73,6 +73,28 @@
            <bool>true</bool>
           </property>
          </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QScrollArea" name="scrollArea_2">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="nodeHolder">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>780</width>
+         <height>431</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="nodeHolderr"/>
         </item>
        </layout>
       </widget>
