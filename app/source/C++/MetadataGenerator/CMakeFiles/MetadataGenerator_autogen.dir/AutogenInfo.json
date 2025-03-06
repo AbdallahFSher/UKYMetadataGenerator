@@ -368,6 +368,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.h",
+			"MU",
+			"EWIEGA46WW/moc_colorhandler.cpp",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/databasemanager.h",
 			"MU",
 			"EWIEGA46WW/moc_databasemanager.cpp",
@@ -465,6 +471,11 @@
 	"SETTINGS_FILE" : "C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/CMakeFiles/MetadataGenerator_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.cpp",
+			"MU",
+			null
+		],
 		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/databasemanager.cpp",
 			"MU",

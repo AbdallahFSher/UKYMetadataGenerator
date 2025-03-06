@@ -3,6 +3,7 @@
 #include <QtWidgets>
 #include <iostream>
 #include "node.h"
+#include "colorhandler.h"
 
 using namespace std;
 
@@ -18,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     beans2->setText("Two");
     beans->move(200, 200);
 
+    ColorHandler *colorHandler = new ColorHandler();
+
+    this->setPalette(colorHandler->getPalette());
 
     //layout->addWidget(beans);
     //layout->addWidget(beans2);
