@@ -20,9 +20,6 @@ set(PROJECT_SOURCES
         mainwindow.ui
         databasemanager.cpp
         databasemanager.h
-        schema.h
-        schema.cpp
-        schemahandler.h schemahandler.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

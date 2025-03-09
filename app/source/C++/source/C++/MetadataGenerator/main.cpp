@@ -1,19 +1,11 @@
+#include <QCoreApplication>
 #include <QSqlQuery>
 #include <QDebug>
 #include <QSqlError>
-#include <QApplication>
-#include "schemahandler.h"
 #include "DatabaseManager.h"
-#include "mainwindow.h"
 
 int main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    MainWindow w;
-
-    // Schema Testing
-    // Open schema handler
-    SchemaHandler schemaHandler = SchemaHandler();
-    schemaHandler.addSchema("./exampleSchema.sma");
+    QCoreApplication app(argc, argv);
 
     // Open the database
     DatabaseManager& dbManager = DatabaseManager::instance();
@@ -48,6 +40,5 @@ int main(int argc, char *argv[]) {
         qDebug() << "ID:" << id << "Name:" << name;
     }
 
-    w.show();
     return app.exec();
 }
