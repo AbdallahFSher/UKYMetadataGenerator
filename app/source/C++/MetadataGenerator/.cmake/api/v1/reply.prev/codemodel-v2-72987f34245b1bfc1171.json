@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-93431aeb4ff5be379811.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "MetadataGenerator",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "MetadataGenerator::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MetadataGenerator-Debug-6bd809d9b52d37107810.json",
+					"name" : "MetadataGenerator",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MetadataGenerator_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MetadataGenerator_autogen-Debug-c9382ed295ebf68ad4a4.json",
+					"name" : "MetadataGenerator_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MetadataGenerator_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MetadataGenerator_autogen_timestamp_deps-Debug-c97a4d10cd671aef2d1d.json",
+					"name" : "MetadataGenerator_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator",
+		"source" : "C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

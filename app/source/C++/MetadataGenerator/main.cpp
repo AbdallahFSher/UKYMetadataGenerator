@@ -1,3 +1,4 @@
+#include <QApplication>
 #include <QSqlQuery>
 #include <QDebug>
 #include <QSqlError>
@@ -8,7 +9,6 @@
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    MainWindow w;
 
     // Schema Testing
     // Open schema handler
@@ -48,6 +48,8 @@ int main(int argc, char *argv[]) {
         qDebug() << "ID:" << id << "Name:" << name;
     }
 
-    w.show();
+    MainWindow mw = new MainWindow();
+    mw.show();
+
     return app.exec();
 }
