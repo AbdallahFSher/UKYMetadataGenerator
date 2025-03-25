@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     // Schema Testing
     // Open schema handler
     SchemaHandler schemaHandler = SchemaHandler();
-    schemaHandler.addSchema("./exampleSchema.sma");
+    schemaHandler.addSchema("C:\\Users\\abdal\\Documents\\GitHub\\UKYMetadataGenerator\\app\\examples\\exampleSchema.txt");
 
     // Open the database
     DatabaseManager& dbManager = DatabaseManager::instance();
