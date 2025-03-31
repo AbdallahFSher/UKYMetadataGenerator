@@ -2,54 +2,65 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include <QSqlError>
-#include <QApplication>
 #include "schemahandler.h"
 #include "DatabaseManager.h"
 #include "mainwindow.h"
 
+void insertFieldTree(const std::shared_ptr<Field>& node, int parentId, DatabaseManager& dbManager) {
+    int currentId = dbManager.insertSchemaField(parentId, QString::fromStdString(node->name));
+    if (currentId == -1) return;
+    for (const auto& child : node->children) {
+        insertFieldTree(child, currentId, dbManager);
+    }
+}
+
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    // Schema Testing
-    // Open schema handler
-    SchemaHandler schemaHandler = SchemaHandler();
-    schemaHandler.addSchema("C:\\Users\\abdal\\Documents\\GitHub\\UKYMetadataGenerator\\app\\examples\\exampleSchema.txt");
-
-    // Open the database
+    // Open the database FIRST
     DatabaseManager& dbManager = DatabaseManager::instance();
     if (!dbManager.openDatabase("example.db")) {
         return -1;
     }
 
-    // Create a table
+    // Create the table BEFORE inserting data
     QSqlQuery query(dbManager.database());
-    if (!query.exec("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)")) {
-        qDebug() << "Error: Could not create table:" << query.lastError().text();
+    if (!query.exec("CREATE TABLE IF NOT EXISTS schema_fields ("
+                    "id INTEGER PRIMARY KEY, "
+                    "parent_id INTEGER, "
+                    "name TEXT, "
+                    "FOREIGN KEY(parent_id) REFERENCES schema_fields(id))")) {
+        qDebug() << "Error creating schema table:" << query.lastError().text();
         return -1;
     }
 
-    // Insert data
-    query.prepare("INSERT INTO users (name) VALUES (:name)");
-    query.bindValue(":name", "John Doe");
-    if (!query.exec()) {
-        qDebug() << "Error: Could not insert data:" << query.lastError().text();
-        return -1;
+    // Then handle the schema
+    SchemaHandler schemaHandler;
+    Schema* currentSchema = schemaHandler.addSchema("C:/Users/Caleb Fields/Downloads/UKYMetadataGenerator/app/examples/exampleSchema.txt");
+
+    if (currentSchema) {
+        auto rootField = currentSchema->getRoot();
+        if (rootField) {
+            insertFieldTree(rootField, 0, dbManager); // 0 indicates no parent
+        }
     }
 
-    // Query data
-    if (!query.exec("SELECT id, name FROM users")) {
-        qDebug() << "Error: Could not query data:" << query.lastError().text();
-        return -1;
+    // Print the table contents
+    qDebug() << "\nDatabase Contents:";
+    if (!query.exec("SELECT id, parent_id, name FROM schema_fields ORDER BY id")) {
+        qDebug() << "Error reading schema table:" << query.lastError().text();
+    } else {
+        qDebug() << "ID\tParent\tName";
+        qDebug() << "---------------------";
+        while (query.next()) {
+            qDebug() << query.value(0).toInt() << "\t"
+                     << query.value(1).toInt() << "\t"
+                     << query.value(2).toString();
+        }
     }
 
-    while (query.next()) {
-        int id = query.value(0).toInt();
-        QString name = query.value(1).toString();
-        qDebug() << "ID:" << id << "Name:" << name;
-    }
-
-    MainWindow mw = new MainWindow();
-    mw.show();
+    MainWindow *mw = new MainWindow();
+    mw->show();
 
     return app.exec();
 }

@@ -15,16 +15,13 @@ Schema* SchemaHandler::addSchema(Schema* schema) {
     return this->currentSchema;
 }
 
-Schema SchemaHandler::addSchema(const char* inFile) {
-    Schema newSchema = Schema();
-    auto curr = newSchema.getRoot();
-    Field* newField;
-
-    // Parse out information
-    std::shared_ptr<Field> root = extractFieldNames(inFile, newSchema);
-    newSchema.setRoot(root);
-    newSchema.printTree(root, 0);
-
+Schema* SchemaHandler::addSchema(const char* inFile) {
+    Schema* newSchema = new Schema();
+    auto root = extractFieldNames(inFile, *newSchema);
+    newSchema->setRoot(root);
+    newSchema->printTree(root, 0);
+    schemaList.push_back(newSchema);
+    currentSchema = newSchema;
     return newSchema;
 }
 
