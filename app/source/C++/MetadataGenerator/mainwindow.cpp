@@ -31,12 +31,12 @@ MainWindow::MainWindow(QWidget *parent)
     setupConnections();
 
     // Initialize nodes
-    Node *node1 = new Node(ui->nodeHolder, "node1");
-    Node *node2 = new Node(ui->nodeHolder, "node2");
-    node1->setText("One");
-    node1->adjustSize();
-    node2->setText("Two");
-    node1->move(200, 200);
+    //Node *node1 = new Node(ui->nodeHolder, "node1");
+    //Node *node2 = new Node(ui->nodeHolder, "node2");
+    //node1->setText("One");
+    //node1->adjustSize();
+    //node2->setText("Two");
+    //node1->move(200, 200);
 
     ColorHandler *colorHandler = new ColorHandler();
 
