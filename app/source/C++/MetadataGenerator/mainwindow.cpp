@@ -3,6 +3,7 @@
 #include <QtWidgets>
 #include <iostream>
 #include "node.h"
+#include "colorhandler.h"
 #include "suggestionmanager.h"
 
 using namespace std;
@@ -28,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent)
     node1->move(200, 200);
 }
 
+    ColorHandler *colorHandler = new ColorHandler();
+
+    this->setPalette(colorHandler->getPalette());
 void MainWindow::handleTextInputChanged(const QString& text)
 {
     m_suggestionManager->requestSuggestions(text);

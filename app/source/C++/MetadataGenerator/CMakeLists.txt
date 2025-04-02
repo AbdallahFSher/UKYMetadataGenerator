@@ -32,6 +32,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         node.h node.cpp
         databasemanager.h databasemanager.cpp
         fileparser.h fileparser.cpp
+        colorhandler.h colorhandler.cpp
         suggestionmanager.h
         suggestionmanager.cpp
 
