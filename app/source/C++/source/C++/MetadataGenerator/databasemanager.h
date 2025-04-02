@@ -12,8 +12,6 @@ public:
     bool openDatabase(const QString& path);
     void closeDatabase();
     QSqlDatabase& database();
-    int insertSchemaField(int parentId, const QString& name);
-    void printSchemaTable();
 
 private:
     DatabaseManager();
