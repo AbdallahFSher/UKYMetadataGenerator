@@ -1,1 +1,5 @@
 env/
+app/source/C++/build*
+app/source/C++/release-build
+app/source/C++/MetadataGenerator/.idea
+app/source/C++/MetadataGenerator/cmake-build-debug

@@ -20,21 +20,13 @@ set(PROJECT_SOURCES
         mainwindow.ui
         databasemanager.cpp
         databasemanager.h
-        schema.h
-        schema.cpp
-        schemahandler.h schemahandler.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(MetadataGenerator
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        node.h node.cpp
         databasemanager.h databasemanager.cpp
-        fileparser.h fileparser.cpp
-        suggestionmanager.h
-        suggestionmanager.cpp
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET MetadataGenerator APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
