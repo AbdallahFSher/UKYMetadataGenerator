@@ -25,7 +25,7 @@ bool DatabaseManager::openDatabase(const QString& path) {
     return true;
 }
 
-
+// TODO: Update to not add duplicate schema fields
 int DatabaseManager::insertSchemaField(int parentId, const QString& name) {
     QSqlQuery query(db);
     query.prepare("INSERT INTO schema_fields (parent_id, name) VALUES (:parent_id, :name)");

@@ -4,6 +4,10 @@
 #include <QMainWindow>
 #include <QCompleter>
 #include <QLineEdit>
+#include <QtWidgets>
+#include "suggestionmanager.h"
+#include "fileparser.h"
+#include "schemahandler.h"
 
 class SuggestionManager;
 class Node;
@@ -30,6 +34,8 @@ private:
     SuggestionManager* m_suggestionManager;
     QCompleter* m_completer;
     QLineEdit* m_textInput;
+    FileParser* fileParser;
+    SchemaHandler* schemaHandler;
 
     void setupAutocomplete();
     void createTextInputIfNeeded();

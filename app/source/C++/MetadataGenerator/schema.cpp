@@ -24,26 +24,8 @@ std::shared_ptr<Field> Schema::resetCurr() {
     return curr;
 }
 
-/*
-// Creates field as child of curr
-// Sets curr to new field
-// returns curr
-Field* Schema::createField(Field* field) {
-    if(root == nullptr) {
-        root = field;
-        curr = root;
-    } else {
-        if(!field->parent)
-            field->parent = curr;
-        curr->children.push_back(field);
-        curr = field;
-    }
 
-    return curr;
-}
-*/
-
-Field* Schema::createField(Field* parent, std::string name) {
+Field* Schema::createField(std::shared_ptr<Field> parent, std::string name) {
     Field* out = new Field(nullptr);
     out->parent = parent;
     out->name = name;
@@ -74,6 +56,7 @@ void Schema::addFieldToTree(std::shared_ptr<Field> root, const std::vector<std::
         if (it == currentNode->children.end()) {
             // If not, add a new child node
             auto newNode = std::make_shared<Field>(part);
+            newNode->parent = currentNode;
             currentNode->children.push_back(newNode);
             currentNode = newNode;
         } else {
