@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     // Then handle the schema
-    Schema* currentSchema = schemaHandler->addSchema("C:\\Users\\abdal\\Documents\\UKYMetadataGenerator\\app\\examples\\exampleSchema.sma");
+    Schema* currentSchema = schemaHandler->addSchema("..\\..\\..\\examples\\exampleSchema.sma");
 
     if (currentSchema) {
         auto rootField = currentSchema->getRoot();

@@ -1,7 +1,10 @@
 MetadataGenerator_autogen/timestamp: \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QDeadlineTimer \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QEvent \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QFile \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QHash \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QJsonDocument \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QJsonObject \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QList \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QMap \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QMargins \
@@ -940,6 +943,7 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iomanip \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iosfwd \
+	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
