@@ -25,6 +25,7 @@ Schema* SchemaHandler::addSchema(const char* inFile) {
     return newSchema;
 }
 
+
 Schema* SchemaHandler::getCurrSchema() {
     return this->currentSchema;
 }
@@ -42,6 +43,7 @@ std::shared_ptr<Field> SchemaHandler::extractFieldNames(const std::string& fileP
     std::string line;
     std::stack<std::string> contextStack; // Tracks nested contexts
 
+    //TODO: Fix non alphanumeric characters appearing in Field Names
     while (std::getline(inputFile, line)) {
         // Remove leading and trailing whitespace
         line.erase(0, line.find_first_not_of(" \t"));
@@ -94,5 +96,37 @@ std::shared_ptr<Field> SchemaHandler::extractFieldNames(const std::string& fileP
 
     inputFile.close(); // Close the file
     return root;
+}
+
+Schema* SchemaHandler::fromVariantMap(QVariantMap map) {
+    Schema* newSchema = new Schema();
+    newSchema->setRoot(fieldsFromQVMap(map));
+    this->schemaList.push_back(newSchema);
+
+    // TODO: Set this up to add a new schema and set it to the current schema instead of just returning it
+    return newSchema;
+}
+
+std::shared_ptr<Field> SchemaHandler::fieldsFromQVMap(QVariantMap map) {
+    std::shared_ptr<Field> node;
+
+    // Extract node name (if exists)
+    if (map.contains("name")) {
+        node->name = map["name"].toString().toStdString();
+    }
+
+
+    // Recursively process children (if exists)
+    if (map.contains("children")) {
+        QVariantList childrenList = map["children"].toList();
+        for (const QVariant &childVariant : childrenList) {
+            if (childVariant.canConvert<QVariantMap>()) {
+                std::shared_ptr<Field> childNode = fieldsFromQVMap(childVariant.toMap());
+                childNode->parent = node;
+                node->children.push_back(childNode);
+            }
+        }
+    }
+    return node;
 }
 

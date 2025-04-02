@@ -6,7 +6,7 @@
 #define SCHEMA_H
 
 struct Field {
-    Field* parent;
+    std::shared_ptr<Field> parent;
     std::vector<std::shared_ptr<Field>> children;
     std::string name;
 
@@ -24,7 +24,7 @@ public:
     std::shared_ptr<Field> getCurr();
     std::shared_ptr<Field> resetCurr();
     Field* createField(Field* field);
-    Field* createField(Field* parent, std::string name);
+    Field* createField(std::shared_ptr<Field> parent, std::string name);
     void addFieldToTree(std::shared_ptr<Field> root, const std::vector<std::string>& fieldPath);
 
     // DEBUG

@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// TODO: Give information to schema which delineates nodeVariant (color)
 Node::Node(QWidget *parent, const int nodeVariant)
     : QTextEdit(parent)
 {
