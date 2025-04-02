@@ -3,13 +3,20 @@
 
 using namespace std;
 
-Node::Node(QWidget *parent, const char *name)
+Node::Node(QWidget *parent, const int nodeVariant)
     : QTextEdit(parent)
 {
     this->parent;
-    this->name = "";
-    this->key = "";
-    this->value = "";
+    this->nodeVariant = nodeVariant;
+    this->content = map<QString, QString>(); // dictionary
+    this->children = std::vector<Node>();
+    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+}
+
+Node::Node() {
+    this->parent;
+    this->nodeVariant = 0;
+    this->content = map<QString, QString>(); // dictionary
     this->children = std::vector<Node>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
 }
@@ -82,8 +89,25 @@ void Node::mousePressEvent(QMouseEvent *event)
         QDrag *drag = new QDrag(this);
         QMimeData *mimeData = new QMimeData;
 
+        QImage image(QSize(400,300),QImage::Format_RGB32);
+        QPainter painter(&image);
+        painter.setBrush(QBrush(Qt::green));
+        painter.fillRect(QRectF(0,0,400,300),Qt::green);
+        painter.fillRect(QRectF(100,100,200,100),Qt::white);
+        painter.setPen(QPen(Qt::black));
+        painter.drawText(QRect(100,100,200,100),"Text you want to draw...");
+
+        //QPixmap pixmap = QPixmap(this->size());
+        //this->render(pixmap);
+        //QRect rect = this->rect();
+        //QVariant var = QVariant(rect);
+        //mimeData->setImageData(image);
+
         mimeData->setText("");
         drag->setMimeData(mimeData);
+        //QImage img = var.value<QImage>();
+        //drag->setPixmap(pixmap);
+        //drag->setPixmap(QPixmap::fromImage(image));
 
         Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
         QPoint endPos = mapFromGlobal(QCursor::pos());

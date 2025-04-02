@@ -11,10 +11,12 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QPointF \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QRect \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QScopedPointer \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QSet \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QSize \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QSizeF \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QString \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QStringList \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QVariant \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QtCore \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QtCoreDepends \
@@ -408,12 +410,17 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs.h \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs_win.h \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/qwindowsmimeconverter.h \
+	C:/Qt/6.8.2/mingw_64/include/QtSql/QSqlDatabase \
+	C:/Qt/6.8.2/mingw_64/include/QtSql/qsqldatabase.h \
+	C:/Qt/6.8.2/mingw_64/include/QtSql/qtsql-config.h \
+	C:/Qt/6.8.2/mingw_64/include/QtSql/qtsqlexports.h \
+	C:/Qt/6.8.2/mingw_64/include/QtSql/qtsqlglobal.h \
 	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QCommonStyle \
+	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QCompleter \
 	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QLayout \
+	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QLineEdit \
 	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QMainWindow \
-	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QPushButton \
 	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QScrollerProperties \
-	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QVBoxLayout \
 	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QtWidgets \
 	C:/Qt/6.8.2/mingw_64/include/QtWidgets/QtWidgetsDepends \
 	C:/Qt/6.8.2/mingw_64/include/QtWidgets/qabstractbutton.h \
@@ -1103,5 +1110,11 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/mainwindow.h \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.cpp \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.h \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.cpp \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.cpp \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.h \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.cpp \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.h \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/mainwindow.ui \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe

@@ -1,6 +1,8 @@
 #ifndef COLORHANDLER_H
 #define COLORHANDLER_H
 
+#include "node.h"
+
 #include <QColor>;
 #include <QPalette>;
 
@@ -10,15 +12,18 @@ public:
     ColorHandler();
     QPalette getPalette();
     QColor* getColors();
+    void setColors(std::vector<Node*> nodes);
+    QColor bg = QColor("#DDDDDD"); //7. gray
+
 private:
-    QColor colorList[7] = {
-        QColor("#EE7733"), //0. orange
-        QColor("#0077BB"), //1. blue
-        QColor("#33BBEE"), //2. light-blue
-        QColor("#EE3377"), //3. pink
-        QColor("#CC3311"), //4. red
-        QColor("#009988"), //5. blue-green
-        QColor("#BBBBBB") //6. gray
+    QColor colorList[8] = {
+        QColor("#CC6677"), //0. light-red
+        QColor("#DDCC77"), //1. yellow
+        QColor("#117733"), //2. green
+        QColor("#88CCEE"), //3. light-blue
+        QColor("#44AA99"), //4. blue-green
+        QColor("#882255"), //5. rose
+        QColor("#AA4499"), //6. pink
     };
 
     QPalette palette;

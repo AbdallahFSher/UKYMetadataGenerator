@@ -15,23 +15,38 @@ MainWindow::MainWindow(QWidget *parent)
     m_completer(new QCompleter(this)),
     m_textInput(nullptr)
 {
+    std::vector<Node*> nodes = vector<Node*>();
     ui->setupUi(this);
+
+    Node *beans = new Node(this->ui->nodeHolder, 0);
+    Node *beans2 = new Node(this->ui->nodeHolder, 1);
+    nodes.push_back(beans);
+    nodes.push_back(beans2);
+    beans->setText("One");
+    beans->adjustSize();
+    beans2->setText("Two");
+    beans->move(200, 200);
     createTextInputIfNeeded();
     setupAutocomplete();
     setupConnections();
 
     // Initialize nodes
-    Node *node1 = new Node(ui->nodeHolder, "node1");
-    Node *node2 = new Node(ui->nodeHolder, "node2");
-    node1->setText("One");
-    node1->adjustSize();
-    node2->setText("Two");
-    node1->move(200, 200);
-}
+    //Node *node1 = new Node(ui->nodeHolder, "node1");
+    //Node *node2 = new Node(ui->nodeHolder, "node2");
+    //node1->setText("One");
+    //node1->adjustSize();
+    //node2->setText("Two");
+    //node1->move(200, 200);
 
     ColorHandler *colorHandler = new ColorHandler();
 
     this->setPalette(colorHandler->getPalette());
+    colorHandler->setColors(nodes);
+
+    //layout->addWidget(beans);
+    //layout->addWidget(beans2);
+}
+
 void MainWindow::handleTextInputChanged(const QString& text)
 {
     m_suggestionManager->requestSuggestions(text);
