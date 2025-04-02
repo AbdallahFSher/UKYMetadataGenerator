@@ -2,27 +2,43 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QPushButton>
-#include <QVBoxLayout>
+#include <QCompleter>
+#include <QLineEdit>
+#include <QtWidgets>
+#include "suggestionmanager.h"
+#include "fileparser.h"
+#include "schemahandler.h"
 
-QT_BEGIN_NAMESPACE
+class SuggestionManager;
+class Node;
+
 namespace Ui {
 class MainWindow;
 }
-QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-public slots:
-    void loadJsonButtonClicked();
+private slots:
+    void handleTextInputChanged(const QString& text);
+    void updateSuggestions(const QStringList& suggestions);
+    void loadJsonButtonClicked();  // Make sure this is in private slots
 
 private:
     Ui::MainWindow *ui;
+    SuggestionManager* m_suggestionManager;
+    QCompleter* m_completer;
+    QLineEdit* m_textInput;
+    FileParser* fileParser;
+    SchemaHandler* schemaHandler;
+
+    void setupAutocomplete();
+    void createTextInputIfNeeded();
+    void setupConnections();  // Add this new method
 };
 #endif // MAINWINDOW_H

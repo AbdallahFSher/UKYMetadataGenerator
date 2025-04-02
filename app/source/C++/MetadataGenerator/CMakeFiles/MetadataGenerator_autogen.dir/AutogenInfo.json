@@ -368,6 +368,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.h",
+			"MU",
+			"EWIEGA46WW/moc_colorhandler.cpp",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/databasemanager.h",
 			"MU",
 			"EWIEGA46WW/moc_databasemanager.cpp",
@@ -389,6 +395,24 @@
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.h",
 			"MU",
 			"EWIEGA46WW/moc_node.cpp",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h",
+			"MU",
+			"EWIEGA46WW/moc_schema.cpp",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.h",
+			"MU",
+			"EWIEGA46WW/moc_schemahandler.cpp",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.h",
+			"MU",
+			"EWIEGA46WW/moc_suggestionmanager.cpp",
 			null
 		]
 	],
@@ -466,6 +490,11 @@
 	"SOURCES" : 
 	[
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/databasemanager.cpp",
 			"MU",
 			null
@@ -487,6 +516,21 @@
 		],
 		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.cpp",
 			"MU",
 			null
 		]

@@ -4,6 +4,7 @@
 #include <QtWidgets>
 #include <qlineedit.h>
 
+using namespace std;
 
 
 class Node : public QTextEdit
@@ -11,16 +12,18 @@ class Node : public QTextEdit
     Q_OBJECT
 
 public:
-    Node(QWidget *parent = nullptr, const char *name = nullptr);
-    ~Node() {}
+    Node(QWidget *parent = nullptr, const int nodeVariant = 0);
+    Node();
 
     Node *parent;
     QString name;
     QString key;
     QString value;
-    std::vector<Node> children;
+    vector<Node> children;
     QTextEdit *widget;
     QSpacerItem *spacer;
+    int nodeVariant;
+    map<QString, QString> content;
 
     Node* getParent();
     void setParent(Node *newParent);

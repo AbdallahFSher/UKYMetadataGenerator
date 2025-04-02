@@ -1,14 +1,24 @@
 #ifndef FILEPARSER_H
 #define FILEPARSER_H
 
-#include <QJsonDocument>;
+#include <QJsonDocument>
+#include <QFile>
 
-class fileParser
+class FileParser
 {
 public:
-    fileParser();
-    QJsonDocument importJson(QString filePath);
+    FileParser();
+    QVariant importJson(QString filePath);
     void exportJson();
+
+    QVariantMap getCurrentData();
+    QJsonDocument getCurrentJSON();
+    QVariant getCurrentVariant();
+
+private:
+    QVariantMap currentData;
+    QJsonDocument currentJSON;
+    QVariant currentVariant;
 };
 
 #endif // FILEPARSER_H
