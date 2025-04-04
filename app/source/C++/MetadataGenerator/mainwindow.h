@@ -8,6 +8,7 @@
 #include "suggestionmanager.h"
 #include "fileparser.h"
 #include "schemahandler.h"
+#include "nodemanager.h"
 
 class SuggestionManager;
 class Node;
@@ -23,6 +24,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    Ui::MainWindow* getUi();
 
 private slots:
     void handleTextInputChanged(const QString& text);
@@ -36,6 +38,7 @@ private:
     QLineEdit* m_textInput;
     FileParser* fileParser;
     SchemaHandler* schemaHandler;
+    NodeManager* nodeManager;
 
     void setupAutocomplete();
     void createTextInputIfNeeded();

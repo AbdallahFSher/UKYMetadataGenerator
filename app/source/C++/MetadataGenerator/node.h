@@ -15,7 +15,7 @@ public:
     Node(QWidget *parent = nullptr, const int nodeVariant = 0);
     Node();
 
-    Node *parent;
+    Node *nodeParent;
     QString name;
     QString key;
     QString value;
@@ -25,8 +25,8 @@ public:
     int nodeVariant;
     map<QString, QString> content;
 
-    Node* getParent();
-    void setParent(Node *newParent);
+    Node* getNodeParent();
+    void setNodeParent(Node *newParent);
 
     QString getName();
     void setName(QString newName);

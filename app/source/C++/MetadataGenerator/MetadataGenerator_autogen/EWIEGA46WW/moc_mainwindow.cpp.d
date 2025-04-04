@@ -896,6 +896,8 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/DatabaseManager.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/fileparser.h \
+  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.h \
+  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.h

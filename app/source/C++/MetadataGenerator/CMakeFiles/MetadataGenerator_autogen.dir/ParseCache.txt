@@ -901,6 +901,8 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/moc_predefs.h
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/fileparser.h
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/mainwindow.h
+ mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.h
+ mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.h
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.h
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.h
@@ -2133,6 +2135,8 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/databasemanager.h
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/moc_predefs.h
  mdp:C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.h
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.h
 C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.cpp
 C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.cpp
 C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.cpp
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.cpp

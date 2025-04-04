@@ -35,6 +35,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         colorhandler.h colorhandler.cpp
         suggestionmanager.h
         suggestionmanager.cpp
+        nodemanager.h nodemanager.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

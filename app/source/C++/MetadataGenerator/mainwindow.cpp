@@ -7,6 +7,7 @@
 #include "colorhandler.h"
 #include "suggestionmanager.h"
 #include "fileparser.h"
+#include "nodemanager.h"
 
 
 using namespace std;
@@ -29,8 +30,9 @@ MainWindow::MainWindow(QWidget *parent)
     fileParser(new FileParser()),
     schemaHandler(new SchemaHandler())
 {
-    std::vector<Node*> nodes = vector<Node*>(); //This vector should be managed by a Node Manager class
+
     ui->setupUi(this);
+    this->nodeManager = new NodeManager(this->ui->nodeHolder);
 
     // Open the database FIRST
     DatabaseManager& dbManager = DatabaseManager::instance();
@@ -90,18 +92,16 @@ MainWindow::MainWindow(QWidget *parent)
     // Initialize nodes
     Node *node1 = new Node(this->ui->nodeHolder, 0);
     Node *node2 = new Node(this->ui->nodeHolder, 1);
+    Node *node3 = new Node(this->ui->nodeHolder, 1);
     node1->setText("One");
     node1->adjustSize();
     node2->setText("Two");
     node1->move(200, 200);
-
-    nodes.push_back(node1);
-    nodes.push_back(node2);
+    node3->move(100, 100);
 
     ColorHandler *colorHandler = new ColorHandler();
 
     this->setPalette(colorHandler->getPalette());
-    colorHandler->setColors(nodes);
 }
 
 // Suggestion Manager Functions
@@ -178,6 +178,7 @@ void MainWindow::loadJsonButtonClicked()
     // Parse JSON data to QVariantMap
     QVariant jsonVariant = this->fileParser->importJson(fileName);
     QVariantMap jsonMap = jsonVariant.toMap();
+    nodeManager->processJson(jsonMap, 0, this->ui->nodeHolder);
 
     // Parse QVariantMap to construct schema
     //Schema* newSchema = this->schemaHandler->fromVariantMap(jsonMap);
@@ -185,9 +186,12 @@ void MainWindow::loadJsonButtonClicked()
     //if (newSchema) {
     //    newSchema->printTree(newSchema->getRoot(), 0);
     //}
-
     ui->jsonLabel->setText(this->fileParser->getCurrentJSON().toJson(QJsonDocument::Indented));
     m_suggestionManager->refreshDatabase();
+}
+
+Ui::MainWindow* MainWindow::getUi() {
+    return this->ui;
 }
 
 MainWindow::~MainWindow()

@@ -7,7 +7,7 @@ using namespace std;
 Node::Node(QWidget *parent, const int nodeVariant)
     : QTextEdit(parent)
 {
-    this->parent;
+    this->nodeParent;
     this->nodeVariant = nodeVariant;
     this->content = map<QString, QString>(); // dictionary
     this->children = std::vector<Node>();
@@ -15,19 +15,19 @@ Node::Node(QWidget *parent, const int nodeVariant)
 }
 
 Node::Node() {
-    this->parent;
+    this->nodeParent;
     this->nodeVariant = 0;
     this->content = map<QString, QString>(); // dictionary
     this->children = std::vector<Node>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
 }
 
-Node* Node::getParent() {
-    return parent;
+Node* Node::getNodeParent() {
+    return nodeParent;
 }
 
-void Node::setParent(Node *newParent) {
-    parent = newParent;
+void Node::setNodeParent(Node *newNodeParent) {
+    nodeParent = newNodeParent;
 }
 
 QString Node::getName() {
@@ -72,7 +72,7 @@ void Node::removeChild(int index) {
 }
 
 bool Node::equals(Node Node2) {
-    if (parent == Node2.parent && name == Node2.name &&
+    if (nodeParent == Node2.nodeParent && name == Node2.name &&
         key == Node2.key && value == Node2.value) {
         return true;
     }
