@@ -28,6 +28,8 @@ private slots:
     void handleTextInputChanged(const QString& text);
     void updateSuggestions(const QStringList& suggestions);
     void loadJsonButtonClicked();  // Make sure this is in private slots
+    void handleNodeToggle(Node* node);
+    void layoutNodes();
 
 private:
     Ui::MainWindow *ui;
@@ -36,7 +38,9 @@ private:
     QLineEdit* m_textInput;
     FileParser* fileParser;
     SchemaHandler* schemaHandler;
+    std::vector<Node*> m_nodes;
 
+    void setupDatabase();
     void setupAutocomplete();
     void createTextInputIfNeeded();
     void setupConnections();  // Add this new method
