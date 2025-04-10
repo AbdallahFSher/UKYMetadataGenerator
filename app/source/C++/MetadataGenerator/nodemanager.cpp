@@ -42,9 +42,12 @@ void NodeManager::processJson(QVariantMap jsonMap, int level, Node* nodeParent) 
 */
 
             newNode->setName(nodes.size());
-            newNode->header->setText(key + " :: " + QString::fromStdString(std::to_string(newNode->getName())));
+            //newNode->header->setText(key + " :: " + QString::fromStdString(std::to_string(newNode->getName())));
+            newNode->header->setText(key);
             if (nodeParent != NULL)
-                newNode->bottomBar->setText(key + " :: " + QString::fromStdString(std::to_string(nodeParent->getName())));
+                //newNode->bottomBar->setText(key + " :: " + QString::fromStdString(std::to_string(nodeParent->getName())));
+                newNode->bottomBar->setText(key);
+
             newNode->adjustSize();
             nodes.push_back(newNode);
 
@@ -81,11 +84,13 @@ void NodeManager::processJson(QVariantMap jsonMap, int level, Node* nodeParent) 
                         Node *newNode = new Node(parent, level, listNode);
                         newNode->setName(nodes.size());
                         newNode->row = level + 1;
-                        newNode->header->setText(childKey + " :: " + QString::fromStdString(std::to_string(newNode->getName())));
+                        //newNode->header->setText(childKey + " :: " + QString::fromStdString(std::to_string(newNode->getName())));
+                        newNode->header->setText(key);
                         newNode->adjustSize();
                         nodes.push_back(newNode);
 
-                        newNode->bottomBar->setText(mapChild[childKey].toString() + " :: " + name);
+                        //newNode->bottomBar->setText(mapChild[childKey].toString() + " :: " + name);
+                        newNode->bottomBar->setText(key);
                         newNode->bottomBar->adjustSize();
                         newNode->adjustSize();
                         newNode->bottomBar->updateGeometry();

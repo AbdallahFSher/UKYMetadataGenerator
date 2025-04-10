@@ -92,6 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->nodeManager = new NodeManager(this->ui->nodeHolder, *colorHandler);
     this->setPalette(colorHandler->getPalette());
+    this->ui->menubar->setPalette(this->palette());
 }
 
 // Suggestion Manager Functions
@@ -205,12 +206,13 @@ void MainWindow::loadJsonButtonClicked()
     //cout << "NODEHOLDER GOT THESE KIDS:: " << this->ui->nodeHolder->children.count() << endl;
 
     // Parse QVariantMap to construct schema
-    //Schema* newSchema = this->schemaHandler->fromVariantMap(jsonMap);
+    /*
+    Schema* newSchema = this->schemaHandler->fromVariantMap(jsonMap);
 
-    //if (newSchema) {
-    //    newSchema->printTree(newSchema->getRoot(), 0);
-    //}
-    ui->jsonLabel->setText(this->fileParser->getCurrentJSON().toJson(QJsonDocument::Indented));
+    if (newSchema) {
+        newSchema->printTree(newSchema->getRoot(), 0);
+    }
+    */
     m_suggestionManager->refreshDatabase();
 }
 
@@ -230,3 +232,22 @@ MainWindow::~MainWindow()
     delete m_suggestionManager;
     delete ui;
 }
+
+
+void MainWindow::on_actionLoad_Schema_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Schema File"),
+                                                    "",
+                                                    tr("Schema Files (*.sma)"));
+    this->schemaHandler->addSchema(fileName.toStdString());
+
+    if (fileName.isEmpty()) return;
+}
+
+
+void MainWindow::on_actionExport_as_triggered()
+{
+
+}
+

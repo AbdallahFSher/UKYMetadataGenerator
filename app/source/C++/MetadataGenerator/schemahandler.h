@@ -16,7 +16,7 @@ public:
     Schema* setCurrSchema(Schema* schema);
     Schema* getCurrSchema();
     Schema* addSchema(Schema* schema); // TODO: Adds schema sent from schema editor
-    Schema* addSchema(const char* inFile); // TODO: Adds schema from .sma file
+    Schema* addSchema(std::string inFile); // TODO: Adds schema from .sma file
     Schema* fromVariantMap(QVariantMap map);
 
 private:

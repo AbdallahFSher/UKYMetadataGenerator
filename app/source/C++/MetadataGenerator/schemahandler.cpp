@@ -15,7 +15,7 @@ Schema* SchemaHandler::addSchema(Schema* schema) {
     return this->currentSchema;
 }
 
-Schema* SchemaHandler::addSchema(const char* inFile) {
+Schema* SchemaHandler::addSchema(std::string inFile) {
     Schema* newSchema = new Schema();
     auto root = extractFieldNames(inFile, *newSchema);
     newSchema->setRoot(root);

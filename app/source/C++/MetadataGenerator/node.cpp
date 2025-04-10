@@ -16,6 +16,8 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->header = new QLineEdit(this);
     this->header->setVisible(true);
     this->header->setText("head");
+    this->header->setAlignment(Qt::AlignCenter);
+    this->header->setStyleSheet("font-weight: bold");
 
     this->bottomBar = new QLineEdit(this);
     this->bottomBar->setVisible(true);
@@ -75,6 +77,10 @@ QString Node::getValue() {
 
 void Node::setValue(QString newValue) {
     value = newValue;
+}
+
+void Node::setValue(int value) {
+    this->value = (QChar)value;
 }
 
 void Node::addChild(Node newChild) {

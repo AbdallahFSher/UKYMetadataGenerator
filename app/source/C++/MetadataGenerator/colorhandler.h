@@ -14,6 +14,8 @@ public:
     QColor* getColors();
     void setColors(std::vector<Node*> nodes);
     QColor bg = QColor("#DDDDDD"); //7. gray
+    //TODO: Dark mode causes bugsssss - makes menubar text white which has awful contrast w grey background
+    QColor text = QColor("#000000"); //8. black
 
 private:
     QColor colorList[8] = {

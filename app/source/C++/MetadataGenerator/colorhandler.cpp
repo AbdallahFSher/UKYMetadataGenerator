@@ -8,14 +8,15 @@
 using namespace std;
 
 ColorHandler::ColorHandler() {
-        //0. light-red
-        //1. yellow
-        //2. green
-        //3. light-blue
-        //4. blue-green
-        //5. rose
-        //6. pink
+    //0. light-red
+    //1. yellow
+    //2. green
+    //3. light-blue
+    //4. blue-green
+    //5. rose
+    //6. pink
     this->palette.setColor(QPalette::Window, this->bg);
+    this->palette.setColor(QPalette::BrightText, this->text);
 }
 
 QPalette ColorHandler::getPalette() {

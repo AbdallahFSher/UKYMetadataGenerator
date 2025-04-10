@@ -32,6 +32,10 @@ private slots:
     void updateSuggestions(const QStringList& suggestions);
     void loadJsonButtonClicked();  // Make sure this is in private slots
 
+    void on_actionLoad_Schema_triggered();
+
+    void on_actionExport_as_triggered();
+
 private:
     Ui::MainWindow *ui;
     SuggestionManager* m_suggestionManager;
