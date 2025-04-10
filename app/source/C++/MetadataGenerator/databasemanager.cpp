@@ -30,19 +30,33 @@ bool DatabaseManager::openDatabase(const QString& path) {
 }
 
 int DatabaseManager::insertSchemaField(int parentId, const QString& name) {
-    QSqlQuery checkQuery(db);
-    checkQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = :parent_id AND name = :name");
-    checkQuery.bindValue(":parent_id", parentId);
-    checkQuery.bindValue(":name", name);
-    if (!checkQuery.exec()) {
-        qDebug() << "Error checking for duplicates:" << checkQuery.lastError().text();
-        return -1;
+    // Check if parent is an array container
+    bool isParentArray = false;
+    if (parentId != 0) {
+        QSqlQuery parentQuery(db);
+        parentQuery.prepare("SELECT name FROM schema_fields WHERE id = :parent_id");
+        parentQuery.bindValue(":parent_id", parentId);
+        if (parentQuery.exec() && parentQuery.next()) {
+            QString parentName = parentQuery.value(0).toString();
+            isParentArray = parentName.endsWith("[]");
+        }
     }
 
-    checkQuery.next();
-    if (checkQuery.value(0).toInt() > 0) {
-        qDebug() << "Duplicate schema field found.";
-        return -1;
+    // Skip duplicate check for array elements
+    if (!isParentArray) {
+        QSqlQuery checkQuery(db);
+        checkQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = :parent_id AND name = :name");
+        checkQuery.bindValue(":parent_id", parentId);
+        checkQuery.bindValue(":name", name);
+        if (!checkQuery.exec()) {
+            qDebug() << "Error checking for duplicates:" << checkQuery.lastError().text();
+            return -1;
+        }
+        checkQuery.next();
+        if (checkQuery.value(0).toInt() > 0) {
+            qDebug() << "Duplicate schema field found.";
+            return -1;
+        }
     }
 
     QSqlQuery query(db);
@@ -56,15 +70,12 @@ int DatabaseManager::insertSchemaField(int parentId, const QString& name) {
     return query.lastInsertId().toInt();
 }
 
-int DatabaseManager::insertSchemaField(int parentId, const std::string& inputName) {
-    QString name = QString::fromUtf8(inputName);
-    return insertSchemaField(parentId, name);
-}
 
 QVariantMap DatabaseManager::buildTreeFromDatabase() {
     return buildSubtree(0); // Start with root nodes (parent_id = 0)
 }
 
+// In DatabaseManager::buildSubtree, replace the array handling section with:
 QVariantMap DatabaseManager::buildSubtree(int parentId) {
     QVariantMap tree;
     QSqlQuery query(db);
@@ -73,7 +84,7 @@ QVariantMap DatabaseManager::buildSubtree(int parentId) {
     query.bindValue(":parent_id", parentId);
 
     if (!query.exec()) {
-        qDebug() << "Error building tree:" << query.lastError().text();
+        qDebug() << "Error executing query:" << query.lastError().text();
         return tree;
     }
 
@@ -81,36 +92,88 @@ QVariantMap DatabaseManager::buildSubtree(int parentId) {
         int id = query.value(0).toInt();
         QString name = query.value(1).toString();
 
-        // Check if the node has children
-        QSqlQuery childQuery(db);
-        childQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = :id");
-        childQuery.bindValue(":id", id);
+        if (name.endsWith("[]")) {
+            QString arrayName = name.left(name.length() - 2);
+            QVariantList arrayItems;
 
-        if (childQuery.exec() && childQuery.next() && childQuery.value(0).toInt() > 0) {
-            // Node has children - treat as parent node
-            tree[name] = buildSubtree(id);
-        } else {
-            // Leaf node - check for key-value format
-            if (name.contains(": ")) {
-                QStringList parts = name.split(": ");
+            QSqlQuery arrayQuery(db);
+            arrayQuery.prepare("SELECT id, name FROM schema_fields WHERE parent_id = :id ORDER BY id");
+            arrayQuery.bindValue(":id", id);
+
+            if (arrayQuery.exec()) {
+                while (arrayQuery.next()) {
+                    int elementId = arrayQuery.value(0).toInt();
+                    QString elementName = arrayQuery.value(1).toString();
+
+                    QVariantMap elementData = buildSubtree(elementId);
+
+                    if (elementName.startsWith("value: ")) {
+                        // Handle primitive values
+                        QString value = elementName.mid(7);
+                        bool ok;
+                        double numValue = value.toDouble(&ok);
+                        if (ok) {
+                            arrayItems.append(numValue);
+                        } else if (value == "true" || value == "false") {
+                            arrayItems.append(value == "true");
+                        } else {
+                            arrayItems.append(value);
+                        }
+                    } else {
+                        // Handle objects (even if empty)
+                        arrayItems.append(elementData);
+                    }
+                }
+            }
+            tree[arrayName] = arrayItems.isEmpty() ? QVariantList() : arrayItems;
+        }
+        else if (name.contains(": ")) {
+            QStringList parts = name.split(": ");
+            if (parts.size() >= 2) {
                 QString key = parts[0];
-                QString value = parts.mid(1).join(": ").trimmed();
-                tree[key] = value;  // Correct leaf node value
-            } else if (!name.isEmpty()) {
-                // If it's not a key-value pair, treat as a simple leaf
-                tree[name] = "";
+                QString value = parts[1];
+                bool ok;
+                double numValue = value.toDouble(&ok);
+                if (ok) {
+                    tree[key] = numValue;
+                } else if (value == "true" || value == "false") {
+                    tree[key] = (value == "true");
+                } else {
+                    tree[key] = value;
+                }
+            }
+        }
+        else if (!name.isEmpty()) {
+            QVariantMap subtree = buildSubtree(id);
+            if (!subtree.isEmpty()) {
+                tree[name] = subtree;
             }
         }
     }
-
     return tree;
 }
 
 
+// Add this method to DatabaseManager class
+bool DatabaseManager::clearDatabase()
+{
+    QSqlQuery query(db);
+    return query.exec("DELETE FROM schema_fields");
+}
+
 
 bool DatabaseManager::exportToJson(const QString& filePath) {
     QVariantMap data = buildTreeFromDatabase();
+    if (data.isEmpty()) {
+        qDebug() << "Warning: No data to export";
+        return false;
+    }
+
     QJsonDocument doc = QJsonDocument::fromVariant(data);
+    if (doc.isNull()) {
+        qDebug() << "Error: Failed to create JSON document";
+        return false;
+    }
 
     QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly)) {
@@ -118,7 +181,12 @@ bool DatabaseManager::exportToJson(const QString& filePath) {
         return false;
     }
 
-    file.write(doc.toJson(QJsonDocument::Indented));
+    if (file.write(doc.toJson(QJsonDocument::Indented)) == -1) {
+        qDebug() << "Failed to write to file:" << file.errorString();
+        file.close();
+        return false;
+    }
+
     file.close();
     return true;
 }

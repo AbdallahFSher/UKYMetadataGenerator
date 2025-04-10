@@ -13,11 +13,11 @@ public:
     void closeDatabase();
     QSqlDatabase& database();
     int insertSchemaField(int parentId, const QString& name);
-    int insertSchemaField(int parentId, const std::string& name);
     void printSchemaTable();
     bool exportToJson(const QString& filePath);
     bool exportToXml(const QString& filePath);
     bool exportToGaml(const QString& filePath);
+    bool clearDatabase();
 
 private:
     DatabaseManager();
