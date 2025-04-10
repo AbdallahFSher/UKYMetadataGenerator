@@ -105,53 +105,44 @@ QVariantMap DatabaseManager::buildSubtree(int parentId) {
                     int elementId = arrayQuery.value(0).toInt();
                     QString elementName = arrayQuery.value(1).toString();
 
-                    QVariantMap elementData = buildSubtree(elementId);
-
-                    if (elementName.startsWith("value: ")) {
-                        // Handle primitive values
-                        QString value = elementName.mid(7);
-                        bool ok;
-                        double numValue = value.toDouble(&ok);
-                        if (ok) {
-                            arrayItems.append(numValue);
-                        } else if (value == "true" || value == "false") {
-                            arrayItems.append(value == "true");
-                        } else {
-                            arrayItems.append(value);
+                    if (elementName == "element") {
+                        QVariantMap elementMap = buildSubtree(elementId);
+                        arrayItems.append(elementMap);
+                    }
+                    else if (elementName.startsWith("value: ")) {
+                        QString raw = elementName.mid(7);  // strip "value: "
+                        if (raw.startsWith("\"") && raw.endsWith("\"")) {
+                            raw = raw.mid(1, raw.length() - 2);  // remove quotes
                         }
-                    } else {
-                        // Handle objects (even if empty)
-                        arrayItems.append(elementData);
+                        arrayItems.append(QVariant(raw));
                     }
                 }
             }
-            tree[arrayName] = arrayItems.isEmpty() ? QVariantList() : arrayItems;
+
+            tree[arrayName] = arrayItems;
         }
         else if (name.contains(": ")) {
-            QStringList parts = name.split(": ");
-            if (parts.size() >= 2) {
-                QString key = parts[0];
-                QString value = parts[1];
-                bool ok;
-                double numValue = value.toDouble(&ok);
-                if (ok) {
-                    tree[key] = numValue;
-                } else if (value == "true" || value == "false") {
-                    tree[key] = (value == "true");
-                } else {
-                    tree[key] = value;
-                }
+            // This is a primitive value
+            int splitIndex = name.indexOf(": ");
+            QString key = name.left(splitIndex);
+            QString value = name.mid(splitIndex + 2);
+
+            if (value.startsWith("\"") && value.endsWith("\"")) {
+                value = value.mid(1, value.length() - 2);
             }
+
+            tree[key] = QVariant(value);
         }
-        else if (!name.isEmpty()) {
-            QVariantMap subtree = buildSubtree(id);
-            if (!subtree.isEmpty()) {
-                tree[name] = subtree;
-            }
+        else {
+            // This is a nested object (subtree)
+            QVariantMap childTree = buildSubtree(id);
+            tree[name] = childTree;
         }
     }
+
     return tree;
 }
+
 
 
 // Add this method to DatabaseManager class

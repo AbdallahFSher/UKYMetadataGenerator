@@ -224,7 +224,6 @@ void MainWindow::loadJsonButtonClicked()
         else if (data.type() == QVariant::List) {
             QVariantList list = data.toList();
 
-            // Create an array container. Append "[]" to indicate an array.
             int arrayParentId = parentId;
             if (!key.isEmpty()) {
                 arrayParentId = dbManager.insertSchemaField(parentId, key + "[]");
@@ -233,24 +232,22 @@ void MainWindow::loadJsonButtonClicked()
 
             for (const auto& item : list) {
                 if (item.type() == QVariant::Map || item.type() == QVariant::List) {
-                    // Create an element container for each array element.
                     int elementId = dbManager.insertSchemaField(arrayParentId, "element");
                     insertJsonToDb(item, "", elementId);
                 } else {
-                    // For primitive types in arrays, simply insert the value.
+                    // Ensure primitive is stored with quotes as string
                     QString value = item.toString();
-                    // If the value is empty, keep it an empty string.
-                    dbManager.insertSchemaField(arrayParentId, "value: " + value);
+                    QString quoted = "\"" + value + "\"";
+                    QString name = "value: " + quoted;
+                    dbManager.insertSchemaField(arrayParentId, name);
                 }
             }
         }
         else {
-            // Handle primitive types (string, number, bool)
             QString value = data.toString();
-            // Do not replace empty values—save them as empty strings.
-            // Build a display name by concatenating the key (if any) and the value.
-            QString displayName = key.isEmpty() ? value : key + ": " + value;
-            dbManager.insertSchemaField(parentId, displayName);
+            QString quoted = "\"" + value + "\"";
+            QString name = key.isEmpty() ? quoted : key + ": " + quoted;
+            dbManager.insertSchemaField(parentId, name);
         }
     };
 
