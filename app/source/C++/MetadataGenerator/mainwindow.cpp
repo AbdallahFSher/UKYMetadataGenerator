@@ -72,11 +72,10 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     this->pw = new PreferencesWindow(this);
-    this->addNodeDialogue = new AddNodeDialogue(this);
+    this->addNodeDialogue = new AddNodeDialogue(this, m_suggestionManager);
 
     // Caleb's Code: Create text input, autocomplete and export buttons
-    createTextInputIfNeeded();
-    setupAutocomplete();
+    //createTextInputIfNeeded();
     setupConnections();
 
     // Color and Node manager setup
@@ -124,12 +123,19 @@ void MainWindow::setupAutocomplete()
 {
     m_completer->setCaseSensitivity(Qt::CaseInsensitive);
     m_completer->setFilterMode(Qt::MatchContains);
-    m_textInput->setCompleter(m_completer);
 
-    connect(m_textInput, &QLineEdit::textEdited,
-            this, &MainWindow::handleTextInputChanged);
+    for(Node* n:this->nodeManager->getNodes()){
+        n->header->setCompleter(m_completer);
+        connect(n->header, &QLineEdit::textEdited,
+                this, &MainWindow::handleTextInputChanged);
+        n->bottomBar->setCompleter(m_completer);
+        connect(n->bottomBar, &QLineEdit::textEdited,
+                this, &MainWindow::handleTextInputChanged);
+    }
+    addNodeDialogue->setupAutocomplete(m_completer);
     connect(m_suggestionManager, &SuggestionManager::suggestionsReady,
             this, &MainWindow::updateSuggestions);
+
 
     m_suggestionManager->initialize();
 }
@@ -291,6 +297,7 @@ void MainWindow::loadJsonButtonClicked()
 
         connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
     }
+    setupAutocomplete();
 }
 
 // Optional method for handling the load schema action

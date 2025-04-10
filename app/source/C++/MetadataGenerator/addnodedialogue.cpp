@@ -1,11 +1,12 @@
 #include "addnodedialogue.h"
 #include "ui_addnodedialogue.h"
 
-AddNodeDialogue::AddNodeDialogue(QWidget *parent)
+AddNodeDialogue::AddNodeDialogue(QWidget *parent, SuggestionManager* suggestionManager)
     : QDialog(parent)
     , ui(new Ui::AddNodeDialogue)
 {
     ui->setupUi(this);
+    this->suggestionManager = suggestionManager;
     this->ignoreSignals = true;
     this->spd = new SelectParentDialogue();
 }
@@ -34,3 +35,18 @@ void AddNodeDialogue::on_buttonBox_accepted()
     this->spd->show();
     this->hide();
 }
+
+void AddNodeDialogue::setupAutocomplete(QCompleter* completer) {
+    this->ui->keyEdit->setCompleter(completer);
+    this->ui->valueEdit->setCompleter(completer);
+    connect(this->ui->keyEdit, &QLineEdit::textEdited,
+            this, &AddNodeDialogue::handleTextInputChanged);
+    connect(this->ui->valueEdit, &QLineEdit::textEdited,
+            this, &AddNodeDialogue::handleTextInputChanged);
+}
+
+void AddNodeDialogue::handleTextInputChanged(const QString& text)
+{
+    suggestionManager->requestSuggestions(text);
+}
+
