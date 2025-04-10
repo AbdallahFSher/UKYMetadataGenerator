@@ -32,7 +32,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     ui->setupUi(this);
-    this->nodeManager = new NodeManager(this->ui->nodeHolder);
 
     // Open the database FIRST
     DatabaseManager& dbManager = DatabaseManager::instance();
@@ -88,19 +87,9 @@ MainWindow::MainWindow(QWidget *parent)
     createTextInputIfNeeded();
     setupAutocomplete();
     setupConnections();
-
-    // Initialize nodes
-    Node *node1 = new Node(this->ui->nodeHolder, 0);
-    Node *node2 = new Node(this->ui->nodeHolder, 1);
-    Node *node3 = new Node(this->ui->nodeHolder, 1);
-    node1->setText("One");
-    node1->adjustSize();
-    node2->setText("Two");
-    node1->move(200, 200);
-    node3->move(100, 100);
-
     ColorHandler *colorHandler = new ColorHandler();
 
+    this->nodeManager = new NodeManager(this->ui->nodeHolder, *colorHandler);
     this->setPalette(colorHandler->getPalette());
 }
 
@@ -178,7 +167,9 @@ void MainWindow::loadJsonButtonClicked()
     // Parse JSON data to QVariantMap
     QVariant jsonVariant = this->fileParser->importJson(fileName);
     QVariantMap jsonMap = jsonVariant.toMap();
-    nodeManager->processJson(jsonMap, 0, this->ui->nodeHolder);
+    nodeManager->processJson(jsonMap, 0);
+    this->ui->nodeHolder->update();
+    //cout << "NODEHOLDER GOT THESE KIDS:: " << this->ui->nodeHolder->children.count() << endl;
 
     // Parse QVariantMap to construct schema
     //Schema* newSchema = this->schemaHandler->fromVariantMap(jsonMap);

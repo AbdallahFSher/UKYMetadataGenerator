@@ -7,13 +7,16 @@
 using namespace std;
 
 
-class Node : public QTextEdit
+class Node : public QFrame
 {
     Q_OBJECT
 
 public:
-    Node(QWidget *parent = nullptr, const int nodeVariant = 0);
-    Node();
+    Node(QWidget* parent, const int nodeVariant = 0, Node* nodeParent = nullptr);
+//    Node();
+
+    QLineEdit* header;
+    QLineEdit* bottomBar;
 
     Node *nodeParent;
     QString name;

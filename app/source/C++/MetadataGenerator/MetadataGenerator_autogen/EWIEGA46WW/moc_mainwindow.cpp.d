@@ -289,10 +289,12 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/6.8.2/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QAction \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QActionGroup \
+  C:/Qt/6.8.2/mingw_64/include/QtGui/QColor \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QFileSystemModel \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QMatrix4x4 \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDevice \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDeviceWindow \
+  C:/Qt/6.8.2/mingw_64/include/QtGui/QPalette \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QShortcut \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QTransform \
@@ -895,6 +897,7 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/DatabaseManager.h \
+  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/fileparser.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.h \

@@ -288,10 +288,12 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/qyieldcpu.h \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QAction \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QActionGroup \
+	C:/Qt/6.8.2/mingw_64/include/QtGui/QColor \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QFileSystemModel \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QMatrix4x4 \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDevice \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDeviceWindow \
+	C:/Qt/6.8.2/mingw_64/include/QtGui/QPalette \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QShortcut \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QSurfaceFormat \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QTransform \

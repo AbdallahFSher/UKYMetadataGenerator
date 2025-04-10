@@ -1,0 +1,79 @@
+{
+	"Metadata": {
+		"Data Citation": {
+			"Title": "TEAMS Grant",
+			"doi": "pending",
+			"Principal Investigator": [
+				{
+					"Name": "Bjoern Bauer",
+					"ORCID": "0000-0003-3867-2251",
+					"email": "bjoern.bauer@uky.edu"
+				},
+				{
+					"Name": "Anika Hartz",
+					"ORCID": "0000-0001-9276-0688",
+					"email": "anika.hartz@uky.edu"
+				},
+				{
+					"Name": "Zhan",
+					"ORCID": "",
+					"email": ""
+				}
+			],
+			"Depositor": [
+				{
+					"Name": "Bryan Maloney",
+					"email": "bjma@uky.edu"
+				}
+			],
+			"Date of Deposit": "pending",
+			"Institution": "University of Kentucky",
+			"Keywords": "Epilepsy drug discovery anti-inflammatory",
+			"Abstract": "pending",
+			"Funding Agency": "UK",
+			"Grant Number": "x"
+		},
+		"Publications": [
+			{
+				"Authors": "",
+				"Year": "",
+				"Journal": "",
+				"Title": ""
+			}
+		],
+		"Projects": [
+			{
+				"Name": "Novel mPGES Inhibitors",
+				"Workers": [
+					{
+						"Name": "Zhan",
+						"ORCID": "",
+						"email": ""
+					},
+					{
+						"Name": "Bjoern Bauer",
+						"ORCID": "0000-0003-3867-2251",
+						"email": "bjoern.bauer@uky.edu"
+					}
+				],
+				"Aims": [
+					{
+						"Name": "Design, synthesis, & in vitro activity",
+						"Workers": [
+							{
+								"Name": "Zhan",
+								"ORCID": "",
+								"email": ""
+							},
+							{
+								"Name": "Bjoern Bauer",
+								"ORCID": "0000-0003-3867-2251",
+								"email": "bjoern.bauer@uky.edu"
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+}

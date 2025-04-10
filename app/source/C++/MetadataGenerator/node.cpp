@@ -4,23 +4,47 @@
 using namespace std;
 
 // TODO: Give information to schema which delineates nodeVariant (color)
-Node::Node(QWidget *parent, const int nodeVariant)
-    : QTextEdit(parent)
+Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
+    : QFrame(parent)
 {
-    this->nodeParent;
+    this->nodeParent = nodeParent;
     this->nodeVariant = nodeVariant;
     this->content = map<QString, QString>(); // dictionary
     this->children = std::vector<Node>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+    this->header = new QLineEdit(this);
+    this->header->setVisible(true);
+    this->header->setText("head");
+
+    this->bottomBar = new QLineEdit(this);
+    this->bottomBar->setText("tail");
+    this->bottomBar->setVisible(true);
+
+    this->setLayout(new QVBoxLayout());
+    this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    this->updateGeometry();
+    this->header->updateGeometry();
+    this->bottomBar->updateGeometry();
+
+    this->layout()->addWidget(header);
+    this->layout()->addWidget(bottomBar);
+    this->setMinimumSize(100, 80);
+
+    this->setVisible(true);
 }
 
-Node::Node() {
-    this->nodeParent;
-    this->nodeVariant = 0;
-    this->content = map<QString, QString>(); // dictionary
-    this->children = std::vector<Node>();
-    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
-}
+//Node::Node() {
+//    this->nodeParent;
+//    this->nodeVariant = 0;
+//    this->content = map<QString, QString>(); // dictionary
+//    this->children = std::vector<Node>();
+//    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+//}
 
 Node* Node::getNodeParent() {
     return nodeParent;
@@ -81,7 +105,7 @@ bool Node::equals(Node Node2) {
 
 void Node::mousePressEvent(QMouseEvent *event)
 {
-    cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
+    //cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
     if (event->button() == Qt::LeftButton) {
 
         QPoint startPos = mapFromGlobal(QCursor::pos());
@@ -115,13 +139,13 @@ void Node::mousePressEvent(QMouseEvent *event)
         QPoint diff = endPos - startPos;
         //QPoint diff = endPos;
 
-        cout << "INITALPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
+        //cout << "INITALPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
         this->move(this->pos() + diff);
-        cout << "ENDPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
-        cout << "START MOUSE POS: " << (QString("%1x%2").arg(startPos.x()).arg(startPos.y())).toStdString() << endl;
-        cout << "END MOUSE POS: " << (QString("%1x%2").arg(endPos.x()).arg(endPos.y())).toStdString() << endl;
-        cout << "DIFF: " << (QString("%1x%2").arg(diff.x()).arg(diff.y())).toStdString() << endl;
+        //cout << "ENDPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
+        //cout << "START MOUSE POS: " << (QString("%1x%2").arg(startPos.x()).arg(startPos.y())).toStdString() << endl;
+        //cout << "END MOUSE POS: " << (QString("%1x%2").arg(endPos.x()).arg(endPos.y())).toStdString() << endl;
+        //cout << "DIFF: " << (QString("%1x%2").arg(diff.x()).arg(diff.y())).toStdString() << endl;
 
-        cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
+        //cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
     }
 }
