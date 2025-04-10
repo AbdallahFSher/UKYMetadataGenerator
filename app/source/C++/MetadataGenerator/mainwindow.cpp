@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
                     "id INTEGER PRIMARY KEY, "
                     "parent_id INTEGER, "
                     "name TEXT, "
-                    "FOREIGN KEY(parent_id) REFERENCES schema_fields(id))")) {
+                    "FOREIGN KEY(parent_id) REFERENCES schema_fields(id) ON DELETE CASCADE)")) {
         qDebug() << "Error creating schema table:" << query.lastError().text();
     }
 
@@ -172,7 +172,7 @@ void MainWindow::setupConnections()
     }
 }
 
-// In MainWindow.cpp
+
 void MainWindow::loadJsonButtonClicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -199,63 +199,66 @@ void MainWindow::loadJsonButtonClicked()
         qDebug() << "Error clearing schema table:" << clearQuery.lastError().text();
     }
 
-    // Recursive function to mirror the NodeManager's processing
+    // Recursive function to insert data into the database
+    // Adjust this function in your recursive parser
+    // Recursive function to insert data into the database
     std::function<void(const QVariant&, const QString&, int)> insertJsonToDb;
     insertJsonToDb = [&](const QVariant& data, const QString& key, int parentId) {
-        if (data.canConvert<QVariantMap>()) {
-            // Handle objects
+        if (data.type() == QVariant::Map) {
+            // Convert to a QVariantMap
             QVariantMap map = data.toMap();
-            int currentId = dbManager.insertSchemaField(parentId, key);
-            for (auto it = map.constBegin(); it != map.constEnd(); ++it) {
+            int currentId = parentId;
+
+            // If there is a key, insert it as a node regardless of its value
+            if (!key.isEmpty()) {
+                currentId = dbManager.insertSchemaField(parentId, key);
+                if (currentId == -1) return;
+            }
+
+            // To preserve order as best as possible, iterate using iterator (not keys()).
+            // Note: QJsonObject parsing may preserve the order as in the original JSON text.
+            for (auto it = map.begin(); it != map.end(); ++it) {
                 insertJsonToDb(it.value(), it.key(), currentId);
             }
         }
-        else if (data.canConvert<QVariantList>()) {
-            // Handle arrays
+        else if (data.type() == QVariant::List) {
             QVariantList list = data.toList();
-            if (!list.isEmpty()) {
-                int listNodeId = dbManager.insertSchemaField(parentId, key);
-                if (listNodeId != -1) {
-                    // Check if this is a string disguised as an array of characters
-                    bool isCharacterArray = true;
-                    QString concatenated;
-                    for (const QVariant& item : list) {
-                        if (!item.canConvert<QString>() || item.toString().length() != 1) {
-                            isCharacterArray = false;
-                            break;
-                        }
-                        concatenated += item.toString();
-                    }
 
-                    if (isCharacterArray) {
-                        // Insert as single string
-                        dbManager.insertSchemaField(listNodeId, concatenated);
-                    } else {
-                        // Process normally
-                        for (const QVariant& item : list) {
-                            insertJsonToDb(item, "", listNodeId);
-                        }
-                    }
+            // Create an array container. Append "[]" to indicate an array.
+            int arrayParentId = parentId;
+            if (!key.isEmpty()) {
+                arrayParentId = dbManager.insertSchemaField(parentId, key + "[]");
+                if (arrayParentId == -1) return;
+            }
+
+            for (const auto& item : list) {
+                if (item.type() == QVariant::Map || item.type() == QVariant::List) {
+                    // Create an element container for each array element.
+                    int elementId = dbManager.insertSchemaField(arrayParentId, "element");
+                    insertJsonToDb(item, "", elementId);
+                } else {
+                    // For primitive types in arrays, simply insert the value.
+                    QString value = item.toString();
+                    // If the value is empty, keep it an empty string.
+                    dbManager.insertSchemaField(arrayParentId, "value: " + value);
                 }
             }
         }
         else {
-            // Handle primitive values
+            // Handle primitive types (string, number, bool)
             QString value = data.toString();
-            if (!value.isEmpty()) {
-                if (key.isEmpty()) {
-                    // Array item
-                    dbManager.insertSchemaField(parentId, value);
-                } else {
-                    // Key-value pair
-                    dbManager.insertSchemaField(parentId, key + ": " + value);
-                }
-            }
+            // Do not replace empty values—save them as empty strings.
+            // Build a display name by concatenating the key (if any) and the value.
+            QString displayName = key.isEmpty() ? value : key + ": " + value;
+            dbManager.insertSchemaField(parentId, displayName);
         }
     };
 
-    // Initial call with root object
-    insertJsonToDb(jsonMap, "ROOT", 0);
+
+
+    // Initialize recursive insert for the root of the JSON structure
+    insertJsonToDb(jsonMap, "", 0);
+
 
     // Print the database contents for verification
     dbManager.printSchemaTable();
