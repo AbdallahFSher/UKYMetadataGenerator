@@ -28,6 +28,9 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 
+    connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+    connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+
     this->updateGeometry();
     this->header->updateGeometry();
     this->bottomBar->updateGeometry();
@@ -153,4 +156,25 @@ void Node::mousePressEvent(QMouseEvent *event)
 
         //cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
     }
+}
+
+void Node::resize_to_text() {
+    /*
+    QString headerText = header->text();
+    QString bottomBarText = bottomBar->text();
+    QFont font("", 0);
+    QFontMetrics fm(font);
+
+    QRect headerRect = fm.boundingRect(headerText);
+    QRect bottomRect = fm.boundingRect(bottomBarText);
+    QRect newRect = this->frameRect();
+
+    if (headerRect.width() > bottomRect.width()) {
+        newRect.setWidth(headerRect.width());
+    } else {
+        newRect.setWidth(bottomRect.width());
+    }
+
+    this->setFrameRect(newRect);
+    */
 }

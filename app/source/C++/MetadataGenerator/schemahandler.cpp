@@ -30,6 +30,18 @@ Schema* SchemaHandler::getCurrSchema() {
     return this->currentSchema;
 }
 
+std::string SchemaHandler::trimString(std::string in) {
+    int i = 0;
+    while(illegalChars.find(in[i]) != illegalChars.end()) {
+        i++;
+    }
+    int j = in.length() - 1;
+    while(illegalChars.find(in[j]) != illegalChars.end()) {
+        j--;
+    }
+    return in.substr(i, j - i + 1);
+}
+
 // Function to extract field names from the schema file
 std::shared_ptr<Field> SchemaHandler::extractFieldNames(const std::string& filePath, Schema& newSchema) {
     auto root = std::make_shared<Field>("Root"); // Root of the tree
@@ -58,6 +70,7 @@ std::shared_ptr<Field> SchemaHandler::extractFieldNames(const std::string& fileP
         if (line.back() == '{' || line.back() == '[') {
             // Extract the context name (e.g., "Metadata", "Data Citation", etc.)
             std::string contextName = line.substr(0, line.find_last_of(" \t{["));
+            contextName = trimString(contextName);
             contextStack.push(contextName); // Push the context onto the stack
         }
         // Check if the line ends a context
@@ -69,9 +82,10 @@ std::shared_ptr<Field> SchemaHandler::extractFieldNames(const std::string& fileP
         // Otherwise, it's a field name
         else {
             // Extract the field name (e.g., "Title", "doi", "Name", etc.)
-            std::string fieldName = line.substr(0, line.find_last_of(" \t"));
+            std::string fieldName = line.substr(0, line.find_last_of("\""));
             if (!fieldName.empty()) {
                 // Construct the full field path (e.g., ["Metadata", "Data Citation", "Title"])
+                fieldName = trimString(fieldName);
                 std::vector<std::string> fieldPath;
                 // Copy the stack contents to a vector for iteration
                 std::vector<std::string> contextVector;

@@ -1,6 +1,7 @@
 #include <vector>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <unordered_set>
 #include "schema.h"
 #ifndef SCHEMAHANDLER_H
 #define SCHEMAHANDLER_H
@@ -18,6 +19,7 @@ public:
     Schema* addSchema(Schema* schema); // TODO: Adds schema sent from schema editor
     Schema* addSchema(std::string inFile); // TODO: Adds schema from .sma file
     Schema* fromVariantMap(QVariantMap map);
+    std::string trimString(std::string in);
 
 private:
     std::vector<Schema*> schemaList;
@@ -26,6 +28,8 @@ private:
     bool readJsonFile(std::string file_path, QVariantMap& result);
     std::shared_ptr<Field> extractFieldNames(const std::string& filePath, Schema& newSchema);
     std::shared_ptr<Field> fieldsFromQVMap(QVariantMap map);
+
+    std::unordered_set<char> illegalChars = {'\"', ',', '[', ']', ':', ' ', '\t', '\n'};
 
 };
 

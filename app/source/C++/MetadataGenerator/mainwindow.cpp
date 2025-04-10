@@ -50,14 +50,14 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     // Then handle the schema
-    Schema* currentSchema = schemaHandler->addSchema("..\\..\\..\\examples\\exampleSchema.sma");
+    /*Schema* currentSchema = schemaHandler->addSchema("..\\..\\..\\examples\\exampleSchema.sma");
 
     if (currentSchema) {
         auto rootField = currentSchema->getRoot();
         if (rootField) {
             insertFieldTree(rootField, 0, dbManager); // 0 indicates no parent
         }
-    }
+    }*/
 
     // Print the table contents
     qDebug() << "\nDatabase Contents:";

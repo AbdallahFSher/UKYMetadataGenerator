@@ -29,9 +29,19 @@
          <height>537</height>
         </rect>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <layout class="QVBoxLayout" name="_2">
         <item>
-         <layout class="QGridLayout" name="gridLayout"/>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+          </property>
+         </layout>
         </item>
        </layout>
       </widget>

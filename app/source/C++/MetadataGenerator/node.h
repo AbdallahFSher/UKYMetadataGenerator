@@ -51,6 +51,7 @@ public:
 
 public slots:
     void setValue(int value);
+    void resize_to_text();
 
 signals:
     void valueChanged(int newValue);
