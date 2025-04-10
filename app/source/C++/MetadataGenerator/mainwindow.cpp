@@ -9,7 +9,6 @@
 #include "fileparser.h"
 #include "nodemanager.h"
 
-
 using namespace std;
 
 void insertFieldTree(const std::shared_ptr<Field>& node, int parentId, DatabaseManager& dbManager) {
@@ -30,12 +29,11 @@ MainWindow::MainWindow(QWidget *parent)
     fileParser(new FileParser()),
     schemaHandler(new SchemaHandler())
 {
-
     ui->setupUi(this);
 
     // Open the database FIRST
     DatabaseManager& dbManager = DatabaseManager::instance();
-    if (!dbManager.openDatabase("example.db")) {
+    if (!dbManager.openDatabase("metadata.db")) {
         qDebug() << "Could not open database!";
     }
 
@@ -47,16 +45,6 @@ MainWindow::MainWindow(QWidget *parent)
                     "name TEXT, "
                     "FOREIGN KEY(parent_id) REFERENCES schema_fields(id))")) {
         qDebug() << "Error creating schema table:" << query.lastError().text();
-    }
-
-    // Then handle the schema
-    Schema* currentSchema = schemaHandler->addSchema("..\\..\\..\\examples\\exampleSchema.sma");
-
-    if (currentSchema) {
-        auto rootField = currentSchema->getRoot();
-        if (rootField) {
-            insertFieldTree(rootField, 0, dbManager); // 0 indicates no parent
-        }
     }
 
     // Print the table contents
@@ -72,27 +60,41 @@ MainWindow::MainWindow(QWidget *parent)
                      << query.value(2).toString();
         }
     }
-/*
-    // Calvin's Code
-    Node *beans = new Node(this->ui->nodeHolder, 0);
-    Node *beans2 = new Node(this->ui->nodeHolder, 1);
-    this->ui->gridLayout->addWidget(beans);
-    this->ui->gridLayout->addWidget(beans2, 3, 3);
-    beans->header->setText("One");
-    beans->adjustSize();
-    beans2->header->setText("Two");
-    beans->move(200, 200);
-    cout << this->ui->gridLayout->columnCount() << " COLUMNS IN THIS MOTHER !~!!!" << endl;
-*/
-    // Caleb's Code
+
+    // Caleb's Code: Create text input, autocomplete and export buttons
     createTextInputIfNeeded();
     setupAutocomplete();
+    createExportButtons();      // <-- New: programmatically create export buttons
     setupConnections();
-    ColorHandler *colorHandler = new ColorHandler();
 
+    // Color and Node manager setup
+    ColorHandler *colorHandler = new ColorHandler();
     this->nodeManager = new NodeManager(this->ui->nodeHolder, *colorHandler);
     this->setPalette(colorHandler->getPalette());
     this->ui->menubar->setPalette(this->palette());
+}
+
+// New method to create export buttons programmatically
+void MainWindow::createExportButtons() {
+    // Create export buttons and set object names for later connection
+    QPushButton* exportJsonButton = new QPushButton("Export JSON", this);
+    exportJsonButton->setObjectName("exportJsonButton");
+    QPushButton* exportXmlButton = new QPushButton("Export XML", this);
+    exportXmlButton->setObjectName("exportXmlButton");
+    QPushButton* exportGamlButton = new QPushButton("Export GAML", this);
+    exportGamlButton->setObjectName("exportGamlButton");
+
+    // Add these buttons to the central widget layout.
+    QVBoxLayout* layout = nullptr;
+    if (ui->centralwidget->layout()) {
+        layout = qobject_cast<QVBoxLayout*>(ui->centralwidget->layout());
+    } else {
+        layout = new QVBoxLayout(ui->centralwidget);
+        layout->addWidget(ui->nodeHolder); // Retain existing widget
+    }
+    layout->addWidget(exportJsonButton);
+    layout->addWidget(exportXmlButton);
+    layout->addWidget(exportGamlButton);
 }
 
 // Suggestion Manager Functions
@@ -113,7 +115,7 @@ void MainWindow::updateSuggestions(const QStringList& suggestions)
 
 void MainWindow::createTextInputIfNeeded()
 {
-    m_textInput = findChild<QLineEdit*>();
+    m_textInput = findChild<QLineEdit*>("textInput");
     if (!m_textInput) {
         m_textInput = new QLineEdit(this);
         m_textInput->setObjectName("textInput");
@@ -141,22 +143,36 @@ void MainWindow::setupAutocomplete()
     m_suggestionManager->initialize();
 }
 
-// General UI
+// General UI connections
 void MainWindow::setupConnections()
 {
-    // Connect to a button if it exists
+    // Connect JSON load buttons or actions
     if (auto button = findChild<QPushButton*>("openButton")) {
         connect(button, &QPushButton::clicked, this, &MainWindow::loadJsonButtonClicked);
     }
-    // Or connect to a menu action if it exists
     else if (auto action = findChild<QAction*>("actionOpen")) {
         connect(action, &QAction::triggered, this, &MainWindow::loadJsonButtonClicked);
     }
     else {
         qWarning() << "No JSON load trigger found in UI";
     }
+
+    // Connect our export buttons to their slots
+    if (auto exportJsonButton = findChild<QPushButton*>("exportJsonButton")) {
+        connect(exportJsonButton, &QPushButton::clicked,
+                this, &MainWindow::on_actionExport_JSON_triggered);
+    }
+    if (auto exportXmlButton = findChild<QPushButton*>("exportXmlButton")) {
+        connect(exportXmlButton, &QPushButton::clicked,
+                this, &MainWindow::on_actionExport_XML_triggered);
+    }
+    if (auto exportGamlButton = findChild<QPushButton*>("exportGamlButton")) {
+        connect(exportGamlButton, &QPushButton::clicked,
+                this, &MainWindow::on_actionExport_GAML_triggered);
+    }
 }
 
+// In MainWindow.cpp
 void MainWindow::loadJsonButtonClicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this,
@@ -169,28 +185,107 @@ void MainWindow::loadJsonButtonClicked()
     // Parse JSON data to QVariantMap
     QVariant jsonVariant = this->fileParser->importJson(fileName);
     QVariantMap jsonMap = jsonVariant.toMap();
+
+    // First process the JSON to create nodes
     nodeManager->processJson(jsonMap, 0);
     this->ui->nodeHolder->update();
+
+    // Now insert the JSON structure into the database
+    DatabaseManager& dbManager = DatabaseManager::instance();
+
+    // Clear existing schema data
+    QSqlQuery clearQuery(dbManager.database());
+    if (!clearQuery.exec("DELETE FROM schema_fields")) {
+        qDebug() << "Error clearing schema table:" << clearQuery.lastError().text();
+    }
+
+    // Recursive function to mirror the NodeManager's processing
+    std::function<void(const QVariant&, const QString&, int)> insertJsonToDb;
+    insertJsonToDb = [&](const QVariant& data, const QString& key, int parentId) {
+        if (data.canConvert<QVariantMap>()) {
+            // Handle objects
+            QVariantMap map = data.toMap();
+            int currentId = dbManager.insertSchemaField(parentId, key);
+            for (auto it = map.constBegin(); it != map.constEnd(); ++it) {
+                insertJsonToDb(it.value(), it.key(), currentId);
+            }
+        }
+        else if (data.canConvert<QVariantList>()) {
+            // Handle arrays
+            QVariantList list = data.toList();
+            if (!list.isEmpty()) {
+                int listNodeId = dbManager.insertSchemaField(parentId, key);
+                if (listNodeId != -1) {
+                    // Check if this is a string disguised as an array of characters
+                    bool isCharacterArray = true;
+                    QString concatenated;
+                    for (const QVariant& item : list) {
+                        if (!item.canConvert<QString>() || item.toString().length() != 1) {
+                            isCharacterArray = false;
+                            break;
+                        }
+                        concatenated += item.toString();
+                    }
+
+                    if (isCharacterArray) {
+                        // Insert as single string
+                        dbManager.insertSchemaField(listNodeId, concatenated);
+                    } else {
+                        // Process normally
+                        for (const QVariant& item : list) {
+                            insertJsonToDb(item, "", listNodeId);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            // Handle primitive values
+            QString value = data.toString();
+            if (!value.isEmpty()) {
+                if (key.isEmpty()) {
+                    // Array item
+                    dbManager.insertSchemaField(parentId, value);
+                } else {
+                    // Key-value pair
+                    dbManager.insertSchemaField(parentId, key + ": " + value);
+                }
+            }
+        }
+    };
+
+    // Initial call with root object
+    insertJsonToDb(jsonMap, "ROOT", 0);
+
+    // Print the database contents for verification
+    dbManager.printSchemaTable();
+
+    // Refresh suggestions with the new data
+    m_suggestionManager->refreshDatabase();
+
     int currentColumn = 0;
     int maxParent = -1;
-    cout << "\n\n Node Time \n" << endl;
+    qDebug() << "\n\n Node Time \n";
+    qDebug() << "Here's our Stats, Boss:";
+    qDebug() << "Columns:" << this->ui->gridLayout->columnCount();
+    qDebug() << "Rows:" << this->ui->gridLayout->rowCount();
+    qDebug() << "Size of this window:" << this->ui->scrollArea_2->geometry().width()
+             << "x" << this->ui->nodeHolder->geometry().height();
 
-    cout << "Here's our Stats, Boss:" << endl;
-    cout << "Columns: " << this->ui->gridLayout->columnCount() << endl;
-    cout << "Rows: " << this->ui->gridLayout->rowCount() << endl;
-    cout << "Size of this window: " << this->ui->scrollArea_2->geometry().width() << "x" << this->ui->nodeHolder->geometry().height() << endl;
+    for (Node* node : nodeManager->getNodes()) {
+        qDebug() << "currentColumn :" << currentColumn;
+        qDebug() << "maxParent :" << maxParent;
 
-    for (Node* node:nodeManager->getNodes()) {
+        if (node->getNodeParent() == nullptr) {
+            qDebug() << "\n" << node->header->text() << ": ROOT ::"
+                     << node->row << ":" << currentColumn;
+        } else {
+            qDebug() << "\n" << node->header->text() << ":"
+                     << QString::number(node->getNodeParent()->getName())
+                     << " :: " << node->row << ":" << currentColumn;
+        }
 
-        cout << "currentColumn : " << std::to_string(currentColumn) << endl;
-        cout << "currentColumn : " << std::to_string(maxParent) << endl;
-
-        if (node->getNodeParent() == NULL) {
-            cout << "\n" << node->header->text().toStdString() << ":" << "ROOT :: " << node->row << ":" << currentColumn << endl;
-        } else
-            cout << "\n" << node->header->text().toStdString() << ":" << std::to_string(node->getNodeParent()->getName()) << " :: " << node->row << ":" << currentColumn << endl;
-
-        if (node->getNodeParent() != NULL) {
+        if (node->getNodeParent() != nullptr) {
             if (node->getNodeParent()->getName() > maxParent) {
                 maxParent = node->getNodeParent()->getName();
             } else if (node->getNodeParent()->getName() <= maxParent) {
@@ -198,29 +293,80 @@ void MainWindow::loadJsonButtonClicked()
             }
         }
 
+        // Adding widget to grid layout (adjust for your use case)
         if (currentColumn == -1)
             this->ui->gridLayout->addWidget(node, node->row, 0);
         else
             this->ui->gridLayout->addWidget(node, node->row, currentColumn);
     }
-    //cout << "NODEHOLDER GOT THESE KIDS:: " << this->ui->nodeHolder->children.count() << endl;
-
-    // Parse QVariantMap to construct schema
-    /*
-    Schema* newSchema = this->schemaHandler->fromVariantMap(jsonMap);
-
-    if (newSchema) {
-        newSchema->printTree(newSchema->getRoot(), 0);
-    }
-    */
-    m_suggestionManager->refreshDatabase();
 }
 
-//void MainWindow::mousePressEvent(QMouseEvent *event) {
-//    if (event->button() == Qt::LeftButton) {
-//        cout << "LEFT BUTTON EVENT ???? WOWIE ZOWIW" << endl;
-//    }
-//}
+void MainWindow::on_actionExport_JSON_triggered() {
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export as JSON"), "",
+                                                    tr("JSON Files (*.json)"));
+
+    if (!fileName.isEmpty()) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+        if (dbManager.exportToJson(fileName)) {
+            QMessageBox::information(this, "Export Successful",
+                                     "Database exported to JSON successfully.");
+        } else {
+            QMessageBox::warning(this, "Export Failed",
+                                 "Failed to export database to JSON.");
+        }
+    }
+}
+
+void MainWindow::on_actionExport_XML_triggered() {
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export as XML"), "",
+                                                    tr("XML Files (*.xml)"));
+
+    if (!fileName.isEmpty()) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+        if (dbManager.exportToXml(fileName)) {
+            QMessageBox::information(this, "Export Successful",
+                                     "Database exported to XML successfully.");
+        } else {
+            QMessageBox::warning(this, "Export Failed",
+                                 "Failed to export database to XML.");
+        }
+    }
+}
+
+void MainWindow::on_actionExport_GAML_triggered() {
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export as GAML"), "",
+                                                    tr("GAML Files (*.gaml)"));
+
+    if (!fileName.isEmpty()) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+        if (dbManager.exportToGaml(fileName)) {
+            QMessageBox::information(this, "Export Successful",
+                                     "Database exported to GAML successfully.");
+        } else {
+            QMessageBox::warning(this, "Export Failed",
+                                 "Failed to export database to GAML.");
+        }
+    }
+}
+
+// Optional method for handling the load schema action
+void MainWindow::on_actionLoad_Schema_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Schema File"),
+                                                    "",
+                                                    tr("Schema Files (*.sma)"));
+    if (!fileName.isEmpty())
+        this->schemaHandler->addSchema(fileName.toStdString());
+}
+
+// Stub for additional export actions if needed
+void MainWindow::on_actionExport_as_triggered() {
+    // Additional export functionality can be implemented here
+}
 
 Ui::MainWindow* MainWindow::getUi() {
     return this->ui;
@@ -229,25 +375,22 @@ Ui::MainWindow* MainWindow::getUi() {
 MainWindow::~MainWindow()
 {
     m_suggestionManager->cancelPendingRequests();
+
+    // Close and delete the database file
+    DatabaseManager& dbManager = DatabaseManager::instance();
+    QString dbFilePath = dbManager.database().databaseName();
+    dbManager.closeDatabase(); // Make sure the DB is properly closed
+
+    // Attempt to remove the database file
+    QFile dbFile(dbFilePath);
+    if (dbFile.exists()) {
+        if (!dbFile.remove()) {
+            qWarning() << "Failed to delete database file:" << dbFile.errorString();
+        } else {
+            qDebug() << "Database file deleted successfully.";
+        }
+    }
+
     delete m_suggestionManager;
     delete ui;
 }
-
-
-void MainWindow::on_actionLoad_Schema_triggered()
-{
-    QString fileName = QFileDialog::getOpenFileName(this,
-                                                    tr("Open Schema File"),
-                                                    "",
-                                                    tr("Schema Files (*.sma)"));
-    this->schemaHandler->addSchema(fileName.toStdString());
-
-    if (fileName.isEmpty()) return;
-}
-
-
-void MainWindow::on_actionExport_as_triggered()
-{
-
-}
-
