@@ -30,11 +30,12 @@ public:
 private slots:
     void handleTextInputChanged(const QString& text);
     void updateSuggestions(const QStringList& suggestions);
-    void loadJsonButtonClicked();  // Make sure this is in private slots
-
+    void loadJsonButtonClicked();
     void on_actionLoad_Schema_triggered();
-
     void on_actionExport_as_triggered();
+    void on_actionExport_JSON_triggered();
+    void on_actionExport_XML_triggered();
+    void on_actionExport_GAML_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -47,6 +48,8 @@ private:
 
     void setupAutocomplete();
     void createTextInputIfNeeded();
-    void setupConnections();  // Add this new method
+    void setupConnections();
+    void createExportButtons(); // New method to programmatically create export buttons
 };
-#endif // MAINWINDOW_H
+
+#endif
