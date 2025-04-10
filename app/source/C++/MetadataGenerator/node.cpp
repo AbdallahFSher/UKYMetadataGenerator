@@ -18,7 +18,6 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->header->setText("head");
 
     this->bottomBar = new QLineEdit(this);
-    this->bottomBar->setText("tail");
     this->bottomBar->setVisible(true);
 
     this->setLayout(new QVBoxLayout());
@@ -54,11 +53,11 @@ void Node::setNodeParent(Node *newNodeParent) {
     nodeParent = newNodeParent;
 }
 
-QString Node::getName() {
+int Node::getName() {
     return name;
 }
 
-void Node::setName(QString newName) {
+void Node::setName(int newName) {
     name = newName;
 }
 

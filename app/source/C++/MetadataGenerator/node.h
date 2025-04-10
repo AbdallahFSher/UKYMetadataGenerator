@@ -19,9 +19,11 @@ public:
     QLineEdit* bottomBar;
 
     Node *nodeParent;
-    QString name;
+    int name;
     QString key;
     QString value;
+    int row;
+    int column;
     vector<Node> children;
     QTextEdit *widget;
     QSpacerItem *spacer;
@@ -31,8 +33,8 @@ public:
     Node* getNodeParent();
     void setNodeParent(Node *newParent);
 
-    QString getName();
-    void setName(QString newName);
+    int getName();
+    void setName(int newName);
 
     QString getKey();
     void setKey(QString newKey);
@@ -46,6 +48,12 @@ public:
 
     bool equals(Node Node2);
     void mousePressEvent(QMouseEvent *event);
+
+public slots:
+    void setValue(int value);
+
+signals:
+    void valueChanged(int newValue);
 
 private:
     QLineEdit *lineEdit;

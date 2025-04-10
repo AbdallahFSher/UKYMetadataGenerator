@@ -25,6 +25,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     Ui::MainWindow* getUi();
+    //void mousePressEvent(QMouseEvent *event);
 
 private slots:
     void handleTextInputChanged(const QString& text);

@@ -3,8 +3,8 @@
 
 #include "node.h"
 
-#include <QColor>;
-#include <QPalette>;
+#include <QColor>
+#include <QPalette>
 
 class ColorHandler
 {

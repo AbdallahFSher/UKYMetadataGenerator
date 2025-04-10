@@ -76,12 +76,13 @@ MainWindow::MainWindow(QWidget *parent)
     // Calvin's Code
     Node *beans = new Node(this->ui->nodeHolder, 0);
     Node *beans2 = new Node(this->ui->nodeHolder, 1);
-    nodes.push_back(beans);
-    nodes.push_back(beans2);
-    beans->setText("One");
+    this->ui->gridLayout->addWidget(beans);
+    this->ui->gridLayout->addWidget(beans2, 3, 3);
+    beans->header->setText("One");
     beans->adjustSize();
-    beans2->setText("Two");
+    beans2->header->setText("Two");
     beans->move(200, 200);
+    cout << this->ui->gridLayout->columnCount() << " COLUMNS IN THIS MOTHER !~!!!" << endl;
 */
     // Caleb's Code
     createTextInputIfNeeded();
@@ -169,6 +170,38 @@ void MainWindow::loadJsonButtonClicked()
     QVariantMap jsonMap = jsonVariant.toMap();
     nodeManager->processJson(jsonMap, 0);
     this->ui->nodeHolder->update();
+    int currentColumn = 0;
+    int maxParent = -1;
+    cout << "\n\n Node Time \n" << endl;
+
+    cout << "Here's our Stats, Boss:" << endl;
+    cout << "Columns: " << this->ui->gridLayout->columnCount() << endl;
+    cout << "Rows: " << this->ui->gridLayout->rowCount() << endl;
+    cout << "Size of this window: " << this->ui->scrollArea_2->geometry().width() << "x" << this->ui->nodeHolder->geometry().height() << endl;
+
+    for (Node* node:nodeManager->getNodes()) {
+
+        cout << "currentColumn : " << std::to_string(currentColumn) << endl;
+        cout << "currentColumn : " << std::to_string(maxParent) << endl;
+
+        if (node->getNodeParent() == NULL) {
+            cout << "\n" << node->header->text().toStdString() << ":" << "ROOT :: " << node->row << ":" << currentColumn << endl;
+        } else
+            cout << "\n" << node->header->text().toStdString() << ":" << std::to_string(node->getNodeParent()->getName()) << " :: " << node->row << ":" << currentColumn << endl;
+
+        if (node->getNodeParent() != NULL) {
+            if (node->getNodeParent()->getName() > maxParent) {
+                maxParent = node->getNodeParent()->getName();
+            } else if (node->getNodeParent()->getName() <= maxParent) {
+                currentColumn++;
+            }
+        }
+
+        if (currentColumn == -1)
+            this->ui->gridLayout->addWidget(node, node->row, 0);
+        else
+            this->ui->gridLayout->addWidget(node, node->row, currentColumn);
+    }
     //cout << "NODEHOLDER GOT THESE KIDS:: " << this->ui->nodeHolder->children.count() << endl;
 
     // Parse QVariantMap to construct schema
@@ -180,6 +213,12 @@ void MainWindow::loadJsonButtonClicked()
     ui->jsonLabel->setText(this->fileParser->getCurrentJSON().toJson(QJsonDocument::Indented));
     m_suggestionManager->refreshDatabase();
 }
+
+//void MainWindow::mousePressEvent(QMouseEvent *event) {
+//    if (event->button() == Qt::LeftButton) {
+//        cout << "LEFT BUTTON EVENT ???? WOWIE ZOWIW" << endl;
+//    }
+//}
 
 Ui::MainWindow* MainWindow::getUi() {
     return this->ui;

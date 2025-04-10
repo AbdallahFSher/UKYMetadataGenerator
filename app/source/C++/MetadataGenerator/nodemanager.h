@@ -16,6 +16,8 @@ public:
     void addNode(Node* node);
     QWidget* parent;
     ColorHandler colorHandler;
+    int currentColumn;
+    std::vector<Node*> getNodes();
 
 private:
     std::vector<Node*> nodes;

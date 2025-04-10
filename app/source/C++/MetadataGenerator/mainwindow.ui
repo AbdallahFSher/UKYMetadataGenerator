@@ -92,9 +92,9 @@
          <height>431</height>
         </rect>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <layout class="QVBoxLayout" name="_2">
         <item>
-         <layout class="QVBoxLayout" name="nodeHolderr"/>
+         <layout class="QGridLayout" name="gridLayout"/>
         </item>
        </layout>
       </widget>
