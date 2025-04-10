@@ -111,6 +111,7 @@ void NodeManager::processJson(QVariantMap jsonMap, int level, Node* nodeParent) 
 
 void NodeManager::addNode(Node* node) {
     nodes.push_back(node);
+    colorHandler.setColors(nodes);
 }
 
 std::vector<Node*> NodeManager::getNodes() {

@@ -13,7 +13,7 @@ class Node : public QFrame
 
 public:
     Node(QWidget* parent, const int nodeVariant = 0, Node* nodeParent = nullptr);
-//    Node();
+    Node();
 
     QLineEdit* header;
     QLineEdit* bottomBar;
@@ -55,6 +55,7 @@ public slots:
 
 signals:
     void valueChanged(int newValue);
+    void beParent(Node* parent);
 
 private:
     QLineEdit *lineEdit;

@@ -9,6 +9,8 @@
 #include "fileparser.h"
 #include "schemahandler.h"
 #include "nodemanager.h"
+#include "preferenceswindow.h"
+#include "addnodedialogue.h"
 
 class SuggestionManager;
 class Node;
@@ -27,15 +29,23 @@ public:
     Ui::MainWindow* getUi();
     //void mousePressEvent(QMouseEvent *event);
 
+public slots:
+    void nodeAdded(Node* newNode);
 private slots:
     void handleTextInputChanged(const QString& text);
     void updateSuggestions(const QStringList& suggestions);
     void loadJsonButtonClicked();
     void on_actionLoad_Schema_triggered();
+
     void on_actionExport_as_triggered();
-    void on_actionExport_JSON_triggered();
-    void on_actionExport_XML_triggered();
-    void on_actionExport_GAML_triggered();
+    void on_actionJSON_triggered();
+    void on_actionXML_triggered();
+    void on_actionGAML_triggered();
+
+    void on_actionPreferences_triggered();
+
+
+    void on_actionAddNode_triggered();
 
 private:
     Ui::MainWindow *ui;
@@ -45,6 +55,9 @@ private:
     FileParser* fileParser;
     SchemaHandler* schemaHandler;
     NodeManager* nodeManager;
+    ColorHandler* colorHandler;
+    PreferencesWindow* pw;
+    AddNodeDialogue* addNodeDialogue;
 
     void setupAutocomplete();
     void createTextInputIfNeeded();
