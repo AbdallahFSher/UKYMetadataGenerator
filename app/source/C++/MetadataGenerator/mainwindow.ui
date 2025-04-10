@@ -29,9 +29,19 @@
          <height>537</height>
         </rect>
        </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <layout class="QVBoxLayout" name="_2">
         <item>
-         <layout class="QGridLayout" name="gridLayout"/>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+          </property>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -48,21 +58,34 @@
      <height>21</height>
     </rect>
    </property>
+   <property name="nativeMenuBar">
+    <bool>true</bool>
+   </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
     </property>
+    <widget class="QMenu" name="menuExport_as">
+     <property name="title">
+      <string>Export as...</string>
+     </property>
+     <addaction name="actionJSON"/>
+     <addaction name="actionXML"/>
+     <addaction name="actionGAML"/>
+    </widget>
     <addaction name="separator"/>
     <addaction name="actionOpen"/>
     <addaction name="actionLoad_Schema"/>
     <addaction name="separator"/>
-    <addaction name="actionExport_as"/>
+    <addaction name="menuExport_as"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>Edit</string>
     </property>
-    <addaction name="actionView"/>
+    <addaction name="actionAddNode"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
@@ -75,9 +98,9 @@
    <addaction name="menuView"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionView">
+  <action name="actionAddNode">
    <property name="text">
-    <string>View</string>
+    <string>Add Node</string>
    </property>
   </action>
   <action name="actionOpen">
@@ -90,14 +113,29 @@
     <string>Load Schema</string>
    </property>
   </action>
-  <action name="actionExport_as">
-   <property name="text">
-    <string>Export as...</string>
-   </property>
-  </action>
   <action name="actionChange_Colors">
    <property name="text">
     <string>Change Colors</string>
+   </property>
+  </action>
+  <action name="actionJSON">
+   <property name="text">
+    <string>JSON</string>
+   </property>
+  </action>
+  <action name="actionXML">
+   <property name="text">
+    <string>XML</string>
+   </property>
+  </action>
+  <action name="actionGAML">
+   <property name="text">
+    <string>GAML</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
    </property>
   </action>
  </widget>

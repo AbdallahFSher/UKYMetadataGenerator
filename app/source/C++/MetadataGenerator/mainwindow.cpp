@@ -47,6 +47,16 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug() << "Error creating schema table:" << query.lastError().text();
     }
 
+    // Then handle the schema
+    /*Schema* currentSchema = schemaHandler->addSchema("..\\..\\..\\examples\\exampleSchema.sma");
+
+    if (currentSchema) {
+        auto rootField = currentSchema->getRoot();
+        if (rootField) {
+            insertFieldTree(rootField, 0, dbManager); // 0 indicates no parent
+        }
+    }*/
+
     // Print the table contents
     qDebug() << "\nDatabase Contents:";
     if (!query.exec("SELECT id, parent_id, name FROM schema_fields ORDER BY id")) {
@@ -61,40 +71,20 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
+    this->pw = new PreferencesWindow(this);
+    this->addNodeDialogue = new AddNodeDialogue(this, m_suggestionManager);
+
     // Caleb's Code: Create text input, autocomplete and export buttons
-    createTextInputIfNeeded();
-    setupAutocomplete();
-    createExportButtons();      // <-- New: programmatically create export buttons
+    //createTextInputIfNeeded();
     setupConnections();
 
     // Color and Node manager setup
-    ColorHandler *colorHandler = new ColorHandler();
+    this->colorHandler = new ColorHandler();
     this->nodeManager = new NodeManager(this->ui->nodeHolder, *colorHandler);
     this->setPalette(colorHandler->getPalette());
     this->ui->menubar->setPalette(this->palette());
-}
 
-// New method to create export buttons programmatically
-void MainWindow::createExportButtons() {
-    // Create export buttons and set object names for later connection
-    QPushButton* exportJsonButton = new QPushButton("Export JSON", this);
-    exportJsonButton->setObjectName("exportJsonButton");
-    QPushButton* exportXmlButton = new QPushButton("Export XML", this);
-    exportXmlButton->setObjectName("exportXmlButton");
-    QPushButton* exportGamlButton = new QPushButton("Export GAML", this);
-    exportGamlButton->setObjectName("exportGamlButton");
 
-    // Add these buttons to the central widget layout.
-    QVBoxLayout* layout = nullptr;
-    if (ui->centralwidget->layout()) {
-        layout = qobject_cast<QVBoxLayout*>(ui->centralwidget->layout());
-    } else {
-        layout = new QVBoxLayout(ui->centralwidget);
-        layout->addWidget(ui->nodeHolder); // Retain existing widget
-    }
-    layout->addWidget(exportJsonButton);
-    layout->addWidget(exportXmlButton);
-    layout->addWidget(exportGamlButton);
 }
 
 // Suggestion Manager Functions
@@ -133,12 +123,19 @@ void MainWindow::setupAutocomplete()
 {
     m_completer->setCaseSensitivity(Qt::CaseInsensitive);
     m_completer->setFilterMode(Qt::MatchContains);
-    m_textInput->setCompleter(m_completer);
 
-    connect(m_textInput, &QLineEdit::textEdited,
-            this, &MainWindow::handleTextInputChanged);
+    for(Node* n:this->nodeManager->getNodes()){
+        n->header->setCompleter(m_completer);
+        connect(n->header, &QLineEdit::textEdited,
+                this, &MainWindow::handleTextInputChanged);
+        n->bottomBar->setCompleter(m_completer);
+        connect(n->bottomBar, &QLineEdit::textEdited,
+                this, &MainWindow::handleTextInputChanged);
+    }
+    addNodeDialogue->setupAutocomplete(m_completer);
     connect(m_suggestionManager, &SuggestionManager::suggestionsReady,
             this, &MainWindow::updateSuggestions);
+
 
     m_suggestionManager->initialize();
 }
@@ -157,19 +154,13 @@ void MainWindow::setupConnections()
         qWarning() << "No JSON load trigger found in UI";
     }
 
-    // Connect our export buttons to their slots
-    if (auto exportJsonButton = findChild<QPushButton*>("exportJsonButton")) {
-        connect(exportJsonButton, &QPushButton::clicked,
-                this, &MainWindow::on_actionExport_JSON_triggered);
-    }
-    if (auto exportXmlButton = findChild<QPushButton*>("exportXmlButton")) {
-        connect(exportXmlButton, &QPushButton::clicked,
-                this, &MainWindow::on_actionExport_XML_triggered);
-    }
-    if (auto exportGamlButton = findChild<QPushButton*>("exportGamlButton")) {
-        connect(exportGamlButton, &QPushButton::clicked,
-                this, &MainWindow::on_actionExport_GAML_triggered);
-    }
+    connect(this->addNodeDialogue, SIGNAL(createNode(Node*)), this, SLOT(nodeAdded(Node*)));
+}
+
+void MainWindow::nodeAdded(Node* newNode) {
+    newNode->setVisible(true);
+    this->ui->gridLayout->addWidget(newNode, newNode->row, newNode->column);
+    this->nodeManager->addNode(newNode);
 }
 
 
@@ -293,63 +284,17 @@ void MainWindow::loadJsonButtonClicked()
             }
         }
 
+        node->column = currentColumn;
+
         // Adding widget to grid layout (adjust for your use case)
         if (currentColumn == -1)
             this->ui->gridLayout->addWidget(node, node->row, 0);
         else
             this->ui->gridLayout->addWidget(node, node->row, currentColumn);
+
+        connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
     }
-}
-
-void MainWindow::on_actionExport_JSON_triggered() {
-    QString fileName = QFileDialog::getSaveFileName(this,
-                                                    tr("Export as JSON"), "",
-                                                    tr("JSON Files (*.json)"));
-
-    if (!fileName.isEmpty()) {
-        DatabaseManager& dbManager = DatabaseManager::instance();
-        if (dbManager.exportToJson(fileName)) {
-            QMessageBox::information(this, "Export Successful",
-                                     "Database exported to JSON successfully.");
-        } else {
-            QMessageBox::warning(this, "Export Failed",
-                                 "Failed to export database to JSON.");
-        }
-    }
-}
-
-void MainWindow::on_actionExport_XML_triggered() {
-    QString fileName = QFileDialog::getSaveFileName(this,
-                                                    tr("Export as XML"), "",
-                                                    tr("XML Files (*.xml)"));
-
-    if (!fileName.isEmpty()) {
-        DatabaseManager& dbManager = DatabaseManager::instance();
-        if (dbManager.exportToXml(fileName)) {
-            QMessageBox::information(this, "Export Successful",
-                                     "Database exported to XML successfully.");
-        } else {
-            QMessageBox::warning(this, "Export Failed",
-                                 "Failed to export database to XML.");
-        }
-    }
-}
-
-void MainWindow::on_actionExport_GAML_triggered() {
-    QString fileName = QFileDialog::getSaveFileName(this,
-                                                    tr("Export as GAML"), "",
-                                                    tr("GAML Files (*.gaml)"));
-
-    if (!fileName.isEmpty()) {
-        DatabaseManager& dbManager = DatabaseManager::instance();
-        if (dbManager.exportToGaml(fileName)) {
-            QMessageBox::information(this, "Export Successful",
-                                     "Database exported to GAML successfully.");
-        } else {
-            QMessageBox::warning(this, "Export Failed",
-                                 "Failed to export database to GAML.");
-        }
-    }
+    setupAutocomplete();
 }
 
 // Optional method for handling the load schema action
@@ -394,3 +339,72 @@ MainWindow::~MainWindow()
     delete m_suggestionManager;
     delete ui;
 }
+
+void MainWindow::on_actionJSON_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export as JSON"), "",
+                                                    tr("JSON Files (*.json)"));
+
+    if (!fileName.isEmpty()) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+        if (dbManager.exportToJson(fileName)) {
+            QMessageBox::information(this, "Export Successful",
+                                     "Database exported to JSON successfully.");
+        } else {
+            QMessageBox::warning(this, "Export Failed",
+                                 "Failed to export database to JSON.");
+        }
+    }
+}
+
+
+void MainWindow::on_actionXML_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export as XML"), "",
+                                                    tr("XML Files (*.xml)"));
+
+    if (!fileName.isEmpty()) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+        if (dbManager.exportToXml(fileName)) {
+            QMessageBox::information(this, "Export Successful",
+                                     "Database exported to XML successfully.");
+        } else {
+            QMessageBox::warning(this, "Export Failed",
+                                 "Failed to export database to XML.");
+        }
+    }
+}
+
+
+void MainWindow::on_actionGAML_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export as GAML"), "",
+                                                    tr("GAML Files (*.gaml)"));
+
+    if (!fileName.isEmpty()) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+        if (dbManager.exportToGaml(fileName)) {
+            QMessageBox::information(this, "Export Successful",
+                                     "Database exported to GAML successfully.");
+        } else {
+            QMessageBox::warning(this, "Export Failed",
+                                 "Failed to export database to GAML.");
+        }
+    }
+}
+
+
+void MainWindow::on_actionPreferences_triggered()
+{
+    this->pw->show();
+}
+
+
+void MainWindow::on_actionAddNode_triggered()
+{
+    this->addNodeDialogue->show();
+}
+

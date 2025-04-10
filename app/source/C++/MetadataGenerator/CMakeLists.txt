@@ -36,6 +36,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         suggestionmanager.h
         suggestionmanager.cpp
         nodemanager.h nodemanager.cpp
+        preferenceswindow.h preferenceswindow.cpp preferenceswindow.ui
+        addnodedialogue.h addnodedialogue.cpp addnodedialogue.ui
+        selectparentdialogue.h selectparentdialogue.cpp selectparentdialogue.ui
 
     )
 # Define target properties for Android with Qt 6 as:

@@ -15,6 +15,41 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
 
     this->header = new QLineEdit(this);
     this->header->setVisible(true);
+    this->header->setAlignment(Qt::AlignCenter);
+    this->header->setStyleSheet("font-weight: bold");
+
+    this->bottomBar = new QLineEdit(this);
+    this->bottomBar->setVisible(true);
+
+    this->setLayout(new QVBoxLayout());
+    this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+    connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+
+    this->updateGeometry();
+    this->header->updateGeometry();
+    this->bottomBar->updateGeometry();
+
+    this->layout()->addWidget(header);
+    this->layout()->addWidget(bottomBar);
+    this->setMinimumSize(100, 80);
+
+    this->setVisible(true);
+}
+
+Node::Node() {
+    this->nodeParent = nullptr;
+    this->nodeVariant = 0;
+    this->content = map<QString, QString>(); // dictionary
+    this->children = std::vector<Node>();
+    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+    this->header = new QLineEdit(this);
+    this->header->setVisible(true);
     this->header->setText("head");
     this->header->setAlignment(Qt::AlignCenter);
     this->header->setStyleSheet("font-weight: bold");
@@ -28,6 +63,9 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
 
+    connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+    connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+
     this->updateGeometry();
     this->header->updateGeometry();
     this->bottomBar->updateGeometry();
@@ -35,17 +73,7 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->layout()->addWidget(header);
     this->layout()->addWidget(bottomBar);
     this->setMinimumSize(100, 80);
-
-    this->setVisible(true);
 }
-
-//Node::Node() {
-//    this->nodeParent;
-//    this->nodeVariant = 0;
-//    this->content = map<QString, QString>(); // dictionary
-//    this->children = std::vector<Node>();
-//    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
-//}
 
 Node* Node::getNodeParent() {
     return nodeParent;
@@ -69,6 +97,7 @@ QString Node::getKey() {
 
 void Node::setKey(QString newKey) {
     key = newKey;
+    this->header->setText(key);
 }
 
 QString Node::getValue() {
@@ -77,6 +106,7 @@ QString Node::getValue() {
 
 void Node::setValue(QString newValue) {
     value = newValue;
+    this->bottomBar->setText(value);
 }
 
 void Node::setValue(int value) {
@@ -112,7 +142,7 @@ void Node::mousePressEvent(QMouseEvent *event)
 {
     //cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
     if (event->button() == Qt::LeftButton) {
-
+        emit this->beParent(this);
         QPoint startPos = mapFromGlobal(QCursor::pos());
 
 
@@ -153,4 +183,26 @@ void Node::mousePressEvent(QMouseEvent *event)
 
         //cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
     }
+}
+
+
+void Node::resize_to_text() {
+    /*
+    QString headerText = header->text();
+    QString bottomBarText = bottomBar->text();
+    QFont font("", 0);
+    QFontMetrics fm(font);
+
+    QRect headerRect = fm.boundingRect(headerText);
+    QRect bottomRect = fm.boundingRect(bottomBarText);
+    QRect newRect = this->frameRect();
+
+    if (headerRect.width() > bottomRect.width()) {
+        newRect.setWidth(headerRect.width());
+    } else {
+        newRect.setWidth(bottomRect.width());
+    }
+
+    this->setFrameRect(newRect);
+    */
 }
