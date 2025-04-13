@@ -7,29 +7,34 @@
 using namespace std;
 
 
-class Node : public QTextEdit
+class Node : public QFrame
 {
     Q_OBJECT
 
 public:
-    Node(QWidget *parent = nullptr, const int nodeVariant = 0);
+    Node(QWidget* parent, const int nodeVariant = 0, Node* nodeParent = nullptr);
     Node();
 
-    Node *parent;
-    QString name;
+    QLineEdit* header;
+    QLineEdit* bottomBar;
+
+    Node *nodeParent;
+    int name;
     QString key;
     QString value;
+    int row;
+    int column;
     vector<Node> children;
     QTextEdit *widget;
     QSpacerItem *spacer;
     int nodeVariant;
     map<QString, QString> content;
 
-    Node* getParent();
-    void setParent(Node *newParent);
+    Node* getNodeParent();
+    void setNodeParent(Node *newParent);
 
-    QString getName();
-    void setName(QString newName);
+    int getName();
+    void setName(int newName);
 
     QString getKey();
     void setKey(QString newKey);
@@ -43,6 +48,14 @@ public:
 
     bool equals(Node Node2);
     void mousePressEvent(QMouseEvent *event);
+
+public slots:
+    void setValue(int value);
+    void resize_to_text();
+
+signals:
+    void valueChanged(int newValue);
+    void beParent(Node* parent);
 
 private:
     QLineEdit *lineEdit;

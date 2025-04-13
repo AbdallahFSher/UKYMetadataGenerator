@@ -4,37 +4,90 @@
 using namespace std;
 
 // TODO: Give information to schema which delineates nodeVariant (color)
-Node::Node(QWidget *parent, const int nodeVariant)
-    : QTextEdit(parent)
+Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
+    : QFrame(parent)
 {
-    this->parent;
+    this->nodeParent = nodeParent;
     this->nodeVariant = nodeVariant;
     this->content = map<QString, QString>(); // dictionary
     this->children = std::vector<Node>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+    this->header = new QLineEdit(this);
+    this->header->setVisible(true);
+    this->header->setAlignment(Qt::AlignCenter);
+    this->header->setStyleSheet("font-weight: bold");
+
+    this->bottomBar = new QLineEdit(this);
+    this->bottomBar->setVisible(true);
+
+    this->setLayout(new QVBoxLayout());
+    this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+    connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+
+    this->updateGeometry();
+    this->header->updateGeometry();
+    this->bottomBar->updateGeometry();
+
+    this->layout()->addWidget(header);
+    this->layout()->addWidget(bottomBar);
+    this->setMinimumSize(100, 80);
+
+    this->setVisible(true);
 }
 
 Node::Node() {
-    this->parent;
+    this->nodeParent = nullptr;
     this->nodeVariant = 0;
     this->content = map<QString, QString>(); // dictionary
     this->children = std::vector<Node>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+    this->header = new QLineEdit(this);
+    this->header->setVisible(true);
+    this->header->setText("head");
+    this->header->setAlignment(Qt::AlignCenter);
+    this->header->setStyleSheet("font-weight: bold");
+
+    this->bottomBar = new QLineEdit(this);
+    this->bottomBar->setVisible(true);
+
+    this->setLayout(new QVBoxLayout());
+    this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+
+    connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+    connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
+
+    this->updateGeometry();
+    this->header->updateGeometry();
+    this->bottomBar->updateGeometry();
+
+    this->layout()->addWidget(header);
+    this->layout()->addWidget(bottomBar);
+    this->setMinimumSize(100, 80);
 }
 
-Node* Node::getParent() {
-    return parent;
+Node* Node::getNodeParent() {
+    return nodeParent;
 }
 
-void Node::setParent(Node *newParent) {
-    parent = newParent;
+void Node::setNodeParent(Node *newNodeParent) {
+    nodeParent = newNodeParent;
 }
 
-QString Node::getName() {
+int Node::getName() {
     return name;
 }
 
-void Node::setName(QString newName) {
+void Node::setName(int newName) {
     name = newName;
 }
 
@@ -44,6 +97,7 @@ QString Node::getKey() {
 
 void Node::setKey(QString newKey) {
     key = newKey;
+    this->header->setText(key);
 }
 
 QString Node::getValue() {
@@ -52,6 +106,11 @@ QString Node::getValue() {
 
 void Node::setValue(QString newValue) {
     value = newValue;
+    this->bottomBar->setText(value);
+}
+
+void Node::setValue(int value) {
+    this->value = (QChar)value;
 }
 
 void Node::addChild(Node newChild) {
@@ -72,7 +131,7 @@ void Node::removeChild(int index) {
 }
 
 bool Node::equals(Node Node2) {
-    if (parent == Node2.parent && name == Node2.name &&
+    if (nodeParent == Node2.nodeParent && name == Node2.name &&
         key == Node2.key && value == Node2.value) {
         return true;
     }
@@ -81,9 +140,9 @@ bool Node::equals(Node Node2) {
 
 void Node::mousePressEvent(QMouseEvent *event)
 {
-    cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
+    //cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
     if (event->button() == Qt::LeftButton) {
-
+        emit this->beParent(this);
         QPoint startPos = mapFromGlobal(QCursor::pos());
 
 
@@ -115,13 +174,35 @@ void Node::mousePressEvent(QMouseEvent *event)
         QPoint diff = endPos - startPos;
         //QPoint diff = endPos;
 
-        cout << "INITALPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
+        //cout << "INITALPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
         this->move(this->pos() + diff);
-        cout << "ENDPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
-        cout << "START MOUSE POS: " << (QString("%1x%2").arg(startPos.x()).arg(startPos.y())).toStdString() << endl;
-        cout << "END MOUSE POS: " << (QString("%1x%2").arg(endPos.x()).arg(endPos.y())).toStdString() << endl;
-        cout << "DIFF: " << (QString("%1x%2").arg(diff.x()).arg(diff.y())).toStdString() << endl;
+        //cout << "ENDPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
+        //cout << "START MOUSE POS: " << (QString("%1x%2").arg(startPos.x()).arg(startPos.y())).toStdString() << endl;
+        //cout << "END MOUSE POS: " << (QString("%1x%2").arg(endPos.x()).arg(endPos.y())).toStdString() << endl;
+        //cout << "DIFF: " << (QString("%1x%2").arg(diff.x()).arg(diff.y())).toStdString() << endl;
 
-        cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
+        //cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
     }
+}
+
+
+void Node::resize_to_text() {
+    /*
+    QString headerText = header->text();
+    QString bottomBarText = bottomBar->text();
+    QFont font("", 0);
+    QFontMetrics fm(font);
+
+    QRect headerRect = fm.boundingRect(headerText);
+    QRect bottomRect = fm.boundingRect(bottomBarText);
+    QRect newRect = this->frameRect();
+
+    if (headerRect.width() > bottomRect.width()) {
+        newRect.setWidth(headerRect.width());
+    } else {
+        newRect.setWidth(bottomRect.width());
+    }
+
+    this->setFrameRect(newRect);
+    */
 }

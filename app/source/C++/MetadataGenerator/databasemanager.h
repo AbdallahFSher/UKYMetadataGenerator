@@ -14,10 +14,16 @@ public:
     QSqlDatabase& database();
     int insertSchemaField(int parentId, const QString& name);
     void printSchemaTable();
+    bool exportToJson(const QString& filePath);
+    bool exportToXml(const QString& filePath);
+    bool exportToGaml(const QString& filePath);
+    bool clearDatabase();
 
 private:
     DatabaseManager();
     QSqlDatabase db;
+    QVariantMap buildTreeFromDatabase();
+    QVariantMap buildSubtree(int parentId);
 };
 
 #endif // DATABASEMANAGER_H

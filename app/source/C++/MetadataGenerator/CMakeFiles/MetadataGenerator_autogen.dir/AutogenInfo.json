@@ -398,6 +398,12 @@
 			null
 		],
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.h",
+			"MU",
+			"EWIEGA46WW/moc_nodemanager.cpp",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h",
 			"MU",
 			"EWIEGA46WW/moc_schema.cpp",
@@ -516,6 +522,11 @@
 		],
 		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.cpp",
 			"MU",
 			null
 		],

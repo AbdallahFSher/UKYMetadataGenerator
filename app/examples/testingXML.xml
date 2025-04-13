@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ROOT>
+    <Metadata>
+        <Data Citation>
+            <Abstract>
+                <pending></pending>
+            </Abstract>
+            <Date of Deposit>
+                <pending></pending>
+            </Date of Deposit>
+            <Depositor>
+                <>
+                    <Name>
+                        <Bryan Maloney></Bryan Maloney>
+                    </Name>
+                    <email>
+                        <bjma@uky.edu></bjma@uky.edu>
+                    </email>
+                </>
+            </Depositor>
+            <Funding Agency>
+                <UK></UK>
+            </Funding Agency>
+            <Grant Number>
+                <x></x>
+            </Grant Number>
+            <Institution>
+                <University of Kentucky></University of Kentucky>
+            </Institution>
+            <Keywords>
+                <Epilepsy drug discovery anti-inflammatory></Epilepsy drug discovery anti-inflammatory>
+            </Keywords>
+            <Principal Investigator>
+                <>
+                    <Name>
+                        <Bjoern Bauer></Bjoern Bauer>
+                    </Name>
+                    <ORCID>
+                        <0000-0003-3867-2251></0000-0003-3867-2251>
+                    </ORCID>
+                    <email>
+                        <bjoern.bauer@uky.edu></bjoern.bauer@uky.edu>
+                    </email>
+                </>
+            </Principal Investigator>
+            <Title>
+                <TEAMS Grant></TEAMS Grant>
+            </Title>
+            <doi>
+                <pending></pending>
+            </doi>
+        </Data Citation>
+        <Projects>
+            <>
+                <Aims>
+                    <>
+                        <Name>
+                            <Design, synthesis, & in vitro activity></Design, synthesis, & in vitro activity>
+                        </Name>
+                        <Workers>
+                            <>
+                                <Name>
+                                    <Zhan></Zhan>
+                                </Name>
+                            </>
+                        </Workers>
+                    </>
+                </Aims>
+                <Name>
+                    <Novel mPGES Inhibitors></Novel mPGES Inhibitors>
+                </Name>
+                <Workers>
+                    <>
+                        <Name>
+                            <Zhan></Zhan>
+                        </Name>
+                    </>
+                </Workers>
+            </>
+        </Projects>
+        <Publications/>
+    </Metadata>
+</ROOT>

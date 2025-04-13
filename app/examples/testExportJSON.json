@@ -1,0 +1,85 @@
+{
+    "ROOT": {
+        "Metadata": {
+            "Data Citation": {
+                "Abstract": {
+                    "pending": ""
+                },
+                "Date of Deposit": {
+                    "pending": ""
+                },
+                "Depositor": {
+                    "": {
+                        "Name": {
+                            "Bryan Maloney": ""
+                        },
+                        "email": {
+                            "bjma@uky.edu": ""
+                        }
+                    }
+                },
+                "Funding Agency": {
+                    "UK": ""
+                },
+                "Grant Number": {
+                    "x": ""
+                },
+                "Institution": {
+                    "University of Kentucky": ""
+                },
+                "Keywords": {
+                    "Epilepsy drug discovery anti-inflammatory": ""
+                },
+                "Principal Investigator": {
+                    "": {
+                        "Name": {
+                            "Bjoern Bauer": ""
+                        },
+                        "ORCID": {
+                            "0000-0003-3867-2251": ""
+                        },
+                        "email": {
+                            "bjoern.bauer@uky.edu": ""
+                        }
+                    }
+                },
+                "Title": {
+                    "TEAMS Grant": ""
+                },
+                "doi": {
+                    "pending": ""
+                }
+            },
+            "Projects": {
+                "": {
+                    "Aims": {
+                        "": {
+                            "Name": {
+                                "Design, synthesis, & in vitro activity": ""
+                            },
+                            "Workers": {
+                                "": {
+                                    "Name": {
+                                        "Zhan": ""
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "Name": {
+                        "Novel mPGES Inhibitors": ""
+                    },
+                    "Workers": {
+                        "": {
+                            "Name": {
+                                "Zhan": ""
+                            }
+                        }
+                    }
+                }
+            },
+            "Publications": {
+            }
+        }
+    }
+}

@@ -1,7 +1,10 @@
 MetadataGenerator_autogen/timestamp: \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QDeadlineTimer \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QEvent \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QFile \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QHash \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QJsonDocument \
+	C:/Qt/6.8.2/mingw_64/include/QtCore/QJsonObject \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QList \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QMap \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/QMargins \
@@ -285,10 +288,12 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Qt/6.8.2/mingw_64/include/QtCore/qyieldcpu.h \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QAction \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QActionGroup \
+	C:/Qt/6.8.2/mingw_64/include/QtGui/QColor \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QFileSystemModel \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QMatrix4x4 \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDevice \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDeviceWindow \
+	C:/Qt/6.8.2/mingw_64/include/QtGui/QPalette \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QShortcut \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QSurfaceFormat \
 	C:/Qt/6.8.2/mingw_64/include/QtGui/QTransform \
@@ -940,6 +945,7 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iomanip \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iosfwd \
+	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator \
 	C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
@@ -1110,6 +1116,8 @@ MetadataGenerator_autogen/timestamp: \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/mainwindow.h \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.cpp \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.h \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.cpp \
+	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.h \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.cpp \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h \
 	C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.cpp \

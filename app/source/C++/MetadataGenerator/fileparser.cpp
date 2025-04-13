@@ -6,17 +6,14 @@ FileParser::FileParser() {
 }
 
 QVariant FileParser::importJson(QString filePath) {
-    // Open the file
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         throw std::runtime_error("Could not open file: " + filePath.toStdString());
     }
 
-    // Read the file content
     QByteArray jsonData = file.readAll();
     file.close();
 
-    // Parse JSON document
     QJsonParseError parseError;
     QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
 
@@ -24,11 +21,20 @@ QVariant FileParser::importJson(QString filePath) {
         throw std::runtime_error("JSON parse error: " + parseError.errorString().toStdString());
     }
 
-    // Convert to QVariant
     QVariant jsonVariant = jsonDoc.toVariant();
-    this->currentData = jsonVariant.toMap();
     this->currentJSON = jsonDoc;
     this->currentVariant = jsonVariant;
+
+    // Handle either an object or array at the top level
+    if (jsonVariant.type() == QVariant::Map) {
+        this->currentData = jsonVariant.toMap(); // top-level object
+    } else if (jsonVariant.type() == QVariant::List) {
+        QVariantMap wrapper;
+        wrapper["root"] = jsonVariant; // wrap list in map for compatibility
+        this->currentData = wrapper;
+    } else {
+        throw std::runtime_error("Unsupported JSON top-level type");
+    }
 
     return jsonVariant;
 }

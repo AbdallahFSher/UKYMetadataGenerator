@@ -1,0 +1,279 @@
+{
+  "Metadata": {
+    "Data Citation": {
+      "Title": "Evaluation of mPGES-1 Inhibitor BAR-002 in Acute SE Rat Model",
+      "doi": "pending",
+      "Principal Investigator": [
+        {
+          "Name": "Bjoern Bauer",
+          "ORCID": "0000-0003-3867-2251",
+          "email": "bjoern.bauer@uky.edu"
+        }
+      ],
+      "Depositor": [
+        {
+          "Name": "Bryan Maloney",
+          "email": "bjma@uky.edu"
+        }
+      ],
+      "Date of Deposit": "pending",
+      "Institution": "University of Kentucky",
+      "Keywords": "Epilepsy, drug discovery, anti-inflammatory, BBB protection",
+      "Abstract": "Evaluation of novel mPGES-1 inhibitor BAR-002 in lithium-pilocarpine induced status epilepticus rat model",
+      "Funding Agency": "NIH/NINDS",
+      "Grant Number": "R01NS123456"
+    },
+    "Publications": [
+      {
+        "Authors": "",
+        "Year": "",
+        "Journal": "",
+        "Title": ""
+      }
+    ],
+    "Projects": [
+      {
+        "Name": "Preclinical Testing of mPGES-1 Inhibitors",
+        "Workers": [
+          {
+            "Name": "Bjoern Bauer",
+            "ORCID": "0000-0003-3867-2251",
+            "email": "bjoern.bauer@uky.edu"
+          }
+        ],
+        "Aims": [
+          {
+            "Name": "Therapeutic benefits of mPGES-1 inhibitors",
+            "Workers": [
+              {
+                "Name": "Bjoern Bauer",
+                "ORCID": "0000-0003-3867-2251",
+                "email": "bjoern.bauer@uky.edu"
+              }
+            ],
+            "Studies": [
+              {
+                "Name": "Acute SE Rat Study",
+                "Workers": [
+                  {
+                    "Name": "Bjoern Bauer",
+                    "ORCID": "0000-0003-3867-2251",
+                    "email": "bjoern.bauer@uky.edu"
+                  }
+                ],
+                "Design": "Randomized controlled",
+                "DesignType": "Therapeutic efficacy",
+                "Organisms": [
+                  {
+                    "Genus species": "Rattus norvegicus",
+                    "Line/Strain": "Sprague-Dawley",
+                    "Age/Passage": "8-10 weeks"
+                  }
+                ],
+                "Treatments/Groups": "Vehicle control (SE only), SE + BAR-002 (10 mg/kg), SE + BAR-002 (30 mg/kg), SE + valproate (200 mg/kg)",
+                "Start Date": "2023-01-15",
+                "End Date": "2023-04-15",
+                "Equipment": [
+                  {
+                    "Type": "EEG System",
+                    "Make": "Pinnacle Technology",
+                    "Model": "8200-K1-SE",
+                    "Settings": "Sampling rate: 1 kHz, Bandpass: 0.5-100 Hz"
+                  },
+                  {
+                    "Type": "Video Monitoring",
+                    "Make": "Axis",
+                    "Model": "Q1615",
+                    "Settings": "1080p, 30fps, IR illumination"
+                  }
+                ],
+                "Foci": [
+                  {
+                    "Name": "Seizure Monitoring",
+                    "Workers": [
+                      {
+                        "Name": "Bjoern Bauer",
+                        "ORCID": "0000-0003-3867-2251",
+                        "email": "bjoern.bauer@uky.edu"
+                      }
+                    ],
+                    "Assays": [
+                      {
+                        "Name": "Video-EEG Recording",
+                        "Assayists": [
+                          {
+                            "Name": "Lab Technician",
+                            "ORCID": "",
+                            "email": ""
+                          }
+                        ],
+                        "Type": "Electrophysiology",
+                        "Substrate": "Whole animal",
+                        "Target": "Seizure activity",
+                        "Outcome Measure": "Seizure frequency, duration, severity (Racine scale)",
+                        "Date": [
+                          {
+                            "Start": "2023-01-20",
+                            "End": "2023-04-10"
+                          }
+                        ],
+                        "Equipment": [
+                          {
+                            "Type": "EEG System",
+                            "Make": "Pinnacle Technology",
+                            "Model": "8200-K1-SE",
+                            "Settings": ""
+                          }
+                        ],
+                        "Kit/Reagents": [
+                          {
+                            "Type": "EEG Electrodes",
+                            "Make": "Pinnacle Technology",
+                            "Catalogue #": "8209",
+                            "Parameters": [
+                              {
+                                "Material": "Stainless steel",
+                                "Condition": "Sterilized"
+                              }
+                            ]
+                          }
+                        ],
+                        "Data": [
+                          {
+                            "data type": "EEG traces",
+                            "data source": "Pinnacle Acquisition",
+                            "file name": "EEG_raw_data.mat",
+                            "file type": "MATLAB",
+                            "file date": "",
+                            "file size": "",
+                            "recommended software": "MATLAB, LabChart"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "Name": "Biochemical Analysis",
+                    "Workers": [
+                      {
+                        "Name": "Bjoern Bauer",
+                        "ORCID": "0000-0003-3867-2251",
+                        "email": "bjoern.bauer@uky.edu"
+                      }
+                    ],
+                    "Assays": [
+                      {
+                        "Name": "PGE2 ELISA",
+                        "Assayists": [
+                          {
+                            "Name": "Lab Technician",
+                            "ORCID": "",
+                            "email": ""
+                          }
+                        ],
+                        "Type": "ELISA",
+                        "Substrate": "Brain homogenate",
+                        "Target": "PGE2",
+                        "Outcome Measure": "PGE2 concentration (pg/mg protein)",
+                        "Date": [
+                          {
+                            "Start": "2023-04-01",
+                            "End": "2023-04-10"
+                          }
+                        ],
+                        "Equipment": [
+                          {
+                            "Type": "Microplate Reader",
+                            "Make": "BioTek",
+                            "Model": "Synergy H1",
+                            "Settings": "450 nm absorbance"
+                          }
+                        ],
+                        "Kit/Reagents": [
+                          {
+                            "Type": "PGE2 ELISA Kit",
+                            "Make": "Cayman Chemical",
+                            "Catalogue #": "514010",
+                            "Parameters": [
+                              {
+                                "Material": "Antibody-coated plate",
+                                "Condition": "4°C storage"
+                              }
+                            ]
+                          }
+                        ],
+                        "Data": [
+                          {
+                            "data type": "ELISA absorbance",
+                            "data source": "Gen5 Software",
+                            "file name": "PGE2_results.xlsx",
+                            "file type": "Excel",
+                            "file date": "",
+                            "file size": "",
+                            "recommended software": "Excel, GraphPad Prism"
+                          }
+                        ]
+                      },
+                      {
+                        "Name": "Drug Concentration GC-MS",
+                        "Assayists": [
+                          {
+                            "Name": "Analytical Chemist",
+                            "ORCID": "",
+                            "email": ""
+                          }
+                        ],
+                        "Type": "GC-MS",
+                        "Substrate": "Plasma",
+                        "Target": "BAR-002",
+                        "Outcome Measure": "Drug concentration (ng/mL)",
+                        "Date": [
+                          {
+                            "Start": "2023-04-05",
+                            "End": "2023-04-12"
+                          }
+                        ],
+                        "Equipment": [
+                          {
+                            "Type": "GC-MS System",
+                            "Make": "Agilent",
+                            "Model": "7890B/5977B",
+                            "Settings": "EI mode, m/z 100-600"
+                          }
+                        ],
+                        "Kit/Reagents": [
+                          {
+                            "Type": "Internal Standard",
+                            "Make": "Sigma-Aldrich",
+                            "Catalogue #": "BAR-002-d4",
+                            "Parameters": [
+                              {
+                                "Material": "Deuterated standard",
+                                "Condition": "-20°C storage"
+                              }
+                            ]
+                          }
+                        ],
+                        "Data": [
+                          {
+                            "data type": "Mass spectra",
+                            "data source": "MassHunter",
+                            "file name": "GCMS_data.d",
+                            "file type": "Agilent Data",
+                            "file date": "",
+                            "file size": "",
+                            "recommended software": "MassHunter, Excel"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
