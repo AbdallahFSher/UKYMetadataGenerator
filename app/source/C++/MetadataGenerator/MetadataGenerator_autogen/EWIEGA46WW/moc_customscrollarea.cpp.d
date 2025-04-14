@@ -1,11 +1,8 @@
-C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/EWIEGA46WW/moc_mainwindow.cpp: C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/mainwindow.h \
+C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/EWIEGA46WW/moc_customscrollarea.cpp: C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/customscrollarea.h \
   C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/MetadataGenerator_autogen/moc_predefs.h \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QDeadlineTimer \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QEvent \
-  C:/Qt/6.8.2/mingw_64/include/QtCore/QFile \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QHash \
-  C:/Qt/6.8.2/mingw_64/include/QtCore/QJsonDocument \
-  C:/Qt/6.8.2/mingw_64/include/QtCore/QJsonObject \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QList \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QMap \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QMargins \
@@ -15,12 +12,10 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/6.8.2/mingw_64/include/QtCore/QPointF \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QRect \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QScopedPointer \
-  C:/Qt/6.8.2/mingw_64/include/QtCore/QSet \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QSize \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QSizeF \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QString \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QStringList \
-  C:/Qt/6.8.2/mingw_64/include/QtCore/QTimer \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QVariant \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QtCore \
   C:/Qt/6.8.2/mingw_64/include/QtCore/QtCoreDepends \
@@ -289,12 +284,10 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/6.8.2/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QAction \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QActionGroup \
-  C:/Qt/6.8.2/mingw_64/include/QtGui/QColor \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QFileSystemModel \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QMatrix4x4 \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDevice \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QPaintDeviceWindow \
-  C:/Qt/6.8.2/mingw_64/include/QtGui/QPalette \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QShortcut \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QSurfaceFormat \
   C:/Qt/6.8.2/mingw_64/include/QtGui/QTransform \
@@ -416,17 +409,8 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.8.2/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.8.2/mingw_64/include/QtGui/qwindowsmimeconverter.h \
-  C:/Qt/6.8.2/mingw_64/include/QtSql/QSqlDatabase \
-  C:/Qt/6.8.2/mingw_64/include/QtSql/qsqldatabase.h \
-  C:/Qt/6.8.2/mingw_64/include/QtSql/qtsql-config.h \
-  C:/Qt/6.8.2/mingw_64/include/QtSql/qtsqlexports.h \
-  C:/Qt/6.8.2/mingw_64/include/QtSql/qtsqlglobal.h \
   C:/Qt/6.8.2/mingw_64/include/QtWidgets/QCommonStyle \
-  C:/Qt/6.8.2/mingw_64/include/QtWidgets/QCompleter \
-  C:/Qt/6.8.2/mingw_64/include/QtWidgets/QDialog \
   C:/Qt/6.8.2/mingw_64/include/QtWidgets/QLayout \
-  C:/Qt/6.8.2/mingw_64/include/QtWidgets/QLineEdit \
-  C:/Qt/6.8.2/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.8.2/mingw_64/include/QtWidgets/QScrollerProperties \
   C:/Qt/6.8.2/mingw_64/include/QtWidgets/QtWidgets \
   C:/Qt/6.8.2/mingw_64/include/QtWidgets/QtWidgetsDepends \
@@ -704,7 +688,6 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unique_lock.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unique_ptr.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_map.h \
-  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unordered_set.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/uses_allocator_args.h \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/utility.h \
@@ -744,7 +727,6 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iomanip \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/ios \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iosfwd \
-  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iterator \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/limits \
@@ -786,7 +768,6 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/type_traits \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/typeinfo \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_map \
-  C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/unordered_set \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/utility \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/variant \
   C:/Qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/vector \
@@ -898,15 +879,4 @@ C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGene
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
-  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/DatabaseManager.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/addnodedialogue.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/fileparser.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/node.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/nodemanager.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/preferenceswindow.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/selectparentdialogue.h \
-  C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/suggestionmanager.h
+  C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h

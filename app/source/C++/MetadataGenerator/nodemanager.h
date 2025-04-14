@@ -18,6 +18,8 @@ public:
     ColorHandler colorHandler;
     int currentColumn;
     std::vector<Node*> getNodes();
+    QSize nodeSize;
+    void alterNodeSize(double factor);
 
 private:
     std::vector<Node*> nodes;

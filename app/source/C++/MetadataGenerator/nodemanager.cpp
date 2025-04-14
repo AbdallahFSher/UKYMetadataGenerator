@@ -10,6 +10,7 @@ NodeManager::NodeManager(QWidget* parent, ColorHandler colorHandler) {
     this->colorHandler = colorHandler;
     std::vector<Node*> nodes = vector<Node*>(); //This vector should be managed by a Node Manager class
     this->currentColumn = 0;
+    this->nodeSize = QSize(100, 80);
 }
 
 int processCnt = 0;
@@ -107,6 +108,10 @@ void NodeManager::processJson(QVariantMap jsonMap, int level, Node* nodeParent) 
     }
 
     colorHandler.setColors(nodes);
+}
+
+void NodeManager::alterNodeSize(double factor) {
+    nodeSize *= factor;
 }
 
 void NodeManager::addNode(Node* node) {

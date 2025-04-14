@@ -39,6 +39,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         preferenceswindow.h preferenceswindow.cpp preferenceswindow.ui
         addnodedialogue.h addnodedialogue.cpp addnodedialogue.ui
         selectparentdialogue.h selectparentdialogue.cpp selectparentdialogue.ui
+        customscrollarea.h customscrollarea.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

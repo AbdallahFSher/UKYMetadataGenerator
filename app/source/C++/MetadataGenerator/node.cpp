@@ -11,7 +11,7 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->nodeVariant = nodeVariant;
     this->content = map<QString, QString>(); // dictionary
     this->children = std::vector<Node>();
-    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     this->header = new QLineEdit(this);
     this->header->setVisible(true);
@@ -22,10 +22,10 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->bottomBar->setVisible(true);
 
     this->setLayout(new QVBoxLayout());
-    this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    this->bottomBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
     connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));

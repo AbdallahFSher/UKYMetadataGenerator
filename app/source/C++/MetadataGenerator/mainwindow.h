@@ -28,6 +28,9 @@ public:
     ~MainWindow();
     Ui::MainWindow* getUi();
     //void mousePressEvent(QMouseEvent *event);
+    void wheelEvent(QWheelEvent *event);
+    void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent *event);
 
 public slots:
     void nodeAdded(Node* newNode);

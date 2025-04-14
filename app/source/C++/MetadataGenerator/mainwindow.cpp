@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "customscrollarea.h"
 #include "./ui_mainwindow.h"
 #include <QtWidgets>
 #include <QSqlQuery>
@@ -405,6 +406,45 @@ void MainWindow::on_actionPreferences_triggered()
     this->pw->show();
 }
 
+void MainWindow::wheelEvent(QWheelEvent *event) {
+    if (event->modifiers() != Qt::ControlModifier)
+        return;
+    event->setAccepted(false);
+
+    QWidget *tracker = this->ui->scrollArea_2;
+    int xTracker = 0;
+    int yTracker = 0;
+    while (tracker != this) {
+        xTracker += tracker->x();
+        yTracker += tracker->y();
+        tracker = tracker->parentWidget();
+    }
+    double sizeFactor = 1.5;
+    if (event->angleDelta().y() > 0) { // scroll up
+        nodeManager->alterNodeSize(sizeFactor);
+    } else {
+        nodeManager->alterNodeSize(1/sizeFactor);
+    }
+
+    for (Node* node:nodeManager->getNodes()) {
+        node->setFixedSize(nodeManager->nodeSize);
+        node->show();
+//        cout << "NODE size :: " << node->size().width() << endl;
+//        cout << "NODE size :: " << node->size().height() << endl;
+    }
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event) {
+    if (event->key() == Qt::Key_Control) {
+        this->ui->scrollArea_2->setEnabled(false);
+    }
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *event) {
+    if (event->key() == Qt::Key_Control) {
+        this->ui->scrollArea_2->setEnabled(true);
+    }
+}
 
 void MainWindow::on_actionAddNode_triggered()
 {
