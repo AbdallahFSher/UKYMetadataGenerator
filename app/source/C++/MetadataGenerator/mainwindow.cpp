@@ -52,17 +52,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 
-
-    // Then handle the schema
-    /*Schema* currentSchema = schemaHandler->addSchema("..\\..\\..\\examples\\exampleSchema.sma");
-
-    if (currentSchema) {
-        auto rootField = currentSchema->getRoot();
-        if (rootField) {
-            insertFieldTree(rootField, 0, dbManager); // 0 indicates no parent
-        }
-    }*/
-
     // Print the table contents
     qDebug() << "\nDatabase Contents:";
     if (!query.exec("SELECT id, parent_id, name FROM schema_fields ORDER BY id")) {
@@ -165,8 +154,12 @@ void MainWindow::setupConnections()
 
 void MainWindow::nodeAdded(Node* newNode) {
     newNode->setVisible(true);
-    this->ui->gridLayout->addWidget(newNode, newNode->row, newNode->column);
+    this->ui->gridLayout->addWidget(newNode, newNode->column, newNode->row);
     this->nodeManager->addNode(newNode);
+    this->ui->nodeHolder->addWidgets(newNode->getNodeParent(), newNode);
+    connect(newNode, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
+    connect(newNode, SIGNAL(hidden(Node*)), this->ui->nodeHolder, SLOT(update()));
+    connect(newNode, SIGNAL(moved(Node*)), this->ui->nodeHolder, SLOT(update()));
 }
 
 void MainWindow::clearNodeUI() {
@@ -183,25 +176,8 @@ void MainWindow::clearNodeUI() {
 void MainWindow::setupNodeUI() {
     int currentColumn = 0;
     int maxParent = -1;
-    //qDebug() << "\n\n Node Time \n";
-    //qDebug() << "Here's our Stats, Boss:";
-    //qDebug() << "Columns:" << this->ui->gridLayout->columnCount();
-    //qDebug() << "Rows:" << this->ui->gridLayout->rowCount();
-    //qDebug() << "Size of this window:" << this->ui->scrollArea_2->geometry().width()
-    //         << "x" << this->ui->nodeHolder->geometry().height();
 
     for (Node* node : nodeManager->getNodes()) {
-        //qDebug() << "currentColumn :" << currentColumn;
-        //qDebug() << "maxParent :" << maxParent;
-
-        if (node->getNodeParent() == nullptr) {
-            //qDebug() << "\n" << node->header->text() << ": ROOT ::"
-            //         << node->row << ":" << currentColumn;
-        } else {
-            //qDebug() << "\n" << node->header->text() << ":"
-            //         << QString::number(node->getNodeParent()->getName())
-            //         << " :: " << node->row << ":" << currentColumn;
-        }
 
         if (node->getNodeParent() != nullptr) {
             this->ui->nodeHolder->addWidgets(node->getNodeParent(), node);
@@ -224,7 +200,7 @@ void MainWindow::setupNodeUI() {
         connect(node, SIGNAL(hidden(Node*)), this->ui->nodeHolder, SLOT(update()));
         connect(node, SIGNAL(moved(Node*)), this->ui->nodeHolder, SLOT(update()));
         for (Node* node2 : nodeManager->getNodes()) {
-            connect(node, SIGNAL(moved(Node*)), node2, SLOT(hoveredOver(Node*)));
+            //connect(node, SIGNAL(moved(Node*)), node2, SLOT(hoveredOver(Node*)));
         }
     }
 }

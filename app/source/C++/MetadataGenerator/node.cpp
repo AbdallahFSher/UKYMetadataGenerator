@@ -213,7 +213,7 @@ void Node::mousePressEvent(QMouseEvent *event)
 }
 
 void Node::hoveredOver(Node* node) {
-    if (this != node && this->rect().intersects(node->rect())) {
+    if (this->name != node->name && this->rect().intersects(node->rect())) {
         node->setStyleSheet("background: white");
     }
 }
