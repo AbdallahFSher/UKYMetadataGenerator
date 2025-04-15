@@ -27,7 +27,7 @@ private:
 
     bool readJsonFile(std::string file_path, QVariantMap& result);
     std::shared_ptr<Field> extractFieldNames(const std::string& filePath, Schema& newSchema);
-    std::shared_ptr<Field> fieldsFromQVMap(QVariantMap map);
+    std::shared_ptr<Field> fieldsFromQVMap(QVariantMap jsonMap, std::vector<std::string> parentFields, std::shared_ptr<Field> root);
 
     std::unordered_set<char> illegalChars = {'\"', ',', '[', ']', ':', ' ', '\t', '\n'};
 

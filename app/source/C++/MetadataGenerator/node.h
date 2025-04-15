@@ -3,6 +3,7 @@
 
 #include <QtWidgets>
 #include <qlineedit.h>
+#include <queue>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ public:
     int name;
     QString key;
     QString value;
+    std::queue<std::string> fullName;
     int row;
     int column;
     vector<Node> children;

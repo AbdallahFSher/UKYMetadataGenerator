@@ -1,6 +1,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <set>
 #include <QJsonDocument>
 #ifndef SCHEMA_H
 #define SCHEMA_H
@@ -9,6 +10,7 @@ struct Field {
     std::shared_ptr<Field> parent;
     std::vector<std::shared_ptr<Field>> children;
     std::string name;
+    int count = 1;
 
     Field(const std::string& name) : name(name) {}
 };
@@ -33,6 +35,7 @@ public:
 private:
     std::shared_ptr<Field> root;
     std::shared_ptr<Field> curr;
+    std::set<std::string> fieldsSet;
 };
 
 #endif // SCHEMA_H

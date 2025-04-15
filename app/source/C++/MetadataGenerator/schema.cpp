@@ -47,7 +47,9 @@ void Schema::printTree(const std::shared_ptr<Field>& node, int depth = 0) {
 // Function to add a field path to the tree
 void Schema::addFieldToTree(std::shared_ptr<Field> root, const std::vector<std::string>& fieldPath) {
     auto currentNode = root;
+    std::string pathString = "";
     for (const auto& part : fieldPath) {
+        pathString += part;
         // Check if the current node already has a child with this name
         auto it = std::find_if(currentNode->children.begin(), currentNode->children.end(),
                                [&part](const std::shared_ptr<Field>& node) {
@@ -64,5 +66,7 @@ void Schema::addFieldToTree(std::shared_ptr<Field> root, const std::vector<std::
             currentNode = *it;
         }
     }
+    if(!fieldsSet.insert(pathString).second)
+        currentNode->count++;
 }
 

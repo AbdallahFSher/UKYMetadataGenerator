@@ -50,6 +50,8 @@ private slots:
 
     void on_actionAddNode_triggered();
 
+    void on_actionEdit_Schema_triggered();
+
 private:
     Ui::MainWindow *ui;
     SuggestionManager* m_suggestionManager;
@@ -66,6 +68,8 @@ private:
     void createTextInputIfNeeded();
     void setupConnections();
     void createExportButtons(); // New method to programmatically create export buttons
+    void setupNodeUI();
+    void clearNodeUI();
 };
 
 #endif

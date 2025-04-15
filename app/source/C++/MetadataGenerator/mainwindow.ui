@@ -84,6 +84,7 @@
      <string>Edit</string>
     </property>
     <addaction name="actionAddNode"/>
+    <addaction name="actionEdit_Schema"/>
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
    </widget>
@@ -136,6 +137,11 @@
   <action name="actionPreferences">
    <property name="text">
     <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionEdit_Schema">
+   <property name="text">
+    <string>Edit Schema</string>
    </property>
   </action>
  </widget>

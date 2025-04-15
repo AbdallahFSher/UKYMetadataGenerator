@@ -30,6 +30,11 @@ Schema* SchemaHandler::getCurrSchema() {
     return this->currentSchema;
 }
 
+Schema* SchemaHandler::setCurrSchema(Schema* schema) {
+    this->currentSchema = schema;
+    return currentSchema;
+}
+
 std::string SchemaHandler::trimString(std::string in) {
     int i = 0;
     while(illegalChars.find(in[i]) != illegalChars.end()) {
@@ -114,33 +119,63 @@ std::shared_ptr<Field> SchemaHandler::extractFieldNames(const std::string& fileP
 
 Schema* SchemaHandler::fromVariantMap(QVariantMap map) {
     Schema* newSchema = new Schema();
-    newSchema->setRoot(fieldsFromQVMap(map));
+    this->setCurrSchema(newSchema);
+    std::shared_ptr<Field> root = std::make_shared<Field>("root");
+    std::vector<std::string> emptyVec;
+
+    newSchema->setRoot(fieldsFromQVMap(map, emptyVec, root)->children[0]);
+    newSchema->printTree(newSchema->getRoot(), 0);
     this->schemaList.push_back(newSchema);
 
     // TODO: Set this up to add a new schema and set it to the current schema instead of just returning it
     return newSchema;
 }
 
-std::shared_ptr<Field> SchemaHandler::fieldsFromQVMap(QVariantMap map) {
-    std::shared_ptr<Field> node;
+// Loop through each key
+// Each key can be a dictionary, a list, or a leaf
+// If the key is a dictionary, convert it to a QVMap and call the function again using the new map
+// If the key is a leaf, use the parentFields and the root to add to the tree
+std::shared_ptr<Field> SchemaHandler::fieldsFromQVMap(QVariantMap jsonMap, std::vector<std::string> parentFields, std::shared_ptr<Field> root) {
 
-    // Extract node name (if exists)
-    if (map.contains("name")) {
-        node->name = map["name"].toString().toStdString();
-    }
+    for(QString key : jsonMap.keys()) {
 
+        // Create buffer vector
+        std::vector<std::string> buff;
+        for (auto& item : parentFields) { buff.push_back(item); }
 
-    // Recursively process children (if exists)
-    if (map.contains("children")) {
-        QVariantList childrenList = map["children"].toList();
-        for (const QVariant &childVariant : childrenList) {
-            if (childVariant.canConvert<QVariantMap>()) {
-                std::shared_ptr<Field> childNode = fieldsFromQVMap(childVariant.toMap());
-                childNode->parent = node;
-                node->children.push_back(childNode);
+        if (jsonMap[key].canConvert<QVariantMap>()) {
+
+            buff.push_back(key.toStdString());
+            fieldsFromQVMap(jsonMap[key].toMap(), buff, root);
+
+        } else if(jsonMap[key].toString() == jsonMap[key]) {
+
+            buff.push_back(key.toStdString());
+            this->currentSchema->addFieldToTree(root, buff);
+
+        } else {
+
+            for(QVariant child : jsonMap[key].toList()) {
+
+                QVariantMap mapChild = child.toMap();
+                buff.clear();
+
+                for (auto& item : parentFields) { buff.push_back(item); }
+
+                for (QString childKey:mapChild.keys()) {
+
+                    if (mapChild[childKey] == mapChild[childKey].toString()) {
+
+                        buff.push_back(key.toStdString());
+                        break;
+
+                    }
+                }
+
+                fieldsFromQVMap(mapChild, buff, root);
             }
         }
     }
-    return node;
+    return root;
 }
 

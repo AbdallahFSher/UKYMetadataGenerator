@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "customscrollarea.h"
+#include "GridLayoutUtil.h"
 #include "./ui_mainwindow.h"
 #include <QtWidgets>
 #include <QSqlQuery>
@@ -164,6 +165,59 @@ void MainWindow::nodeAdded(Node* newNode) {
     this->nodeManager->addNode(newNode);
 }
 
+void MainWindow::clearNodeUI() {
+    int rowCount = this->ui->gridLayout->rowCount();
+    for(int row = 0; row < rowCount; row++) {
+        GridLayoutUtil::removeRow(this->ui->gridLayout, row);
+    }
+
+    if (!nodeManager->getNodes().empty()) {
+        nodeManager->emptyNodeList();
+    }
+}
+
+void MainWindow::setupNodeUI() {
+    int currentColumn = 0;
+    int maxParent = -1;
+    //qDebug() << "\n\n Node Time \n";
+    //qDebug() << "Here's our Stats, Boss:";
+    //qDebug() << "Columns:" << this->ui->gridLayout->columnCount();
+    //qDebug() << "Rows:" << this->ui->gridLayout->rowCount();
+    //qDebug() << "Size of this window:" << this->ui->scrollArea_2->geometry().width()
+    //         << "x" << this->ui->nodeHolder->geometry().height();
+
+    for (Node* node : nodeManager->getNodes()) {
+        //qDebug() << "currentColumn :" << currentColumn;
+        //qDebug() << "maxParent :" << maxParent;
+
+        if (node->getNodeParent() == nullptr) {
+            //qDebug() << "\n" << node->header->text() << ": ROOT ::"
+            //         << node->row << ":" << currentColumn;
+        } else {
+            //qDebug() << "\n" << node->header->text() << ":"
+            //         << QString::number(node->getNodeParent()->getName())
+            //         << " :: " << node->row << ":" << currentColumn;
+        }
+
+        if (node->getNodeParent() != nullptr) {
+            if (node->getNodeParent()->getName() > maxParent) {
+                maxParent = node->getNodeParent()->getName();
+            } else if (node->getNodeParent()->getName() <= maxParent) {
+                currentColumn++;
+            }
+        }
+
+        node->column = currentColumn;
+
+        // Adding widget to grid layout (adjust for your use case)
+        if (currentColumn == -1)
+            this->ui->gridLayout->addWidget(node, node->row, 0);
+        else
+            this->ui->gridLayout->addWidget(node, node->row, currentColumn);
+
+        connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
+    }
+}
 
 void MainWindow::loadJsonButtonClicked()
 {
@@ -178,8 +232,15 @@ void MainWindow::loadJsonButtonClicked()
     QVariant jsonVariant = this->fileParser->importJson(fileName);
     QVariantMap jsonMap = jsonVariant.toMap();
 
-    // First process the JSON to create nodes
-    nodeManager->processJson(jsonMap, 0);
+    // Clear the UI
+    clearNodeUI();
+
+    // Process JSON to a schema
+    schemaHandler->fromVariantMap(jsonMap);
+
+    // Fill Node fields with JSON values
+    //nodeManager->processJson(jsonMap, 0);
+    nodeManager->nodesFromSchema(schemaHandler->getCurrSchema(), true, &jsonMap);
     this->ui->nodeHolder->update();
 
     // Now insert the JSON structure into the database
@@ -246,8 +307,6 @@ void MainWindow::loadJsonButtonClicked()
         }
     };
 
-
-
     // Initialize recursive insert for the root of the JSON structure
     insertJsonToDb(jsonMap, "", 0);
 
@@ -258,46 +317,8 @@ void MainWindow::loadJsonButtonClicked()
     // Refresh suggestions with the new data
     m_suggestionManager->refreshDatabase();
 
-    int currentColumn = 0;
-    int maxParent = -1;
-    qDebug() << "\n\n Node Time \n";
-    qDebug() << "Here's our Stats, Boss:";
-    qDebug() << "Columns:" << this->ui->gridLayout->columnCount();
-    qDebug() << "Rows:" << this->ui->gridLayout->rowCount();
-    qDebug() << "Size of this window:" << this->ui->scrollArea_2->geometry().width()
-             << "x" << this->ui->nodeHolder->geometry().height();
+    setupNodeUI();
 
-    for (Node* node : nodeManager->getNodes()) {
-        qDebug() << "currentColumn :" << currentColumn;
-        qDebug() << "maxParent :" << maxParent;
-
-        if (node->getNodeParent() == nullptr) {
-            qDebug() << "\n" << node->header->text() << ": ROOT ::"
-                     << node->row << ":" << currentColumn;
-        } else {
-            qDebug() << "\n" << node->header->text() << ":"
-                     << QString::number(node->getNodeParent()->getName())
-                     << " :: " << node->row << ":" << currentColumn;
-        }
-
-        if (node->getNodeParent() != nullptr) {
-            if (node->getNodeParent()->getName() > maxParent) {
-                maxParent = node->getNodeParent()->getName();
-            } else if (node->getNodeParent()->getName() <= maxParent) {
-                currentColumn++;
-            }
-        }
-
-        node->column = currentColumn;
-
-        // Adding widget to grid layout (adjust for your use case)
-        if (currentColumn == -1)
-            this->ui->gridLayout->addWidget(node, node->row, 0);
-        else
-            this->ui->gridLayout->addWidget(node, node->row, currentColumn);
-
-        connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
-    }
     setupAutocomplete();
 }
 
@@ -449,5 +470,14 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event) {
 void MainWindow::on_actionAddNode_triggered()
 {
     this->addNodeDialogue->show();
+}
+
+
+void MainWindow::on_actionEdit_Schema_triggered()
+{
+    // Clear the UI
+    clearNodeUI();
+    nodeManager->nodesFromSchema(schemaHandler->getCurrSchema(), false);
+    setupNodeUI();
 }
 
