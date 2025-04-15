@@ -50,38 +50,20 @@ void NodeManager::processJson(QVariantMap jsonMap, int level, Node* nodeParent) 
 
     bool firstKid = true;
 
-    for (QString key:keys) {
-
+    for (const QString& key : keys) {
         if (jsonMap[key].canConvert<QVariantMap>()) {
-
-            Node *newNode = new Node(parent, level, nodeParent);
+            Node* newNode = new Node(parent, level, nodeParent);
             newNode->row = level;
-            /*
-            newNode->row = level;
-            if (!firstKid) {
-                cout << "\nFIRSTKID ALTERT!!!!!" << endl;
-                this->currentColumn++;
-                cout << "NEWWW CURRENTCOLUYMN ::: " + std::to_string(currentColumn) << endl;
-            } else {
-                cout << "1:FIRSTKID ISSSS::: " + std::to_string(firstKid) << endl;
-                firstKid = false;
-                cout << "FIRSTKID ISSSS::: " + std::to_string(firstKid) << endl;
-            }
-            newNode->column = this->currentColumn;
-*/
-
             newNode->setName(nodes.size());
-            //newNode->header->setText(key + " :: " + QString::fromStdString(std::to_string(newNode->getName())));
             newNode->header->setText(key);
-            if (nodeParent != NULL)
-                //newNode->bottomBar->setText(key + " :: " + QString::fromStdString(std::to_string(nodeParent->getName())));
+            if (nodeParent != nullptr)
                 newNode->bottomBar->setText(key);
 
-            //newNode->adjustSize();
             nodes.push_back(newNode);
 
             //cout << "MAP##" << level << endl;
             processJson(jsonMap[key].toMap(), level + 1, newNode);
+
         } else if (jsonMap[key] == jsonMap[key].toString()) {
             Node* newNode = new Node(parent, level, nodeParent);
             newNode->row = level;
@@ -89,44 +71,32 @@ void NodeManager::processJson(QVariantMap jsonMap, int level, Node* nodeParent) 
             newNode->header->setText(key);
             newNode->bottomBar->setText(jsonMap[key].toString());
             nodes.push_back(newNode);
+
         } else {
-            //cout << "THE KEY " << key.toStdString() << " CORRESPONDS TOA  LIST BTW" << endl;
-            Node *listNode = new Node(parent, level, nodeParent);
+            cout << "THE KEY " << key.toStdString() << " CORRESPONDS TO A LIST BTW" << endl;
+            Node* listNode = new Node(parent, level, nodeParent);
             listNode->row = level;
-            //listNode->adjustSize();
             listNode->setName(nodes.size());
-            QString name = QString::fromStdString(std::to_string(listNode->getName()));
-            //listNode->header->setText(key + " :: " + QString::fromStdString(std::to_string(listNode->getName())));
             listNode->header->setText(key);
-            //listNode->bottomBar->setText(QString::fromStdString(std::to_string(nodeParent->getName())));
             listNode->bottomBar->setText("This is a list node");
             nodes.push_back(listNode);
 
-            QList<QVariant> jsonList = (jsonMap[key].toList());
-
-            for (QVariant child:(jsonMap[key].toList())) {
-
+            QList<QVariant> jsonList = jsonMap[key].toList();
+            for (const QVariant& child : jsonList) {
                 QVariantMap mapChild = child.toMap();
-                for (QString childKey:mapChild.keys()) {
-                    //cout << "\nHunting for a string in a dict if you cared..." << endl;
-                    //cout << "ChildKey: " << childKey.toStdString() << endl;
-                    //cout << "ChildValue" << mapChild[childKey].toString().toStdString() << endl;
+                for (const QString& childKey : mapChild.keys()) {
+                    cout << "\nHunting for a string in a dict..." << endl;
+                    cout << "ChildKey: " << childKey.toStdString() << endl;
+                    cout << "ChildValue: " << mapChild[childKey].toString().toStdString() << endl;
+
                     if (mapChild[childKey] == mapChild[childKey].toString()) {
-                        //cout << "GOT one... if you cared..." << endl;
-                        Node *newNode = new Node(parent, level, listNode);
+                        cout << "GOT one..." << endl;
+                        Node* newNode = new Node(parent, level, listNode);
                         newNode->setName(nodes.size());
                         newNode->row = level + 1;
-                        //newNode->header->setText(childKey + " :: " + QString::fromStdString(std::to_string(newNode->getName())));
                         newNode->header->setText(childKey);
-                        //newNode->adjustSize();
-                        nodes.push_back(newNode);
-
-                        //newNode->bottomBar->setText(mapChild[childKey].toString() + " :: " + name);
                         newNode->bottomBar->setText(mapChild[childKey].toString());
-                        //newNode->bottomBar->adjustSize();
-                        //newNode->adjustSize();
-                        //newNode->bottomBar->updateGeometry();
-                        //newNode->updateGeometry();
+                        nodes.push_back(newNode);
                         break;
                     }
                 }
@@ -178,6 +148,6 @@ void NodeManager::addNode(Node* node) {
     colorHandler.setColors(nodes);
 }
 
-std::vector<Node*> NodeManager::getNodes() {
+std::vector<Node*> NodeManager::getNodes() const {
     return nodes;
 }
