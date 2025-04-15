@@ -2,6 +2,7 @@
 #define DRAWCONNECTION_H
 
 #include <QWidget>
+#include "node.h"
 
 class DrawConnection : public QWidget
 {

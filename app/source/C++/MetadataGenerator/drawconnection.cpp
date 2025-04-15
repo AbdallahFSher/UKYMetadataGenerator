@@ -30,3 +30,4 @@ void DrawConnection::paintEvent(QPaintEvent *)
             painter.drawLine(mapFromGlobal(start), mapFromGlobal(end));
     }
 }
+

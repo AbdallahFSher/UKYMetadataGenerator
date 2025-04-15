@@ -56,12 +56,11 @@ public:
     void mouseDoubleClickEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
-    void dragMoveEvent(QDragMoveEvent *event);
-    void dragEnterEvent(QDragEnterEvent *event);
 
 public slots:
     void setValue(int value);
     void resize_to_text();
+    void hoveredOver(Node* node);
 
 signals:
     void valueChanged(int newValue);

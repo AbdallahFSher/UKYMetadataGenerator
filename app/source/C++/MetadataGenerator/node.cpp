@@ -159,8 +159,19 @@ void Node::hideNodes(Node* root) {
 
 void Node::mouseMoveEvent(QMouseEvent *event) {
     if ((event->buttons() & Qt::LeftButton) && dragging) {
-        //this->move(this->pos() + event->position().toPoint());
-        //emit moved(this);
+        this->move(mapToParent(event->pos()));
+
+        /*
+        QGridLayout* grid = static_cast<QGridLayout*>(this->parent());
+        int row = mapToParent(event->pos()).x() / grid->horizontalSpacing();
+        int col = mapToParent(event->pos()).y() / grid->verticalSpacing();
+        auto hoveredOver = grid->itemAtPosition(row, col);
+        if (hoveredOver && hoveredOver->widget() != this) {
+            hoveredOver->widget()->setStyleSheet("background: white");
+        }
+        */
+
+        emit moved(this);
     }
 }
 
@@ -171,59 +182,15 @@ void Node::mouseReleaseEvent(QMouseEvent *event) {
     }
 }
 
-void Node::dragEnterEvent(QDragEnterEvent *event) {
-    if (event->mimeData()->hasFormat("application/nodeData")) {
-        if (event->source() == this) {
-            event->setDropAction(Qt::MoveAction);
-            event->accept();
-        } else {
-            event->acceptProposedAction();
-        }
-    } else {
-        event->ignore();
-    }
-}
-
-void Node::dragMoveEvent(QDragMoveEvent *event) {
-    if (event->mimeData()->hasFormat("application/nodeData")) {
-        if (event->source() == this) {
-            event->setDropAction(Qt::MoveAction);
-            event->accept();
-        } else {
-            event->acceptProposedAction();
-        }
-    } else {
-        event->ignore();
-    }
-}
-
 void Node::mousePressEvent(QMouseEvent *event)
 {
     //cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
     if (event->button() == Qt::LeftButton) {
         emit this->beParent(this);
 
+        this->raise();
         this->setCursor(Qt::BlankCursor);
         dragging = true;
-
-        QDrag *drag = new QDrag(this);
-        QMimeData *mimeData = new QMimeData;
-        QByteArray nodeData;
-        QDataStream dataStream(&nodeData, QIODevice::WriteOnly);
-        dataStream << this->key << this->value << QPoint(event->position().toPoint() - this->pos());
-
-        mimeData->setData("application/nodeData", nodeData);
-        drag->setMimeData(mimeData);
-        drag->setPixmap(this->grab());
-        drag->setHotSpot(event->pos());
-
-        if (drag->exec(Qt::MoveAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {
-
-        } else {
-            std::cout << "WE MOVIN" << std::endl;
-            this->move(drag->hotSpot());
-            emit moved(this);
-        }
         /*
         QPoint startPos = mapFromGlobal(QCursor::pos());
 
@@ -242,6 +209,12 @@ void Node::mousePressEvent(QMouseEvent *event)
         this->move(this->pos() + diff);
         emit moved(this);
         */
+    }
+}
+
+void Node::hoveredOver(Node* node) {
+    if (this != node && this->rect().intersects(node->rect())) {
+        node->setStyleSheet("background: white");
     }
 }
 

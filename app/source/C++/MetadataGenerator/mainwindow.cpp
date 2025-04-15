@@ -223,6 +223,9 @@ void MainWindow::setupNodeUI() {
         connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
         connect(node, SIGNAL(hidden(Node*)), this->ui->nodeHolder, SLOT(update()));
         connect(node, SIGNAL(moved(Node*)), this->ui->nodeHolder, SLOT(update()));
+        for (Node* node2 : nodeManager->getNodes()) {
+            connect(node, SIGNAL(moved(Node*)), node2, SLOT(hoveredOver(Node*)));
+        }
     }
 }
 
