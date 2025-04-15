@@ -1,10 +1,11 @@
 #include "suggestionmanager.h"
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QDebug>
 
 SuggestionManager::SuggestionManager(QObject* parent)
     : QObject(parent),
-    m_dbManager(DatabaseManager::instance())
+    m_dbManager(DatabaseManager::instance()) // Make sure DatabaseManager::instance() is returning a valid instance
 {
     m_requestTimer.setSingleShot(true);
     m_requestTimer.setInterval(300); // 300ms debounce delay
@@ -25,7 +26,7 @@ void SuggestionManager::initialize()
 void SuggestionManager::refreshDatabase()
 {
     cancelPendingRequests();
-    m_entitySet.clear();
+    m_entitySet.clear();  // Clear current set of entities before refreshing
     loadAllEntitiesFromDatabase();
     qDebug() << "Suggestion database refreshed";
 }
@@ -35,16 +36,21 @@ void SuggestionManager::loadAllEntitiesFromDatabase()
     QSqlQuery query(m_dbManager.database());
     if (query.exec("SELECT DISTINCT name FROM schema_fields")) {
         while (query.next()) {
-            m_entitySet.insert(query.value(0).toString());
+            QString entity = query.value(0).toString();
+            m_entitySet.insert(entity);
         }
+        qDebug() << "Loaded" << m_entitySet.size() << "suggestions";
+    } else {
+        qWarning() << "Failed to load suggestions from database:" << query.lastError().text();
     }
-    qDebug() << "Loaded" << m_entitySet.size() << "suggestions";
 }
 
 void SuggestionManager::requestSuggestions(const QString& partialInput)
 {
     m_currentInput = partialInput.trimmed();
-    m_requestTimer.start();
+    if (!m_currentInput.isEmpty()) {
+        m_requestTimer.start();
+    }
 }
 
 void SuggestionManager::cancelPendingRequests()
@@ -64,11 +70,11 @@ void SuggestionManager::processSuggestionRequest()
             matches.append(entity);
 
             if (matches.size() >= 10) {
-                break;
+                break; // Limit the number of suggestions
             }
         }
     }
 
-    matches.sort(Qt::CaseInsensitive);
+    matches.sort(Qt::CaseInsensitive);  // Sort suggestions alphabetically
     emit suggestionsReady(matches);
 }

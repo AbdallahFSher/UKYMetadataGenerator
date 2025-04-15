@@ -1,11 +1,13 @@
 #include "DatabaseManager.h"
-#include <QSqlError>
-#include <QDebug>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QJsonDocument>
 #include <QFile>
 #include <QXmlStreamWriter>
-#include <QString>
+#include <QRegularExpression>
+#include <QTextStream>
+#include <QDebug>
+#include <functional>
 
 DatabaseManager& DatabaseManager::instance() {
     static DatabaseManager instance;
@@ -23,251 +25,11 @@ DatabaseManager::~DatabaseManager() {
 bool DatabaseManager::openDatabase(const QString& path) {
     db.setDatabaseName(path);
     if (!db.open()) {
-        qDebug() << "Error: Could not open database:" << db.lastError().text();
+        qDebug() << "Error opening database:" << db.lastError().text();
         return false;
     }
+    qDebug() << "Database opened:" << path;
     return true;
-}
-
-int DatabaseManager::insertSchemaField(int parentId, const QString& name) {
-    // Check if parent is an array container
-    bool isParentArray = false;
-    if (parentId != 0) {
-        QSqlQuery parentQuery(db);
-        parentQuery.prepare("SELECT name FROM schema_fields WHERE id = :parent_id");
-        parentQuery.bindValue(":parent_id", parentId);
-        if (parentQuery.exec() && parentQuery.next()) {
-            QString parentName = parentQuery.value(0).toString();
-            isParentArray = parentName.endsWith("[]");
-        }
-    }
-
-    // Skip duplicate check for array elements
-    if (!isParentArray) {
-        QSqlQuery checkQuery(db);
-        checkQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = :parent_id AND name = :name");
-        checkQuery.bindValue(":parent_id", parentId);
-        checkQuery.bindValue(":name", name);
-        if (!checkQuery.exec()) {
-            qDebug() << "Error checking for duplicates:" << checkQuery.lastError().text();
-            return -1;
-        }
-        checkQuery.next();
-        if (checkQuery.value(0).toInt() > 0) {
-            qDebug() << "Duplicate schema field found.";
-            return -1;
-        }
-    }
-
-    QSqlQuery query(db);
-    query.prepare("INSERT INTO schema_fields (parent_id, name) VALUES (:parent_id, :name)");
-    query.bindValue(":parent_id", parentId);
-    query.bindValue(":name", name);
-    if (!query.exec()) {
-        qDebug() << "Error inserting schema field:" << query.lastError().text();
-        return -1;
-    }
-    return query.lastInsertId().toInt();
-}
-
-
-QVariantMap DatabaseManager::buildTreeFromDatabase() {
-    return buildSubtree(0); // Start with root nodes (parent_id = 0)
-}
-
-// In DatabaseManager::buildSubtree, replace the array handling section with:
-QVariantMap DatabaseManager::buildSubtree(int parentId) {
-    QVariantMap tree;
-    QSqlQuery query(db);
-
-    query.prepare("SELECT id, name FROM schema_fields WHERE parent_id = :parent_id ORDER BY id");
-    query.bindValue(":parent_id", parentId);
-
-    if (!query.exec()) {
-        qDebug() << "Error executing query:" << query.lastError().text();
-        return tree;
-    }
-
-    while (query.next()) {
-        int id = query.value(0).toInt();
-        QString name = query.value(1).toString();
-
-        if (name.endsWith("[]")) {
-            QString arrayName = name.left(name.length() - 2);
-            QVariantList arrayItems;
-
-            QSqlQuery arrayQuery(db);
-            arrayQuery.prepare("SELECT id, name FROM schema_fields WHERE parent_id = :id ORDER BY id");
-            arrayQuery.bindValue(":id", id);
-
-            if (arrayQuery.exec()) {
-                while (arrayQuery.next()) {
-                    int elementId = arrayQuery.value(0).toInt();
-                    QString elementName = arrayQuery.value(1).toString();
-
-                    if (elementName == "element") {
-                        QVariantMap elementMap = buildSubtree(elementId);
-                        arrayItems.append(elementMap);
-                    }
-                    else if (elementName.startsWith("value: ")) {
-                        QString raw = elementName.mid(7);  // strip "value: "
-                        if (raw.startsWith("\"") && raw.endsWith("\"")) {
-                            raw = raw.mid(1, raw.length() - 2);  // remove quotes
-                        }
-                        arrayItems.append(QVariant(raw));
-                    }
-                }
-            }
-
-            tree[arrayName] = arrayItems;
-        }
-        else if (name.contains(": ")) {
-            // This is a primitive value
-            int splitIndex = name.indexOf(": ");
-            QString key = name.left(splitIndex);
-            QString value = name.mid(splitIndex + 2);
-
-            if (value.startsWith("\"") && value.endsWith("\"")) {
-                value = value.mid(1, value.length() - 2);
-            }
-
-            tree[key] = QVariant(value);
-        }
-        else {
-            // This is a nested object (subtree)
-            QVariantMap childTree = buildSubtree(id);
-            tree[name] = childTree;
-        }
-    }
-
-    return tree;
-}
-
-
-
-// Add this method to DatabaseManager class
-bool DatabaseManager::clearDatabase()
-{
-    QSqlQuery query(db);
-    return query.exec("DELETE FROM schema_fields");
-}
-
-
-bool DatabaseManager::exportToJson(const QString& filePath) {
-    QVariantMap data = buildTreeFromDatabase();
-    if (data.isEmpty()) {
-        qDebug() << "Warning: No data to export";
-        return false;
-    }
-
-    QJsonDocument doc = QJsonDocument::fromVariant(data);
-    if (doc.isNull()) {
-        qDebug() << "Error: Failed to create JSON document";
-        return false;
-    }
-
-    QFile file(filePath);
-    if (!file.open(QIODevice::WriteOnly)) {
-        qDebug() << "Failed to open file for writing:" << filePath;
-        return false;
-    }
-
-    if (file.write(doc.toJson(QJsonDocument::Indented)) == -1) {
-        qDebug() << "Failed to write to file:" << file.errorString();
-        file.close();
-        return false;
-    }
-
-    file.close();
-    return true;
-}
-
-bool DatabaseManager::exportToXml(const QString& filePath) {
-    QVariantMap data = buildTreeFromDatabase();
-    QFile file(filePath);
-
-    if (!file.open(QIODevice::WriteOnly)) {
-        qDebug() << "Failed to open file for writing:" << filePath;
-        return false;
-    }
-
-    QXmlStreamWriter xml(&file);
-    xml.setAutoFormatting(true);
-    xml.writeStartDocument();
-
-    // Convert QVariantMap to XML recursively
-    std::function<void(const QVariantMap&)> writeMap = [&](const QVariantMap& map) {
-        for (auto it = map.begin(); it != map.end(); ++it) {
-            if (it.value().type() == QVariant::Map) {
-                xml.writeStartElement(it.key());
-                writeMap(it.value().toMap());
-                xml.writeEndElement();
-            } else {
-                xml.writeTextElement(it.key(), it.value().toString());
-            }
-        }
-    };
-
-    writeMap(data);
-    xml.writeEndDocument();
-    file.close();
-    return true;
-}
-
-bool DatabaseManager::exportToGaml(const QString& filePath) {
-    QVariantMap data = buildTreeFromDatabase();
-    QFile file(filePath);
-
-    if (!file.open(QIODevice::WriteOnly)) {
-        qDebug() << "Failed to open file for writing:" << filePath;
-        return false;
-    }
-
-    QTextStream stream(&file);
-    stream << "graph {\n";
-
-    // Convert QVariantMap to GAML recursively
-    std::function<void(const QVariantMap&, const QString&, int)> writeMap =
-        [&](const QVariantMap& map, const QString& parentName, int depth) {
-            QString indent(depth * 2, ' ');
-
-            for (auto it = map.begin(); it != map.end(); ++it) {
-                QString nodeName = parentName.isEmpty() ? it.key() : parentName + "." + it.key();
-
-                if (it.value().type() == QVariant::Map) {
-                    stream << indent << "node " << nodeName << " {\n";
-                    writeMap(it.value().toMap(), nodeName, depth + 1);
-                    stream << indent << "}\n";
-                } else {
-                    stream << indent << "attribute " << it.key() << " = \""
-                           << it.value().toString() << "\";\n";
-                }
-            }
-        };
-
-    writeMap(data, "", 1);
-    stream << "}\n";
-    file.close();
-    return true;
-}
-
-void DatabaseManager::printSchemaTable() {
-    QSqlQuery query(db);
-    if (!query.exec("SELECT id, parent_id, name FROM schema_fields ORDER BY id")) {
-        qDebug() << "Error printing schema table:" << query.lastError().text();
-        return;
-    }
-
-    qDebug() << "\nSchema Table Contents:";
-    qDebug() << "ID\tParent\tName";
-    qDebug() << "---------------------";
-
-    while (query.next()) {
-        int id = query.value(0).toInt();
-        int parentId = query.value(1).toInt();
-        QString name = query.value(2).toString();
-        qDebug() << id << "\t" << parentId << "\t" << name;
-    }
 }
 
 void DatabaseManager::closeDatabase() {
@@ -278,4 +40,344 @@ void DatabaseManager::closeDatabase() {
 
 QSqlDatabase& DatabaseManager::database() {
     return db;
+}
+
+int DatabaseManager::insertSchemaField(int parentId, const QString& name, const QString& type) {
+    QSqlQuery checkQuery(db);
+    checkQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = ? AND name = ?");
+    checkQuery.addBindValue(parentId);
+    checkQuery.addBindValue(name);
+
+    if (checkQuery.exec() && checkQuery.next() && checkQuery.value(0).toInt() > 0) {
+        qDebug() << "Duplicate key under the same parent:" << name;
+        return -1;
+    }
+
+    QSqlQuery insertQuery(db);
+    insertQuery.prepare("INSERT INTO schema_fields (parent_id, name, type) VALUES (?, ?, ?)");
+    insertQuery.addBindValue(parentId);
+    insertQuery.addBindValue(name);
+    insertQuery.addBindValue(type);
+
+    if (!insertQuery.exec()) {
+        qDebug() << "Insertion failed:" << insertQuery.lastError().text();
+        return -1;
+    }
+
+    return insertQuery.lastInsertId().toInt();
+}
+
+
+bool DatabaseManager::insertSchemaFieldWithTransaction(int parentId, const QString& key, const QString& value) {
+    if (!db.transaction()) {
+        qDebug() << "Transaction start failed.";
+        return false;
+    }
+
+    int id = insertSchemaField(parentId, key, value);
+    if (id == -1) {
+        db.rollback();
+        return false;
+    }
+
+    return db.commit();
+}
+
+QVariantMap DatabaseManager::buildTreeFromDatabase() {
+    return buildSubtree(0); // Root parent_id = 0
+}
+
+QVariantMap DatabaseManager::buildSubtree(int parentId, int depth) {
+    QVariantMap tree;
+
+    if (depth > 100) {
+        qDebug() << "Maximum recursion depth reached!";
+        return tree;
+    }
+
+    QSqlQuery query(db);
+    query.prepare("SELECT id, name, type FROM schema_fields WHERE parent_id = ?");
+    query.addBindValue(parentId);
+
+    if (!query.exec()) {
+        qDebug() << "Query failed:" << query.lastError().text();
+        return tree;
+    }
+
+    while (query.next()) {
+        int id = query.value(0).toInt();
+        QString key = query.value(1).toString();
+        QString type = query.value(2).toString();
+
+        // Handle arrays (keys ending with "[]")
+        if (key.endsWith("[]")) {
+            QString arrayName = key.left(key.length() - 2);
+            QVariantList arrayItems;
+
+            // Fetch array elements (children of the array node)
+            QSqlQuery arrayQuery(db);
+            arrayQuery.prepare("SELECT id FROM schema_fields WHERE parent_id = ?");
+            arrayQuery.addBindValue(id);
+
+            if (arrayQuery.exec()) {
+                while (arrayQuery.next()) {
+                    QVariantMap element = buildSubtree(arrayQuery.value(0).toInt(), depth + 1);
+                    arrayItems.append(element);
+                }
+            }
+
+            tree[arrayName] = arrayItems;
+        } else {
+            // Check if this node has children
+            QSqlQuery childQuery(db);
+            childQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = ?");
+            childQuery.addBindValue(id);
+            bool hasChildren = false;
+
+            if (childQuery.exec() && childQuery.next()) {
+                hasChildren = (childQuery.value(0).toInt() > 0);
+            }
+
+            if (hasChildren) {
+                // Treat as object and recurse into children
+                tree[key] = buildSubtree(id, depth + 1);
+            } else {
+                // Leaf node: use the type directly (e.g., "Abstract": "pending")
+                tree[key] = type; // No "value" key
+            }
+        }
+    }
+
+    return tree;
+}
+
+
+bool DatabaseManager::clearDatabase() {
+    QSqlQuery query(db);
+    bool success = query.exec("DELETE FROM schema_fields");
+    qDebug() << (success ? "Database cleared." : "Failed to clear database:" + query.lastError().text());
+    return success;
+}
+
+// -------- Export Helpers -------- //
+
+bool DatabaseManager::exportToJson(const QString& filePath) {
+    QVariantMap data = buildTreeFromDatabase();
+    if (data.isEmpty()) {
+        qDebug() << "No data to export.";
+        return false;
+    }
+
+    QJsonDocument doc = QJsonDocument::fromVariant(data);
+    if (doc.isNull()) {
+        qDebug() << "Failed to create JSON document.";
+        return false;
+    }
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        qDebug() << "Failed to open file for writing:" << file.errorString();
+        return false;
+    }
+
+    qint64 bytesWritten = file.write(doc.toJson(QJsonDocument::Indented));
+    file.close();
+
+    if (bytesWritten == -1) {
+        qDebug() << "Failed to write JSON to file:" << file.errorString();
+        return false;
+    }
+
+    qDebug() << "JSON exported to:" << filePath;
+    return true;
+}
+
+
+
+bool DatabaseManager::exportToXml(const QString& filePath) {
+    QVariantMap data = buildTreeFromDatabase();
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Failed to open file for writing:" << file.errorString();
+        return false;
+    }
+
+    QXmlStreamWriter xml(&file);
+    xml.setAutoFormatting(true);
+    xml.writeStartDocument();
+    xml.writeStartElement("root"); // Root element for the XML
+
+    auto sanitize = [](const QString& name) {
+        QString sanitized = name;
+        sanitized.replace(" ", "_")
+            .replace("/", "_")
+            .remove(QRegularExpression("[^a-zA-Z0-9_\\-]"));
+        return sanitized;
+    };
+
+    std::function<void(const QVariant&, const QString&)> writeVariant;
+    writeVariant = [&](const QVariant& var, const QString& tag) {
+        QString elementName = sanitize(tag);
+
+        if (var.type() == QVariant::Map) {
+            // Handle objects (nested elements)
+            xml.writeStartElement(elementName);
+            QVariantMap map = var.toMap();
+            for (auto it = map.begin(); it != map.end(); ++it) {
+                writeVariant(it.value(), it.key());
+            }
+            xml.writeEndElement();
+        } else if (var.type() == QVariant::List) {
+            // Handle arrays (use parent's tag name for each element)
+            QVariantList list = var.toList();
+            if (list.isEmpty()) return;
+
+            xml.writeStartElement(elementName);
+            for (const auto& item : list) {
+                writeVariant(item, elementName); // Use parent's tag name for array elements
+            }
+            xml.writeEndElement();
+        } else {
+            // Handle leaf nodes (text content)
+            xml.writeTextElement(elementName, var.toString());
+        }
+    };
+
+    // Start writing from the root of the data
+    for (auto it = data.begin(); it != data.end(); ++it) {
+        writeVariant(it.value(), it.key());
+    }
+
+    xml.writeEndElement(); // Close root
+    xml.writeEndDocument();
+    return true;
+}
+
+//maybe correct??
+bool DatabaseManager::exportToGaml(const QString& filePath) {
+    QVariantMap data = buildTreeFromDatabase();
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Failed to open file for writing:" << file.errorString();
+        return false;
+    }
+
+    QTextStream out(&file);
+    out << "graph {\n";
+
+    std::function<void(const QVariant&, const QString&, int)> writeGaml;
+    writeGaml = [&](const QVariant& var, const QString& parentPath, int depth) {
+        QString indent(depth * 2, ' ');
+
+        if (var.type() == QVariant::Map) {
+            QVariantMap map = var.toMap();
+            for (auto it = map.begin(); it != map.end(); ++it) {
+                QString key = it.key();
+                QString sanitizedKey = key.replace(" ", "").replace("&", "And");
+                QString currentPath = parentPath.isEmpty()
+                                          ? sanitizedKey
+                                          : parentPath + "." + sanitizedKey;
+
+                // Write attributes directly for leaf nodes
+                if (it.value().type() != QVariant::Map &&
+                    it.value().type() != QVariant::List) {
+                    out << indent << "attribute " << sanitizedKey
+                        << " = \"" << it.value().toString() << "\";\n";
+                }
+                // Handle nested objects/arrays
+                else {
+                    out << indent << "node " << sanitizedKey << " {\n";
+                    writeGaml(it.value(), currentPath, depth + 1);
+                    out << indent << "}\n";
+                }
+            }
+        }
+        else if (var.type() == QVariant::List) {
+            QVariantList list = var.toList();
+            for (int i = 0; i < list.size(); ++i) {
+                QString elementPath = parentPath + "[" + QString::number(i) + "]";
+                const QVariant& element = list[i];
+
+                out << indent << "node [" << i << "] {\n";
+                writeGaml(element, elementPath, depth + 1);
+                out << indent << "}\n";
+            }
+        }
+    };
+
+    writeGaml(data, "", 1);
+    out << "}\n";
+    return true;
+}
+
+bool DatabaseManager::exportToYaml(const QString& filePath) {
+    QVariantMap data = buildTreeFromDatabase();
+    if (data.isEmpty()) {
+        qDebug() << "No data to export.";
+        return false;
+    }
+
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
+        qDebug() << "Failed to open file for writing:" << file.errorString();
+        return false;
+    }
+
+    QTextStream out(&file);
+    std::function<void(const QVariant&, int)> writeYaml;
+    writeYaml = [&out, &writeYaml](const QVariant& var, int indentLevel) {
+        QString indent(indentLevel * 2, ' '); // 2 spaces per indent level
+
+        if (var.type() == QVariant::Map) {
+            QVariantMap map = var.toMap();
+            for (auto it = map.begin(); it != map.end(); ++it) {
+                QString key = it.key();
+                const QVariant& value = it.value();
+
+                out << indent << key << ":";
+                if (value.type() == QVariant::Map || value.type() == QVariant::List) {
+                    out << "\n";
+                    writeYaml(value, indentLevel + 1);
+                } else {
+                    out << " " << value.toString() << "\n";
+                }
+            }
+        } else if (var.type() == QVariant::List) {
+            QVariantList list = var.toList();
+            for (const QVariant& item : list) {
+                out << indent << "-";
+                if (item.type() == QVariant::Map || item.type() == QVariant::List) {
+                    out << "\n";
+                    writeYaml(item, indentLevel + 1);
+                } else {
+                    out << " " << item.toString() << "\n";
+                }
+            }
+        } else {
+            out << indent << var.toString() << "\n";
+        }
+    };
+
+    writeYaml(data, 0); // Start with indentation level 0 (root)
+
+    file.close();
+    qDebug() << "YAML exported to:" << filePath;
+    return true;
+}
+
+void DatabaseManager::printSchemaTable() {
+    QSqlQuery query(db);
+    if (!query.exec("SELECT id, parent_id, name, type FROM schema_fields ORDER BY id")) {
+        qDebug() << "Failed to print schema table:" << query.lastError().text();
+        return;
+    }
+
+    qDebug() << "\nSchema Table:";
+    qDebug() << "ID\tParent ID\tKey\tValue";
+    while (query.next()) {
+        qDebug() << query.value(0).toInt()
+        << "\t" << query.value(1).toInt()
+        << "\t" << query.value(2).toString()
+        << "\t" << query.value(3).toString();
+    }
 }

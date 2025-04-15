@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <Metadata>
+        <Data_Citation>
+            <Abstract>pending</Abstract>
+            <Date_of_Deposit>pending</Date_of_Deposit>
+            <Depositor>
+                <Depositor>
+                    <Name>Bryan Maloney</Name>
+                    <email>bjma@uky.edu</email>
+                </Depositor>
+            </Depositor>
+            <Funding_Agency>UK</Funding_Agency>
+            <Grant_Number>x</Grant_Number>
+            <Institution>University of Kentucky</Institution>
+            <Keywords>Epilepsy drug discovery anti-inflammatory</Keywords>
+            <Principal_Investigator>
+                <Principal_Investigator>
+                    <Name>Bjoern Bauer</Name>
+                    <ORCID>0000-0003-3867-2251</ORCID>
+                    <email>bjoern.bauer@uky.edu</email>
+                </Principal_Investigator>
+                <Principal_Investigator>
+                    <Name>Anika Hartz</Name>
+                    <ORCID>0000-0001-9276-0688</ORCID>
+                    <email>anika.hartz@uky.edu</email>
+                </Principal_Investigator>
+                <Principal_Investigator>
+                    <Name>Zhan</Name>
+                    <ORCID></ORCID>
+                    <email></email>
+                </Principal_Investigator>
+            </Principal_Investigator>
+            <Title>TEAMS Grant</Title>
+            <doi>pending</doi>
+        </Data_Citation>
+        <Projects>
+            <Projects>
+                <Aims>
+                    <Aims>
+                        <Name>Design, synthesis, &amp; in vitro activity</Name>
+                        <Workers>
+                            <Workers>
+                                <Name>Zhan</Name>
+                                <ORCID></ORCID>
+                                <email></email>
+                            </Workers>
+                            <Workers>
+                                <Name>Bjoern Bauer</Name>
+                                <ORCID>0000-0003-3867-2251</ORCID>
+                                <email>bjoern.bauer@uky.edu</email>
+                            </Workers>
+                        </Workers>
+                    </Aims>
+                </Aims>
+                <Name>Novel mPGES Inhibitors</Name>
+                <Workers>
+                    <Workers>
+                        <Name>Zhan</Name>
+                        <ORCID></ORCID>
+                        <email></email>
+                    </Workers>
+                    <Workers>
+                        <Name>Bjoern Bauer</Name>
+                        <ORCID>0000-0003-3867-2251</ORCID>
+                        <email>bjoern.bauer@uky.edu</email>
+                    </Workers>
+                </Workers>
+            </Projects>
+        </Projects>
+        <Publications>
+            <Publications>
+                <Authors></Authors>
+                <Journal></Journal>
+                <Title></Title>
+                <Year></Year>
+            </Publications>
+        </Publications>
+    </Metadata>
+</root>

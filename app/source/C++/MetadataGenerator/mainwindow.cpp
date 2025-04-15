@@ -12,7 +12,7 @@
 using namespace std;
 
 void insertFieldTree(const std::shared_ptr<Field>& node, int parentId, DatabaseManager& dbManager) {
-    int currentId = dbManager.insertSchemaField(parentId, QString::fromStdString(node->name));
+    int currentId = dbManager.insertSchemaField(parentId, QString::fromStdString(node->name), "field");
     if (currentId == -1) return;
     for (const auto& child : node->children) {
         insertFieldTree(child, currentId, dbManager);
@@ -37,15 +37,18 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug() << "Could not open database!";
     }
 
-    // Create the table BEFORE inserting data
+    // Create the table with type and correct foreign key relationship
     QSqlQuery query(dbManager.database());
     if (!query.exec("CREATE TABLE IF NOT EXISTS schema_fields ("
                     "id INTEGER PRIMARY KEY, "
                     "parent_id INTEGER, "
                     "name TEXT, "
+                    "type TEXT, "  // Ensure the 'type' column is defined
                     "FOREIGN KEY(parent_id) REFERENCES schema_fields(id) ON DELETE CASCADE)")) {
         qDebug() << "Error creating schema table:" << query.lastError().text();
     }
+
+
 
     // Then handle the schema
     /*Schema* currentSchema = schemaHandler->addSchema("..\\..\\..\\examples\\exampleSchema.sma");
@@ -170,11 +173,15 @@ void MainWindow::loadJsonButtonClicked()
                                                     tr("Open JSON File"),
                                                     "",
                                                     tr("JSON Files (*.json)"));
-
     if (fileName.isEmpty()) return;
 
     // Parse JSON data to QVariantMap
     QVariant jsonVariant = this->fileParser->importJson(fileName);
+    if (!jsonVariant.isValid()) {
+        qWarning() << "Failed to parse JSON file.";
+        return;
+    }
+
     QVariantMap jsonMap = jsonVariant.toMap();
 
     // First process the JSON to create nodes
@@ -191,23 +198,20 @@ void MainWindow::loadJsonButtonClicked()
     }
 
     // Recursive function to insert data into the database
-    // Adjust this function in your recursive parser
-    // Recursive function to insert data into the database
+    // In MainWindow::loadJsonButtonClicked()
     std::function<void(const QVariant&, const QString&, int)> insertJsonToDb;
     insertJsonToDb = [&](const QVariant& data, const QString& key, int parentId) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+
         if (data.type() == QVariant::Map) {
-            // Convert to a QVariantMap
             QVariantMap map = data.toMap();
             int currentId = parentId;
 
-            // If there is a key, insert it as a node regardless of its value
             if (!key.isEmpty()) {
-                currentId = dbManager.insertSchemaField(parentId, key);
+                currentId = dbManager.insertSchemaField(parentId, key, "object");
                 if (currentId == -1) return;
             }
 
-            // To preserve order as best as possible, iterate using iterator (not keys()).
-            // Note: QJsonObject parsing may preserve the order as in the original JSON text.
             for (auto it = map.begin(); it != map.end(); ++it) {
                 insertJsonToDb(it.value(), it.key(), currentId);
             }
@@ -215,38 +219,31 @@ void MainWindow::loadJsonButtonClicked()
         else if (data.type() == QVariant::List) {
             QVariantList list = data.toList();
 
-            int arrayParentId = parentId;
-            if (!key.isEmpty()) {
-                arrayParentId = dbManager.insertSchemaField(parentId, key + "[]");
-                if (arrayParentId == -1) return;
-            }
+            if (list.isEmpty()) return;
 
-            for (const auto& item : list) {
-                if (item.type() == QVariant::Map || item.type() == QVariant::List) {
-                    int elementId = dbManager.insertSchemaField(arrayParentId, "element");
-                    insertJsonToDb(item, "", elementId);
-                } else {
-                    // Ensure primitive is stored with quotes as string
-                    QString value = item.toString();
-                    QString quoted = "\"" + value + "\"";
-                    QString name = "value: " + quoted;
-                    dbManager.insertSchemaField(arrayParentId, name);
-                }
+            // Insert array node with "[]" suffix
+            int arrayId = dbManager.insertSchemaField(parentId, key + "[]", "array");
+            if (arrayId == -1) return;
+
+            // Insert each array element with index-based name (e.g., "0", "1")
+            for (int i = 0; i < list.size(); ++i) {
+                QString elementName = QString::number(i); // Unique name for each element
+                int elementId = dbManager.insertSchemaField(arrayId, elementName, "array_element");
+                if (elementId == -1) continue;
+                insertJsonToDb(list[i], "", elementId); // Recursively insert element content
             }
         }
         else {
-            QString value = data.toString();
-            QString quoted = "\"" + value + "\"";
-            QString name = key.isEmpty() ? quoted : key + ": " + quoted;
-            dbManager.insertSchemaField(parentId, name);
+            // Leaf node: insert key-value pair directly
+            if (!key.isEmpty()) {
+                QString valueStr = data.toString();
+                dbManager.insertSchemaField(parentId, key, valueStr);
+            }
         }
     };
 
-
-
     // Initialize recursive insert for the root of the JSON structure
     insertJsonToDb(jsonMap, "", 0);
-
 
     // Print the database contents for verification
     dbManager.printSchemaTable();
@@ -254,6 +251,7 @@ void MainWindow::loadJsonButtonClicked()
     // Refresh suggestions with the new data
     m_suggestionManager->refreshDatabase();
 
+    // Debugging output
     int currentColumn = 0;
     int maxParent = -1;
     qDebug() << "\n\n Node Time \n";
@@ -264,12 +262,8 @@ void MainWindow::loadJsonButtonClicked()
              << "x" << this->ui->nodeHolder->geometry().height();
 
     for (Node* node : nodeManager->getNodes()) {
-        qDebug() << "currentColumn :" << currentColumn;
-        qDebug() << "maxParent :" << maxParent;
-
         if (node->getNodeParent() == nullptr) {
-            qDebug() << "\n" << node->header->text() << ": ROOT ::"
-                     << node->row << ":" << currentColumn;
+            qDebug() << "\n" << node->header->text() << ": ROOT ::" << node->row << ":" << currentColumn;
         } else {
             qDebug() << "\n" << node->header->text() << ":"
                      << QString::number(node->getNodeParent()->getName())
@@ -286,14 +280,12 @@ void MainWindow::loadJsonButtonClicked()
 
         node->column = currentColumn;
 
-        // Adding widget to grid layout (adjust for your use case)
-        if (currentColumn == -1)
-            this->ui->gridLayout->addWidget(node, node->row, 0);
-        else
-            this->ui->gridLayout->addWidget(node, node->row, currentColumn);
+        // Adding widget to grid layout
+        this->ui->gridLayout->addWidget(node, node->row, currentColumn);
 
         connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
     }
+
     setupAutocomplete();
 }
 
@@ -396,6 +388,23 @@ void MainWindow::on_actionGAML_triggered()
     }
 }
 
+void MainWindow::on_actionYAML_triggered()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    tr("Export as YAML"), "",
+                                                    tr("YAML Files (*.yaml *.yml)"));
+
+    if (!fileName.isEmpty()) {
+        DatabaseManager& dbManager = DatabaseManager::instance();
+        if (dbManager.exportToYaml(fileName)) {
+            QMessageBox::information(this, "Export Successful",
+                                     "Database exported to YAML successfully.");
+        } else {
+            QMessageBox::warning(this, "Export Failed",
+                                 "Failed to export database to YAML.");
+        }
+    }
+}
 
 void MainWindow::on_actionPreferences_triggered()
 {
