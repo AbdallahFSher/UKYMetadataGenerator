@@ -19,6 +19,7 @@ public:
     int currentColumn;
     std::vector<Node*> getNodes();
     QSize nodeSize;
+    double fontSize;
     void alterNodeSize(double factor);
 
 private:

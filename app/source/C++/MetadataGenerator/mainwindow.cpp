@@ -420,13 +420,21 @@ void MainWindow::wheelEvent(QWheelEvent *event) {
         tracker = tracker->parentWidget();
     }
     double sizeFactor = 1.5;
-    if (event->angleDelta().y() > 0) { // scroll up
-        nodeManager->alterNodeSize(sizeFactor);
-    } else {
-        nodeManager->alterNodeSize(1/sizeFactor);
-    }
+    if (event->angleDelta().y() < 0)  // scroll up
+        sizeFactor = 1/sizeFactor;
+    nodeManager->alterNodeSize(sizeFactor);
+    cout << nodeManager->getNodes()[0]->header->font().pointSize() << " IS POINT SIZE" << endl;
+    nodeManager->fontSize *= sizeFactor;
 
     for (Node* node:nodeManager->getNodes()) {
+        QFont tempFont = node->header->font();
+        if (nodeManager->fontSize < 1)
+            tempFont.setPointSize(1);
+        else
+            tempFont.setPointSize(nodeManager->fontSize);
+        node->header->setFont(tempFont);
+        tempFont.setBold(false);
+        node->bottomBar->setFont(tempFont);
         node->setFixedSize(nodeManager->nodeSize);
         node->show();
 //        cout << "NODE size :: " << node->size().width() << endl;

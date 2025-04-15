@@ -22,10 +22,10 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->bottomBar->setVisible(true);
 
     this->setLayout(new QVBoxLayout());
-    this->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    this->header->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    this->bottomBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    this->header->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    this->bottomBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
     connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
