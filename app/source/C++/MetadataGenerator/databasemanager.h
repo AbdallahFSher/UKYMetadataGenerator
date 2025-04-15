@@ -21,7 +21,7 @@ public:
     // Schema Field Management
     int insertSchemaField(int parentId, const QString& key, const QString& value);
     bool insertSchemaFieldWithTransaction(int parentId, const QString& key, const QString& value);  // Transaction-based insert
-
+    void deleteSchemaFieldsByParentId(int parentId);
     void printSchemaTable();
 
     // Export functions

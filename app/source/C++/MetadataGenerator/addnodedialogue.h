@@ -15,20 +15,18 @@ class AddNodeDialogue : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddNodeDialogue(QWidget *parent = nullptr, SuggestionManager* suggestionManager = nullptr);
+    explicit AddNodeDialogue(QWidget *parent = nullptr,
+                             SuggestionManager* suggestionManager = nullptr);
     ~AddNodeDialogue();
-
 
     void setupAutocomplete(QCompleter* completer);
 
 public slots:
-    // Slot which connects to clicked() signal from Nodes in MainWindow
     void setParent(Node* parent);
 
 signals:
-    // Signal sent to MainWindow to add node to Node Manager
-    void createNode(Node*);
-
+    // Updated signal with database parent ID
+    void createNode(Node* node, int parentDatabaseId);
 
 private slots:
     void on_buttonBox_accepted();
@@ -41,6 +39,9 @@ private:
     SelectParentDialogue* spd;
     SuggestionManager* suggestionManager;
 
+    // Parent tracking
+    Node* currentParent = nullptr;
+    int parentDatabaseId = 0;  // Default to root (0)
 };
 
 #endif // ADDNODEDIALOGUE_H

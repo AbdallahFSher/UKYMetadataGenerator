@@ -49,6 +49,9 @@ public:
     bool equals(Node Node2);
     void mousePressEvent(QMouseEvent *event);
 
+    int getDatabaseId() const;
+    void setDatabaseId(int id);
+
 public slots:
     void setValue(int value);
     void resize_to_text();
@@ -59,6 +62,7 @@ signals:
 
 private:
     QLineEdit *lineEdit;
+    int databaseId = -1;
 };
 
 #endif // NODE_H

@@ -17,15 +17,25 @@ AddNodeDialogue::~AddNodeDialogue()
 }
 
 void AddNodeDialogue::setParent(Node* parent) {
+    if (!parent || parent->getDatabaseId() < 0) {
+        qWarning() << "Invalid parent node or missing database ID";
+        return;
+    }
+
     if (!this->ignoreSignals) {
         this->newNode = new Node(parent->parentWidget(), parent->row + 1, parent);
-        this->newNode->setKey(this->ui->keyEdit->text());
-        this->newNode->setValue(this->ui->valueEdit->text());
+        this->newNode->setKey(ui->keyEdit->text());
+        this->newNode->setValue(ui->valueEdit->text());
         this->newNode->row = parent->row + 1;
         this->newNode->column = parent->column;
-        this->spd->hide();
-        this->ignoreSignals = true;
-        emit this->createNode(newNode);
+
+        int parentDbId = parent->getDatabaseId();
+        // Handle root node case if necessary, e.g., parentDbId = 0 might map to NULL in the database
+        qDebug() << "Using parent database ID:" << parentDbId;
+
+        spd->hide();
+        ignoreSignals = true;
+        emit createNode(newNode, parentDbId);
     }
 }
 
@@ -49,4 +59,3 @@ void AddNodeDialogue::handleTextInputChanged(const QString& text)
 {
     suggestionManager->requestSuggestions(text);
 }
-

@@ -130,6 +130,14 @@ void Node::removeChild(int index) {
 //    children.erase(children.begin() + index);
 }
 
+int Node::getDatabaseId() const {
+    return databaseId;
+}
+
+void Node::setDatabaseId(int id) {
+    databaseId = id;
+}
+
 bool Node::equals(Node Node2) {
     if (nodeParent == Node2.nodeParent && name == Node2.name &&
         key == Node2.key && value == Node2.value) {

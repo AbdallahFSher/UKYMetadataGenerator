@@ -1,5 +1,6 @@
 #include "nodemanager.h"
 #include "colorhandler.h"
+#include "databasemanager.h"
 #include "node.h"
 #include <iostream>
 
@@ -10,70 +11,54 @@ NodeManager::NodeManager(QWidget* parent, ColorHandler colorHandler)
     // nodes is automatically initialized as a member of the class, no need to do it here
 }
 
-void NodeManager::processJson(QVariantMap jsonMap, int level, Node* nodeParent) {
-    static int processCnt = 0; // Make processCnt a static local variable to keep track of the count
-    cout << "PROCESS COUNT: " << processCnt++ << endl;
-    cout << "NODELIST LENGTH: " << nodes.size() << endl;
-    QList<QString> keys = jsonMap.keys();
+void NodeManager::processJson(const QVariantMap& json, int parentDatabaseId, QWidget* parentWidget) {
+    DatabaseManager& db = DatabaseManager::instance();
 
-    bool firstKid = true;
+    // Clear existing database entries for this parent
+    db.deleteSchemaFieldsByParentId(parentDatabaseId);
 
-    for (const QString& key : keys) {
-        if (jsonMap[key].canConvert<QVariantMap>()) {
-            Node* newNode = new Node(parent, level, nodeParent);
-            newNode->row = level;
-            newNode->setName(nodes.size());
-            newNode->header->setText(key);
-            if (nodeParent != nullptr)
-                newNode->bottomBar->setText(key);
+    // Clear in-memory nodes
+    qDeleteAll(nodes);
+    nodes.clear();
 
-            nodes.push_back(newNode);
+    // Process new JSON
+    createNodesFromJson(json, parentDatabaseId, parentWidget);
+}
+void NodeManager::createNodesFromJson(const QVariantMap& json, int parentDatabaseId, QWidget* parentWidget) {
+    DatabaseManager& db = DatabaseManager::instance();
 
-            cout << "MAP##" << level << endl;
-            processJson(jsonMap[key].toMap(), level + 1, newNode);
+    for (auto it = json.begin(); it != json.end(); ++it) {
+        QString key = it.key();
+        QVariant value = it.value();
 
-        } else if (jsonMap[key] == jsonMap[key].toString()) {
-            Node* newNode = new Node(parent, level, nodeParent);
-            newNode->row = level;
-            newNode->setName(nodes.size());
-            newNode->header->setText(key);
-            newNode->bottomBar->setText(jsonMap[key].toString());
-            nodes.push_back(newNode);
+        // Insert into database
+        int newId = db.insertSchemaField(parentDatabaseId, key,
+                                         value.type() == QVariant::Map ? "object" : "string");
+        if (newId == -1) {
+            qWarning() << "Failed to insert JSON node:" << key;
+            continue;
+        }
 
-        } else {
-            cout << "THE KEY " << key.toStdString() << " CORRESPONDS TO A LIST BTW" << endl;
-            Node* listNode = new Node(parent, level, nodeParent);
-            listNode->row = level;
-            listNode->setName(nodes.size());
-            listNode->header->setText(key);
-            listNode->bottomBar->setText("This is a list node");
-            nodes.push_back(listNode);
+        // Create UI node
+        Node* newNode = new Node(parentWidget, 0, nullptr);
+        newNode->setDatabaseId(newId);
+        newNode->setKey(key);
+        newNode->setValue(value.toString());
+        nodes.push_back(newNode);
 
-            QList<QVariant> jsonList = jsonMap[key].toList();
-            for (const QVariant& child : jsonList) {
-                QVariantMap mapChild = child.toMap();
-                for (const QString& childKey : mapChild.keys()) {
-                    cout << "\nHunting for a string in a dict..." << endl;
-                    cout << "ChildKey: " << childKey.toStdString() << endl;
-                    cout << "ChildValue: " << mapChild[childKey].toString().toStdString() << endl;
-
-                    if (mapChild[childKey] == mapChild[childKey].toString()) {
-                        cout << "GOT one..." << endl;
-                        Node* newNode = new Node(parent, level, listNode);
-                        newNode->setName(nodes.size());
-                        newNode->row = level + 1;
-                        newNode->header->setText(childKey);
-                        newNode->bottomBar->setText(mapChild[childKey].toString());
-                        nodes.push_back(newNode);
-                        break;
-                    }
-                }
-                processJson(mapChild, level + 1, listNode);
+        // Add node to parent's layout
+        if (parentWidget) {
+            if (!parentWidget->layout()) {
+                parentWidget->setLayout(new QVBoxLayout());
             }
+            parentWidget->layout()->addWidget(newNode);
+        }
+
+        // Recursive processing for nested objects
+        if (value.type() == QVariant::Map) {
+            createNodesFromJson(value.toMap(), newId, newNode);
         }
     }
-
-    colorHandler.setColors(nodes);
 }
 
 void NodeManager::addNode(Node* node) {

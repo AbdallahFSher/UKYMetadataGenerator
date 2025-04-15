@@ -157,15 +157,38 @@ void MainWindow::setupConnections()
         qWarning() << "No JSON load trigger found in UI";
     }
 
-    connect(this->addNodeDialogue, SIGNAL(createNode(Node*)), this, SLOT(nodeAdded(Node*)));
+    connect(addNodeDialogue, &AddNodeDialogue::createNode,
+            this, &MainWindow::nodeAdded);
 }
 
-void MainWindow::nodeAdded(Node* newNode) {
+void MainWindow::nodeAdded(Node* newNode, int parentDatabaseId) {
     newNode->setVisible(true);
     this->ui->gridLayout->addWidget(newNode, newNode->row, newNode->column);
     this->nodeManager->addNode(newNode);
-}
 
+    // Insert into database
+    DatabaseManager& dbManager = DatabaseManager::instance();
+    QString name = newNode->header->text();
+    QString value = newNode->bottomBar->text();
+
+    // Determine type based on node content
+    QString type = value.isEmpty() ? "object" : "string";
+
+    int newId = dbManager.insertSchemaField(parentDatabaseId, name, type);
+
+    if(newId != -1) {
+        newNode->setDatabaseId(newId); // Store DB ID in the node
+        qDebug() << "Inserted node into database with ID:" << newId;
+    } else {
+        qWarning() << "Failed to insert node into database";
+    }
+
+    // If it's an object node, allow future children
+    if(type == "object") {
+        newNode->setAcceptDrops(true);
+        newNode->setStyleSheet("border: 2px dashed #666;");
+    }
+}
 
 void MainWindow::loadJsonButtonClicked()
 {
@@ -185,8 +208,35 @@ void MainWindow::loadJsonButtonClicked()
     QVariantMap jsonMap = jsonVariant.toMap();
 
     // First process the JSON to create nodes
+    // ...
+
+    // Process JSON to create nodes
     nodeManager->processJson(jsonMap, 0);
     this->ui->nodeHolder->update();
+
+    // Assign rows and columns properly
+    int currentRow = 0;
+    int currentColumn = 0;
+    QMap<int, int> parentColumns; // Tracks the column of each parent
+
+    for (Node* node : nodeManager->getNodes()) {
+        if (node->getNodeParent() == nullptr) {
+            // Root nodes are placed in column 0, each on a new row
+            node->row = currentRow++;
+            node->column = 0;
+        } else {
+            // Child nodes are placed in the next column of their parent's row
+            Node* parent = node->getNodeParent();
+            node->row = parent->row;
+            node->column = parent->column + 1;
+        }
+        // Ensure the grid layout has enough rows and columns
+        this->ui->gridLayout->addWidget(node, node->row, node->column);
+    }
+
+    // Adjust the grid layout's row and column counts
+    ui->gridLayout->setRowStretch(currentRow, 1);
+    ui->gridLayout->setColumnStretch(currentColumn, 1);
 
     // Now insert the JSON structure into the database
     DatabaseManager& dbManager = DatabaseManager::instance();
@@ -252,7 +302,7 @@ void MainWindow::loadJsonButtonClicked()
     m_suggestionManager->refreshDatabase();
 
     // Debugging output
-    int currentColumn = 0;
+    currentColumn = 0;
     int maxParent = -1;
     qDebug() << "\n\n Node Time \n";
     qDebug() << "Here's our Stats, Boss:";
@@ -283,7 +333,7 @@ void MainWindow::loadJsonButtonClicked()
         // Adding widget to grid layout
         this->ui->gridLayout->addWidget(node, node->row, currentColumn);
 
-        connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
+        connect(node, &Node::beParent, this->addNodeDialogue, &AddNodeDialogue::setParent);
     }
 
     setupAutocomplete();

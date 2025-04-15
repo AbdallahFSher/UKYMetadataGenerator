@@ -30,7 +30,7 @@ public:
     //void mousePressEvent(QMouseEvent *event);
 
 public slots:
-    void nodeAdded(Node* newNode);
+    void nodeAdded(Node* newNode, int parentDatabaseId);
 private slots:
     void handleTextInputChanged(const QString& text);
     void updateSuggestions(const QStringList& suggestions);
@@ -41,6 +41,7 @@ private slots:
     void on_actionJSON_triggered();
     void on_actionXML_triggered();
     void on_actionGAML_triggered();
+    void on_actionYAML_triggered();
 
     void on_actionPreferences_triggered();
 

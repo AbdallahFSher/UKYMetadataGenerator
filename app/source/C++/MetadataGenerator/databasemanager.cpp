@@ -365,6 +365,16 @@ bool DatabaseManager::exportToYaml(const QString& filePath) {
     return true;
 }
 
+void DatabaseManager::deleteSchemaFieldsByParentId(int parentId) {
+    QSqlQuery query;
+    query.prepare("DELETE FROM schema_fields WHERE parent_id = :parentId");
+    query.bindValue(":parentId", parentId);
+    if (!query.exec()) {
+        qWarning() << "Failed to delete schema fields for parent" << parentId
+                   << ":" << query.lastError().text();
+    }
+}
+
 void DatabaseManager::printSchemaTable() {
     QSqlQuery query(db);
     if (!query.exec("SELECT id, parent_id, name, type FROM schema_fields ORDER BY id")) {

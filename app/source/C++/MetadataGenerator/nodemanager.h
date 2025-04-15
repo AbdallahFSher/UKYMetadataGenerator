@@ -7,26 +7,21 @@
 #include <vector>
 #include <QVariantMap>
 
-class NodeManager
-{
+class NodeManager {
 public:
-    // Constructor
     NodeManager(QWidget* parent, ColorHandler colorHandler);
-
-    // Methods
-    void processJson(QVariantMap jsonMap, int level, Node* nodeParent = nullptr);
-    Node* createNode(int level, Node* nodeParent = nullptr);  // Using pointer for consistency
+    void processJson(const QVariantMap& json, int parentDatabaseId, QWidget* parentWidget = nullptr);
     void addNode(Node* node);
-    std::vector<Node*> getNodes() const;  // Marking as const since it's a getter
+    std::vector<Node*> getNodes() const; // Return std::vector
 
-    // Member variables
+private:
+    void createNodesFromJson(const QVariantMap& json, int parentDatabaseId, QWidget* parentWidget);
+
     QWidget* parent;
     ColorHandler colorHandler;
     int currentColumn;
-
-private:
-    // Internal node container
-    std::vector<Node*> nodes;
+    std::vector<Node*> nodes; // Use std::vector
+    int databaseId = -1;
 };
 
 #endif // NODEMANAGER_H
