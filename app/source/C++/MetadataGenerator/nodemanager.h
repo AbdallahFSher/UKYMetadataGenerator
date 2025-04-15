@@ -32,6 +32,7 @@ public:
     int currentColumn;
     std::vector<Node*> getNodes();
     QSize nodeSize;
+    double fontSize;
     void alterNodeSize(double factor);
     void nodesFromSchema(Schema* schema, bool bottombars = true, QVariantMap* jsonMap = nullptr);
     void recCreateNodes(std::shared_ptr<Field> root, int level,

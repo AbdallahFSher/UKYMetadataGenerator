@@ -12,6 +12,7 @@ NodeManager::NodeManager(QWidget* parent, ColorHandler colorHandler) {
     std::vector<std::vector<Node*>> nodeBuffer = vector<std::vector<Node*>>();
     this->currentColumn = 0;
     this->nodeSize = QSize(100, 80);
+    this->fontSize = 9;
 }
 
 void NodeManager::emptyNodeList() {
