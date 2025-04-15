@@ -26,7 +26,7 @@ public:
     std::queue<std::string> fullName;
     int row;
     int column;
-    vector<Node> children;
+    vector<Node*> children;
     QTextEdit *widget;
     QSpacerItem *spacer;
     int nodeVariant;
@@ -44,12 +44,20 @@ public:
     QString getValue();
     void setValue(QString newValue);
 
-    void addChild(Node newChild);
+    void addChild(Node* newChild);
     void removeChild(Node oldChild);
     void removeChild(int index);
 
+    void hideNodes(Node* node);
+    bool collapsed;
+
     bool equals(Node Node2);
     void mousePressEvent(QMouseEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
+    void dragMoveEvent(QDragMoveEvent *event);
+    void dragEnterEvent(QDragEnterEvent *event);
 
 public slots:
     void setValue(int value);
@@ -58,9 +66,13 @@ public slots:
 signals:
     void valueChanged(int newValue);
     void beParent(Node* parent);
+    void hidden(Node* node);
+    void moved(Node* node);
 
 private:
     QLineEdit *lineEdit;
+    QPoint dragDiff;
+    bool dragging;
 };
 
 #endif // NODE_H

@@ -130,6 +130,8 @@ void NodeManager::recCreateNodes(std::shared_ptr<Field> root, int level, Node* n
         if (!bottombars) {
             newNode->bottomBar->setVisible(false);
         }
+        if(nodeParent)
+            nodeParent->children.push_back(newNode);
         addNode(newNode);
     }
     if (!root->children.empty()) {
@@ -148,6 +150,6 @@ void NodeManager::addNode(Node* node) {
     colorHandler.setColors(nodes);
 }
 
-std::vector<Node*> NodeManager::getNodes() const {
+std::vector<Node*> NodeManager::getNodes() {
     return nodes;
 }

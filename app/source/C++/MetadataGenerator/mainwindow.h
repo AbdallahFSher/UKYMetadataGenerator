@@ -11,6 +11,7 @@
 #include "nodemanager.h"
 #include "preferenceswindow.h"
 #include "addnodedialogue.h"
+#include "drawconnection.h"
 
 class SuggestionManager;
 class Node;
@@ -52,6 +53,8 @@ private slots:
 
     void on_actionEdit_Schema_triggered();
 
+    void on_actionYAML_triggered();
+
 private:
     Ui::MainWindow *ui;
     SuggestionManager* m_suggestionManager;
@@ -63,6 +66,7 @@ private:
     ColorHandler* colorHandler;
     PreferencesWindow* pw;
     AddNodeDialogue* addNodeDialogue;
+    DrawConnection* drawConnection;
 
     void setupAutocomplete();
     void createTextInputIfNeeded();

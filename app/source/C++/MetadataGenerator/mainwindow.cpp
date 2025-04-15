@@ -29,7 +29,8 @@ MainWindow::MainWindow(QWidget *parent)
     m_completer(new QCompleter(this)),
     m_textInput(nullptr),
     fileParser(new FileParser()),
-    schemaHandler(new SchemaHandler())
+    schemaHandler(new SchemaHandler()),
+    drawConnection(new DrawConnection())
 {
     ui->setupUi(this);
 
@@ -203,6 +204,7 @@ void MainWindow::setupNodeUI() {
         }
 
         if (node->getNodeParent() != nullptr) {
+            this->ui->nodeHolder->addWidgets(node->getNodeParent(), node);
             if (node->getNodeParent()->getName() > maxParent) {
                 maxParent = node->getNodeParent()->getName();
             } else if (node->getNodeParent()->getName() <= maxParent) {
@@ -214,11 +216,13 @@ void MainWindow::setupNodeUI() {
 
         // Adding widget to grid layout (adjust for your use case)
         if (currentColumn == -1)
-            this->ui->gridLayout->addWidget(node, node->row, 0);
+            this->ui->gridLayout->addWidget(node, 0, node->row);
         else
-            this->ui->gridLayout->addWidget(node, node->row, currentColumn);
+            this->ui->gridLayout->addWidget(node, currentColumn, node->row);
 
         connect(node, SIGNAL(beParent(Node*)), this->addNodeDialogue, SLOT(setParent(Node*)));
+        connect(node, SIGNAL(hidden(Node*)), this->ui->nodeHolder, SLOT(update()));
+        connect(node, SIGNAL(moved(Node*)), this->ui->nodeHolder, SLOT(update()));
     }
 }
 

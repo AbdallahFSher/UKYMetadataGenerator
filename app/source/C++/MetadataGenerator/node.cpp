@@ -7,10 +7,11 @@ using namespace std;
 Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     : QFrame(parent)
 {
+    this->collapsed = false;
     this->nodeParent = nodeParent;
     this->nodeVariant = nodeVariant;
     this->content = map<QString, QString>(); // dictionary
-    this->children = std::vector<Node>();
+    this->children = std::vector<Node*>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     this->header = new QLineEdit(this);
@@ -42,10 +43,11 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
 }
 
 Node::Node() {
+    this->collapsed = false;
     this->nodeParent = nullptr;
     this->nodeVariant = 0;
     this->content = map<QString, QString>(); // dictionary
-    this->children = std::vector<Node>();
+    this->children = std::vector<Node*>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
     this->header = new QLineEdit(this);
@@ -113,8 +115,8 @@ void Node::setValue(int value) {
     this->value = (QChar)value;
 }
 
-void Node::addChild(Node newChild) {
-//    children.push_back(newChild);
+void Node::addChild(Node* newChild) {
+    this->children.push_back(newChild);
 }
 
 void Node::removeChild(Node oldChild) {
@@ -138,50 +140,108 @@ bool Node::equals(Node Node2) {
     return false;
 }
 
+void Node::mouseDoubleClickEvent(QMouseEvent *event) {
+    if(event->button() == Qt::LeftButton) {
+        hideNodes(this);
+        collapsed = !collapsed;
+    }
+}
+
+void Node::hideNodes(Node* root) {
+    if(root->children.size() != 0) {
+        for(int i = 0; i < root->children.size(); i++) {
+            root->children[i]->setVisible(collapsed);
+            hideNodes(root->children[i]);
+            emit hidden(root->children[i]);
+        }
+    }
+}
+
+void Node::mouseMoveEvent(QMouseEvent *event) {
+    if ((event->buttons() & Qt::LeftButton) && dragging) {
+        //this->move(this->pos() + event->position().toPoint());
+        //emit moved(this);
+    }
+}
+
+void Node::mouseReleaseEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton && dragging) {
+        dragging = false;
+        this->setCursor(Qt::ArrowCursor);
+    }
+}
+
+void Node::dragEnterEvent(QDragEnterEvent *event) {
+    if (event->mimeData()->hasFormat("application/nodeData")) {
+        if (event->source() == this) {
+            event->setDropAction(Qt::MoveAction);
+            event->accept();
+        } else {
+            event->acceptProposedAction();
+        }
+    } else {
+        event->ignore();
+    }
+}
+
+void Node::dragMoveEvent(QDragMoveEvent *event) {
+    if (event->mimeData()->hasFormat("application/nodeData")) {
+        if (event->source() == this) {
+            event->setDropAction(Qt::MoveAction);
+            event->accept();
+        } else {
+            event->acceptProposedAction();
+        }
+    } else {
+        event->ignore();
+    }
+}
+
 void Node::mousePressEvent(QMouseEvent *event)
 {
     //cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
     if (event->button() == Qt::LeftButton) {
         emit this->beParent(this);
+
+        this->setCursor(Qt::BlankCursor);
+        dragging = true;
+
+        QDrag *drag = new QDrag(this);
+        QMimeData *mimeData = new QMimeData;
+        QByteArray nodeData;
+        QDataStream dataStream(&nodeData, QIODevice::WriteOnly);
+        dataStream << this->key << this->value << QPoint(event->position().toPoint() - this->pos());
+
+        mimeData->setData("application/nodeData", nodeData);
+        drag->setMimeData(mimeData);
+        drag->setPixmap(this->grab());
+        drag->setHotSpot(event->pos());
+
+        if (drag->exec(Qt::MoveAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {
+
+        } else {
+            std::cout << "WE MOVIN" << std::endl;
+            this->move(drag->hotSpot());
+            emit moved(this);
+        }
+        /*
         QPoint startPos = mapFromGlobal(QCursor::pos());
 
 
         QDrag *drag = new QDrag(this);
         QMimeData *mimeData = new QMimeData;
 
-        QImage image(QSize(400,300),QImage::Format_RGB32);
-        QPainter painter(&image);
-        painter.setBrush(QBrush(Qt::green));
-        painter.fillRect(QRectF(0,0,400,300),Qt::green);
-        painter.fillRect(QRectF(100,100,200,100),Qt::white);
-        painter.setPen(QPen(Qt::black));
-        painter.drawText(QRect(100,100,200,100),"Text you want to draw...");
-
-        //QPixmap pixmap = QPixmap(this->size());
-        //this->render(pixmap);
-        //QRect rect = this->rect();
-        //QVariant var = QVariant(rect);
-        //mimeData->setImageData(image);
-
-        mimeData->setText("");
+        mimeData->setImageData(this->grab());
         drag->setMimeData(mimeData);
-        //QImage img = var.value<QImage>();
-        //drag->setPixmap(pixmap);
-        //drag->setPixmap(QPixmap::fromImage(image));
+        drag->setPixmap(this->grab());
 
         Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
         QPoint endPos = mapFromGlobal(QCursor::pos());
         QPoint diff = endPos - startPos;
-        //QPoint diff = endPos;
 
-        //cout << "INITALPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
         this->move(this->pos() + diff);
-        //cout << "ENDPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
-        //cout << "START MOUSE POS: " << (QString("%1x%2").arg(startPos.x()).arg(startPos.y())).toStdString() << endl;
-        //cout << "END MOUSE POS: " << (QString("%1x%2").arg(endPos.x()).arg(endPos.y())).toStdString() << endl;
-        //cout << "DIFF: " << (QString("%1x%2").arg(diff.x()).arg(diff.y())).toStdString() << endl;
-
-        //cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
+        emit moved(this);
+        */
     }
 }
 

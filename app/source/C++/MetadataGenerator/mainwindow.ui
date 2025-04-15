@@ -20,7 +20,7 @@
       <property name="widgetResizable">
        <bool>true</bool>
       </property>
-      <widget class="QWidget" name="nodeHolder">
+      <widget class="DrawConnection" name="nodeHolder">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -72,6 +72,7 @@
      <addaction name="actionJSON"/>
      <addaction name="actionXML"/>
      <addaction name="actionGAML"/>
+     <addaction name="actionYAML"/>
     </widget>
     <addaction name="separator"/>
     <addaction name="actionOpen"/>
@@ -144,7 +145,20 @@
     <string>Edit Schema</string>
    </property>
   </action>
+  <action name="actionYAML">
+   <property name="text">
+    <string>YAML</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DrawConnection</class>
+   <extends>QWidget</extends>
+   <header>../../../../drawconnection.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
  <slots>
