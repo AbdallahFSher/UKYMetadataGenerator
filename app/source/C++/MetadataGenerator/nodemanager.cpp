@@ -2,6 +2,7 @@
 #include "colorhandler.h"
 #include "node.h"
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -148,6 +149,11 @@ void NodeManager::alterNodeSize(double factor) {
 
 void NodeManager::addNode(Node* node) {
     nodes.push_back(node);
+    colorHandler.setColors(nodes);
+}
+
+void NodeManager::removeNode(Node* node) {
+    nodes.erase(std::remove(nodes.begin(), nodes.end(), node), nodes.end());
     colorHandler.setColors(nodes);
 }
 

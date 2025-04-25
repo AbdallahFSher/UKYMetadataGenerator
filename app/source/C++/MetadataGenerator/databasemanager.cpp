@@ -28,9 +28,21 @@ bool DatabaseManager::openDatabase(const QString& path) {
         qDebug() << "Error opening database:" << db.lastError().text();
         return false;
     }
+
+    // enable foreign-key support so ON DELETE CASCADE actually works
+    {
+        QSqlQuery pragma(db);
+        if (!pragma.exec("PRAGMA foreign_keys = ON")) {
+            qDebug() << "Could not enable foreign keys:" << pragma.lastError().text();
+        } else {
+            qDebug() << "Foreign keys enabled";
+        }
+    }
+
     qDebug() << "Database opened:" << path;
     return true;
 }
+
 
 void DatabaseManager::closeDatabase() {
     if (db.isOpen()) {
@@ -42,20 +54,32 @@ QSqlDatabase& DatabaseManager::database() {
     return db;
 }
 
-int DatabaseManager::insertSchemaField(int parentId, const QString& name, const QString& type) {
+int DatabaseManager::insertSchemaField(int parentId, const QString& name, const QString& type)
+{
+    // check for duplicate under same parent (NULL means root)
     QSqlQuery checkQuery(db);
-    checkQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = ? AND name = ?");
-    checkQuery.addBindValue(parentId);
-    checkQuery.addBindValue(name);
-
+    if (parentId > 0) {
+        checkQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = ? AND name = ?");
+        checkQuery.addBindValue(parentId);
+        checkQuery.addBindValue(name);
+    }
+    else {
+        checkQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id IS NULL AND name = ?");
+        checkQuery.addBindValue(name);
+    }
     if (checkQuery.exec() && checkQuery.next() && checkQuery.value(0).toInt() > 0) {
         qDebug() << "Duplicate key under the same parent:" << name;
         return -1;
     }
 
+    // insert, binding NULL for root-level entries
     QSqlQuery insertQuery(db);
     insertQuery.prepare("INSERT INTO schema_fields (parent_id, name, type) VALUES (?, ?, ?)");
-    insertQuery.addBindValue(parentId);
+    if (parentId > 0)
+        insertQuery.addBindValue(parentId);
+    else
+        insertQuery.addBindValue(QVariant());    // bind NULL for parent_id
+
     insertQuery.addBindValue(name);
     insertQuery.addBindValue(type);
 
@@ -63,12 +87,12 @@ int DatabaseManager::insertSchemaField(int parentId, const QString& name, const 
         qDebug() << "Insertion failed:" << insertQuery.lastError().text();
         return -1;
     }
-
     return insertQuery.lastInsertId().toInt();
 }
 
 
-bool DatabaseManager::insertSchemaFieldWithTransaction(int parentId, const QString& key, const QString& value) {
+bool DatabaseManager::insertSchemaFieldWithTransaction(int parentId, const QString& key, const QString& value)
+{
     if (!db.transaction()) {
         qDebug() << "Transaction start failed.";
         return false;
@@ -89,15 +113,19 @@ QVariantMap DatabaseManager::buildTreeFromDatabase() {
 
 QVariantMap DatabaseManager::buildSubtree(int parentId, int depth) {
     QVariantMap tree;
-
     if (depth > 100) {
         qDebug() << "Maximum recursion depth reached!";
         return tree;
     }
 
     QSqlQuery query(db);
-    query.prepare("SELECT id, name, type FROM schema_fields WHERE parent_id = ?");
-    query.addBindValue(parentId);
+    if (parentId == 0) {
+        // fetch top‐level nodes
+        query.prepare("SELECT id, name, type FROM schema_fields WHERE parent_id IS NULL");
+    } else {
+        query.prepare("SELECT id, name, type FROM schema_fields WHERE parent_id = ?");
+        query.addBindValue(parentId);
+    }
 
     if (!query.exec()) {
         qDebug() << "Query failed:" << query.lastError().text();
@@ -105,45 +133,43 @@ QVariantMap DatabaseManager::buildSubtree(int parentId, int depth) {
     }
 
     while (query.next()) {
-        int id = query.value(0).toInt();
+        int id      = query.value(0).toInt();
         QString key = query.value(1).toString();
-        QString type = query.value(2).toString();
+        QString type= query.value(2).toString();
 
-        // Handle arrays (keys ending with "[]")
+        // arrays end with "[]"
         if (key.endsWith("[]")) {
             QString arrayName = key.left(key.length() - 2);
             QVariantList arrayItems;
 
-            // Fetch array elements (children of the array node)
             QSqlQuery arrayQuery(db);
             arrayQuery.prepare("SELECT id FROM schema_fields WHERE parent_id = ?");
             arrayQuery.addBindValue(id);
 
             if (arrayQuery.exec()) {
                 while (arrayQuery.next()) {
-                    QVariantMap element = buildSubtree(arrayQuery.value(0).toInt(), depth + 1);
-                    arrayItems.append(element);
+                    int childId = arrayQuery.value(0).toInt();
+                    arrayItems.append(buildSubtree(childId, depth + 1));
                 }
             }
-
             tree[arrayName] = arrayItems;
+
         } else {
-            // Check if this node has children
+            // does this node have children?
             QSqlQuery childQuery(db);
             childQuery.prepare("SELECT COUNT(*) FROM schema_fields WHERE parent_id = ?");
             childQuery.addBindValue(id);
-            bool hasChildren = false;
 
-            if (childQuery.exec() && childQuery.next()) {
+            bool hasChildren = false;
+            if (childQuery.exec() && childQuery.next())
                 hasChildren = (childQuery.value(0).toInt() > 0);
-            }
 
             if (hasChildren) {
-                // Treat as object and recurse into children
+                // recurse into object
                 tree[key] = buildSubtree(id, depth + 1);
             } else {
-                // Leaf node: use the type directly (e.g., "Abstract": "pending")
-                tree[key] = type; // No "value" key
+                // leaf: use the stored type as value
+                tree[key] = type;
             }
         }
     }
@@ -157,6 +183,24 @@ bool DatabaseManager::clearDatabase() {
     bool success = query.exec("DELETE FROM schema_fields");
     qDebug() << (success ? "Database cleared." : "Failed to clear database:" + query.lastError().text());
     return success;
+}
+
+void DatabaseManager::deleteSubtree(int id)
+{
+    // first delete all children
+    QSqlQuery q(db);
+    q.prepare("SELECT id FROM schema_fields WHERE parent_id = ?");
+    q.addBindValue(id);
+    if (q.exec()) {
+        while (q.next()) {
+            deleteSubtree(q.value(0).toInt());
+        }
+    }
+    // then delete this node
+    QSqlQuery del(db);
+    del.prepare("DELETE FROM schema_fields WHERE id = ?");
+    del.addBindValue(id);
+    del.exec();
 }
 
 // -------- Export Helpers -------- //

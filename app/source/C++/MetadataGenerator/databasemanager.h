@@ -16,6 +16,7 @@ public:
 
     bool openDatabase(const QString& path);
     void closeDatabase();
+    void deleteSubtree(int id);
     QSqlDatabase& database();
 
     // Schema Field Management

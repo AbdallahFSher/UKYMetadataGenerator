@@ -1,5 +1,7 @@
 #include "Node.h"
 #include <iostream>
+#include <QMenu>
+#include <QContextMenuEvent>
 
 using namespace std;
 
@@ -215,6 +217,15 @@ void Node::mousePressEvent(QMouseEvent *event)
 void Node::hoveredOver(Node* node) {
     if (this->name != node->name && this->rect().intersects(node->rect())) {
         node->setStyleSheet("background: white");
+    }
+}
+
+void Node::contextMenuEvent(QContextMenuEvent* event) {
+    QMenu menu;
+    QAction* del = menu.addAction("Delete Node");
+    QAction* chosen = menu.exec(event->globalPos());
+    if (chosen == del) {
+        emit requestDelete(this);
     }
 }
 

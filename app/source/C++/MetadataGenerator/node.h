@@ -26,6 +26,7 @@ public:
     std::queue<std::string> fullName;
     int row;
     int column;
+    int dbId = 0;
     vector<Node*> children;
     QTextEdit *widget;
     QSpacerItem *spacer;
@@ -67,11 +68,16 @@ signals:
     void beParent(Node* parent);
     void hidden(Node* node);
     void moved(Node* node);
+    void requestDelete(Node*);
 
 private:
     QLineEdit *lineEdit;
     QPoint dragDiff;
     bool dragging;
+
+protected:
+    void contextMenuEvent(QContextMenuEvent* event) override;
 };
+
 
 #endif // NODE_H

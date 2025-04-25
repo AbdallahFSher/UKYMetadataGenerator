@@ -2,17 +2,20 @@
 #define DRAWCONNECTION_H
 
 #include <QWidget>
-#include "node.h"
+#include <QList>
+#include <QPaintEvent>
 
 class DrawConnection : public QWidget
 {
     Q_OBJECT
+
 public:
     explicit DrawConnection(QWidget *parent = nullptr);
     void addWidgets(const QWidget *from, const QWidget *to);
+    void removeWidgets(const QWidget *from, const QWidget *to);
 
 protected:
-    void paintEvent(QPaintEvent *);
+    void paintEvent(QPaintEvent *event) override;
 
 private:
     struct WidgetsConnected {
@@ -21,8 +24,6 @@ private:
     };
 
     QList<WidgetsConnected> list;
-
-signals:
 };
 
 #endif // DRAWCONNECTION_H

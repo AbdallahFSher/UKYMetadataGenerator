@@ -24,6 +24,7 @@ public:
     Node createNode(int level,  Node nodeParent = NULL);
     Node* createNode(int level, Node* nodeParent = nullptr);  // Using pointer for consistency
     void addNode(Node* node);
+    void removeNode(Node* node);
     std::vector<Node*> getNodes() const;  // Marking as const since it's a getter
 
     // Member variables
