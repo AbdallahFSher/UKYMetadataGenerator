@@ -5,7 +5,8 @@
 
 using namespace std;
 
-// TODO: Give information to schema which delineates nodeVariant (color)
+// CONSTRUCTORS
+// Use this constructor to actually create node inside of QWidget
 Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     : QFrame(parent)
 {
@@ -44,6 +45,7 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->setVisible(true);
 }
 
+// Create an empty node
 Node::Node() {
     this->collapsed = false;
     this->nodeParent = nullptr;
@@ -142,6 +144,7 @@ bool Node::equals(Node Node2) {
     return false;
 }
 
+// Handler to hide nodes on double click
 void Node::mouseDoubleClickEvent(QMouseEvent *event) {
     if(event->button() == Qt::LeftButton) {
         hideNodes(this);
@@ -159,6 +162,7 @@ void Node::hideNodes(Node* root) {
     }
 }
 
+// Handler for moving nodes while dragging
 void Node::mouseMoveEvent(QMouseEvent *event) {
     if ((event->buttons() & Qt::LeftButton) && dragging) {
         this->move(mapToParent(event->pos()));
@@ -177,6 +181,7 @@ void Node::mouseMoveEvent(QMouseEvent *event) {
     }
 }
 
+// Handler for stopping the dragging of node
 void Node::mouseReleaseEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton && dragging) {
         dragging = false;
@@ -184,6 +189,7 @@ void Node::mouseReleaseEvent(QMouseEvent *event) {
     }
 }
 
+// Handler for initiating dragging
 void Node::mousePressEvent(QMouseEvent *event)
 {
     //cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
@@ -220,6 +226,7 @@ void Node::hoveredOver(Node* node) {
     }
 }
 
+// Handler for removing nodes with right click
 void Node::contextMenuEvent(QContextMenuEvent* event) {
     QMenu menu;
     QAction* del = menu.addAction("Delete Node");
