@@ -67,8 +67,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Open DB and enable foreign keys
     DatabaseManager& dbManager = DatabaseManager::instance();
-    if (!dbManager.openDatabase("metadata.db"))
-        qDebug() << "Could not open database!";
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir().mkpath(dbPath);
+    QString fullPath = dbPath + "/metadata.db";
+
+    if (!dbManager.openDatabase(fullPath)) {
+        QMessageBox::critical(this, "Database Error", "Could not open or create the database.");
+        return;
+    }
+
     {
         QSqlQuery pragma(dbManager.database());
         pragma.exec("PRAGMA foreign_keys = ON");
