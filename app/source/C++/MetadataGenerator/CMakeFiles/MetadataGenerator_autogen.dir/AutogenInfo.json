@@ -368,9 +368,21 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/addnodedialogue.h",
+			"MU",
+			"EWIEGA46WW/moc_addnodedialogue.cpp",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.h",
 			"MU",
 			"EWIEGA46WW/moc_colorhandler.cpp",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/customscrollarea.h",
+			"MU",
+			"EWIEGA46WW/moc_customscrollarea.cpp",
 			null
 		],
 		[
@@ -404,6 +416,12 @@
 			null
 		],
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/preferenceswindow.h",
+			"MU",
+			"EWIEGA46WW/moc_preferenceswindow.cpp",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.h",
 			"MU",
 			"EWIEGA46WW/moc_schema.cpp",
@@ -413,6 +431,12 @@
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.h",
 			"MU",
 			"EWIEGA46WW/moc_schemahandler.cpp",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/selectparentdialogue.h",
+			"MU",
+			"EWIEGA46WW/moc_selectparentdialogue.cpp",
 			null
 		],
 		[
@@ -496,7 +520,17 @@
 	"SOURCES" : 
 	[
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/addnodedialogue.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/colorhandler.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/customscrollarea.cpp",
 			"MU",
 			null
 		],
@@ -531,12 +565,22 @@
 			null
 		],
 		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/preferenceswindow.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schema.cpp",
 			"MU",
 			null
 		],
 		[
 			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/schemahandler.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/calvi/Documents/coding/UKYMetadataGenerator/app/source/C++/MetadataGenerator/selectparentdialogue.cpp",
 			"MU",
 			null
 		],

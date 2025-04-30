@@ -2,12 +2,19 @@ cmake_minimum_required(VERSION 3.16)
 
 project(MetadataGenerator VERSION 0.1 LANGUAGES CXX)
 
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if (MSVC)
+    add_compile_options(/Zc:__cplusplus)
+endif()
+
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Core Sql)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Sql)
@@ -39,6 +46,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         preferenceswindow.h preferenceswindow.cpp preferenceswindow.ui
         addnodedialogue.h addnodedialogue.cpp addnodedialogue.ui
         selectparentdialogue.h selectparentdialogue.cpp selectparentdialogue.ui
+        customscrollarea.h customscrollarea.cpp
+        GridLayoutUtil.h
+        drawconnection.h drawconnection.cpp
 
     )
 # Define target properties for Android with Qt 6 as:

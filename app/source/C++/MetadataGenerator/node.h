@@ -3,6 +3,7 @@
 
 #include <QtWidgets>
 #include <qlineedit.h>
+#include <queue>
 
 using namespace std;
 
@@ -22,9 +23,11 @@ public:
     int name;
     QString key;
     QString value;
+    std::queue<std::string> fullName;
     int row;
     int column;
-    vector<Node> children;
+    int dbId = 0;
+    vector<Node*> children;
     QTextEdit *widget;
     QSpacerItem *spacer;
     int nodeVariant;
@@ -42,23 +45,39 @@ public:
     QString getValue();
     void setValue(QString newValue);
 
-    void addChild(Node newChild);
+    void addChild(Node* newChild);
     void removeChild(Node oldChild);
     void removeChild(int index);
 
+    void hideNodes(Node* node);
+    bool collapsed;
+
     bool equals(Node Node2);
     void mousePressEvent(QMouseEvent *event);
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 
 public slots:
     void setValue(int value);
     void resize_to_text();
+    void hoveredOver(Node* node);
 
 signals:
     void valueChanged(int newValue);
     void beParent(Node* parent);
+    void hidden(Node* node);
+    void moved(Node* node);
+    void requestDelete(Node*);
 
 private:
     QLineEdit *lineEdit;
+    QPoint dragDiff;
+    bool dragging;
+
+protected:
+    void contextMenuEvent(QContextMenuEvent* event) override;
 };
+
 
 #endif // NODE_H

@@ -1,0 +1,81 @@
+{
+    "Metadata": {
+        "Data Citation": {
+            "Abstract": {
+                "fed": "fse"
+            },
+            "Date of Deposit": "pending",
+            "Depositor": [
+                {
+                    "Name": "Bryan Maloney",
+                    "email": "bjma@uky.edu"
+                }
+            ],
+            "Funding Agency": "UK",
+            "Grant Number": "x",
+            "Institution": "University of Kentucky",
+            "Keywords": "Epilepsy drug discovery anti-inflammatory",
+            "Principal Investigator": [
+                {
+                    "Name": "Bjoern Bauer",
+                    "ORCID": "0000-0003-3867-2251",
+                    "email": "bjoern.bauer@uky.edu"
+                },
+                {
+                    "Name": "Anika Hartz",
+                    "ORCID": "0000-0001-9276-0688",
+                    "email": "anika.hartz@uky.edu"
+                },
+                {
+                    "Name": "Zhan",
+                    "ORCID": "",
+                    "email": ""
+                }
+            ],
+            "Title": "TEAMS Grant",
+            "doi": "pending"
+        },
+        "Projects": [
+            {
+                "Aims": [
+                    {
+                        "Name": "Design, synthesis, & in vitro activity",
+                        "Workers": [
+                            {
+                                "Name": "Zhan",
+                                "ORCID": "",
+                                "email": ""
+                            },
+                            {
+                                "Name": "Bjoern Bauer",
+                                "ORCID": "0000-0003-3867-2251",
+                                "email": "bjoern.bauer@uky.edu"
+                            }
+                        ]
+                    }
+                ],
+                "Name": "Novel mPGES Inhibitors",
+                "Workers": [
+                    {
+                        "Name": "Zhan",
+                        "ORCID": "",
+                        "email": ""
+                    },
+                    {
+                        "Name": "Bjoern Bauer",
+                        "ORCID": "0000-0003-3867-2251",
+                        "email": "bjoern.bauer@uky.edu"
+                    }
+                ]
+            }
+        ],
+        "Publications": [
+            {
+                "Authors": "",
+                "Journal": "",
+                "Title": "",
+                "Year": ""
+            }
+        ]
+    }
+}

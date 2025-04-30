@@ -1,0 +1,46 @@
+{
+    "Metadata": {
+        "Projects": [
+            {
+                "Aims": [
+                    {
+                        "Name": "Design, synthesis, & in vitro activity",
+                        "Workers": [
+                            {
+                                "Name": "Zhan",
+                                "ORCID": "",
+                                "email": ""
+                            },
+                            {
+                                "Name": "Bjoern Bauer",
+                                "ORCID": "0000-0003-3867-2251",
+                                "email": "bjoern.bauer@uky.edu"
+                            }
+                        ]
+                    }
+                ],
+                "Name": "Novel mPGES Inhibitors",
+                "Workers": [
+                    {
+                        "Name": "Zhan",
+                        "ORCID": "",
+                        "email": "bobb"
+                    },
+                    {
+                        "Name": "Bjoern Bauer",
+                        "ORCID": "0000-0003-3867-2251",
+                        "email": "bjoern.bauer@uky.edu"
+                    }
+                ]
+            }
+        ],
+        "Publications": [
+            {
+                "Authors": "",
+                "Journal": "",
+                "Title": "",
+                "Year": ""
+            }
+        ]
+    }
+}

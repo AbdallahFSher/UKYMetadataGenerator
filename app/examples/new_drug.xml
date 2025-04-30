@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <Metadata>
+        <Data_Citation>
+            <Abstract>Evaluation of novel mPGES-1 inhibitor BAR-002 in lithium-pilocarpine induced status epilepticus rat model</Abstract>
+            <Date_of_Deposit>pending</Date_of_Deposit>
+            <Depositor>
+                <item>
+                    <Name>Bryan Maloney</Name>
+                    <email>bjma@uky.edu</email>
+                </item>
+            </Depositor>
+            <Funding_Agency>NIH/NINDS</Funding_Agency>
+            <Grant_Number>R01NS123456</Grant_Number>
+            <Institution>University of Kentucky</Institution>
+            <Keywords>Epilepsy, drug discovery, anti-inflammatory, BBB protection</Keywords>
+            <Principal_Investigator>
+                <item>
+                    <Name>Bjoern Bauer</Name>
+                    <ORCID>0000-0003-3867-2251</ORCID>
+                    <email>bjoern.bauer@uky.edu</email>
+                </item>
+            </Principal_Investigator>
+            <Title>Evaluation of mPGES-1 Inhibitor BAR-002 in Acute SE Rat Model</Title>
+            <doi>pending</doi>
+        </Data_Citation>
+        <Projects>
+            <item>
+                <Aims>
+                    <item>
+                        <Name>Therapeutic benefits of mPGES-1 inhibitors</Name>
+                        <Studies>
+                            <item>
+                                <Design>Randomized controlled</Design>
+                                <DesignType>Therapeutic efficacy</DesignType>
+                                <End_Date>2023-04-15</End_Date>
+                                <Equipment>
+                                    <item>
+                                        <Make>Pinnacle Technology</Make>
+                                        <Model>8200-K1-SE</Model>
+                                        <Settings>Sampling rate: 1 kHz, Bandpass: 0.5-100 Hz</Settings>
+                                        <Type>EEG System</Type>
+                                    </item>
+                                    <item>
+                                        <Make>Axis</Make>
+                                        <Model>Q1615</Model>
+                                        <Settings>1080p, 30fps, IR illumination</Settings>
+                                        <Type>Video Monitoring</Type>
+                                    </item>
+                                </Equipment>
+                                <Foci>
+                                    <item>
+                                        <Assays>
+                                            <item>
+                                                <Assayists>
+                                                    <item>
+                                                        <Name>Lab Technician</Name>
+                                                        <ORCID></ORCID>
+                                                        <email></email>
+                                                    </item>
+                                                </Assayists>
+                                                <Data>
+                                                    <item>
+                                                        <data_source>Pinnacle Acquisition</data_source>
+                                                        <data_type>EEG traces</data_type>
+                                                        <file_date></file_date>
+                                                        <file_name>EEG_raw_data.mat</file_name>
+                                                        <file_size></file_size>
+                                                        <file_type>MATLAB</file_type>
+                                                        <recommended_software>MATLAB, LabChart</recommended_software>
+                                                    </item>
+                                                </Data>
+                                                <Date>
+                                                    <item>
+                                                        <End>2023-04-10</End>
+                                                        <Start>2023-01-20</Start>
+                                                    </item>
+                                                </Date>
+                                                <Equipment>
+                                                    <item>
+                                                        <Make>Pinnacle Technology</Make>
+                                                        <Model>8200-K1-SE</Model>
+                                                        <Settings></Settings>
+                                                        <Type>EEG System</Type>
+                                                    </item>
+                                                </Equipment>
+                                                <Kit_Reagents>
+                                                    <item>
+                                                        <Catalogue_>8209</Catalogue_>
+                                                        <Make>Pinnacle Technology</Make>
+                                                        <Parameters>
+                                                            <item>
+                                                                <Condition>Sterilized</Condition>
+                                                                <Material>Stainless steel</Material>
+                                                            </item>
+                                                        </Parameters>
+                                                        <Type>EEG Electrodes</Type>
+                                                    </item>
+                                                </Kit_Reagents>
+                                                <Name>Video-EEG Recording</Name>
+                                                <Outcome_Measure>Seizure frequency, duration, severity (Racine scale)</Outcome_Measure>
+                                                <Substrate>Whole animal</Substrate>
+                                                <Target>Seizure activity</Target>
+                                                <Type>Electrophysiology</Type>
+                                            </item>
+                                        </Assays>
+                                        <Name>Seizure Monitoring</Name>
+                                        <Workers>
+                                            <item>
+                                                <Name>Bjoern Bauer</Name>
+                                                <ORCID>0000-0003-3867-2251</ORCID>
+                                                <email>bjoern.bauer@uky.edu</email>
+                                            </item>
+                                        </Workers>
+                                    </item>
+                                    <item>
+                                        <Assays>
+                                            <item>
+                                                <Assayists>
+                                                    <item>
+                                                        <Name>Lab Technician</Name>
+                                                        <ORCID></ORCID>
+                                                        <email></email>
+                                                    </item>
+                                                </Assayists>
+                                                <Data>
+                                                    <item>
+                                                        <data_source>Gen5 Software</data_source>
+                                                        <data_type>ELISA absorbance</data_type>
+                                                        <file_date></file_date>
+                                                        <file_name>PGE2_results.xlsx</file_name>
+                                                        <file_size></file_size>
+                                                        <file_type>Excel</file_type>
+                                                        <recommended_software>Excel, GraphPad Prism</recommended_software>
+                                                    </item>
+                                                </Data>
+                                                <Date>
+                                                    <item>
+                                                        <End>2023-04-10</End>
+                                                        <Start>2023-04-01</Start>
+                                                    </item>
+                                                </Date>
+                                                <Equipment>
+                                                    <item>
+                                                        <Make>BioTek</Make>
+                                                        <Model>Synergy H1</Model>
+                                                        <Settings>450 nm absorbance</Settings>
+                                                        <Type>Microplate Reader</Type>
+                                                    </item>
+                                                </Equipment>
+                                                <Kit_Reagents>
+                                                    <item>
+                                                        <Catalogue_>514010</Catalogue_>
+                                                        <Make>Cayman Chemical</Make>
+                                                        <Parameters>
+                                                            <item>
+                                                                <Condition>4°C storage</Condition>
+                                                                <Material>Antibody-coated plate</Material>
+                                                            </item>
+                                                        </Parameters>
+                                                        <Type>PGE2 ELISA Kit</Type>
+                                                    </item>
+                                                </Kit_Reagents>
+                                                <Name>PGE2 ELISA</Name>
+                                                <Outcome_Measure>PGE2 concentration (pg/mg protein)</Outcome_Measure>
+                                                <Substrate>Brain homogenate</Substrate>
+                                                <Target>PGE2</Target>
+                                                <Type>ELISA</Type>
+                                            </item>
+                                            <item>
+                                                <Assayists>
+                                                    <item>
+                                                        <Name>Analytical Chemist</Name>
+                                                        <ORCID></ORCID>
+                                                        <email></email>
+                                                    </item>
+                                                </Assayists>
+                                                <Data>
+                                                    <item>
+                                                        <data_source>MassHunter</data_source>
+                                                        <data_type>Mass spectra</data_type>
+                                                        <file_date></file_date>
+                                                        <file_name>GCMS_data.d</file_name>
+                                                        <file_size></file_size>
+                                                        <file_type>Agilent Data</file_type>
+                                                        <recommended_software>MassHunter, Excel</recommended_software>
+                                                    </item>
+                                                </Data>
+                                                <Date>
+                                                    <item>
+                                                        <End>2023-04-12</End>
+                                                        <Start>2023-04-05</Start>
+                                                    </item>
+                                                </Date>
+                                                <Equipment>
+                                                    <item>
+                                                        <Make>Agilent</Make>
+                                                        <Model>7890B/5977B</Model>
+                                                        <Settings>EI mode, m/z 100-600</Settings>
+                                                        <Type>GC-MS System</Type>
+                                                    </item>
+                                                </Equipment>
+                                                <Kit_Reagents>
+                                                    <item>
+                                                        <Catalogue_>BAR-002-d4</Catalogue_>
+                                                        <Make>Sigma-Aldrich</Make>
+                                                        <Parameters>
+                                                            <item>
+                                                                <Condition>-20°C storage</Condition>
+                                                                <Material>Deuterated standard</Material>
+                                                            </item>
+                                                        </Parameters>
+                                                        <Type>Internal Standard</Type>
+                                                    </item>
+                                                </Kit_Reagents>
+                                                <Name>Drug Concentration GC-MS</Name>
+                                                <Outcome_Measure>Drug concentration (ng/mL)</Outcome_Measure>
+                                                <Substrate>Plasma</Substrate>
+                                                <Target>BAR-002</Target>
+                                                <Type>GC-MS</Type>
+                                            </item>
+                                        </Assays>
+                                        <Name>Biochemical Analysis</Name>
+                                        <Workers>
+                                            <item>
+                                                <Name>Bjoern Bauer</Name>
+                                                <ORCID>0000-0003-3867-2251</ORCID>
+                                                <email>bjoern.bauer@uky.edu</email>
+                                            </item>
+                                        </Workers>
+                                    </item>
+                                </Foci>
+                                <Name>Acute SE Rat Study</Name>
+                                <Organisms>
+                                    <item>
+                                        <Age_Passage>8-10 weeks</Age_Passage>
+                                        <Genus_species>Rattus norvegicus</Genus_species>
+                                        <Line_Strain>Sprague-Dawley</Line_Strain>
+                                    </item>
+                                </Organisms>
+                                <Start_Date>2023-01-15</Start_Date>
+                                <Treatments_Groups>Vehicle control (SE only), SE + BAR-002 (10 mg/kg), SE + BAR-002 (30 mg/kg), SE + valproate (200 mg/kg)</Treatments_Groups>
+                                <Workers>
+                                    <item>
+                                        <Name>Bjoern Bauer</Name>
+                                        <ORCID>0000-0003-3867-2251</ORCID>
+                                        <email>bjoern.bauer@uky.edu</email>
+                                    </item>
+                                </Workers>
+                            </item>
+                        </Studies>
+                        <Workers>
+                            <item>
+                                <Name>Bjoern Bauer</Name>
+                                <ORCID>0000-0003-3867-2251</ORCID>
+                                <email>bjoern.bauer@uky.edu</email>
+                            </item>
+                        </Workers>
+                    </item>
+                </Aims>
+                <Name>Preclinical Testing of mPGES-1 Inhibitors</Name>
+                <Workers>
+                    <item>
+                        <Name>Bjoern Bauer</Name>
+                        <ORCID>0000-0003-3867-2251</ORCID>
+                        <email>bjoern.bauer@uky.edu</email>
+                    </item>
+                </Workers>
+            </item>
+        </Projects>
+        <Publications>
+            <item>
+                <Authors></Authors>
+                <Journal></Journal>
+                <Title></Title>
+                <Year></Year>
+            </item>
+        </Publications>
+    </Metadata>
+</root>

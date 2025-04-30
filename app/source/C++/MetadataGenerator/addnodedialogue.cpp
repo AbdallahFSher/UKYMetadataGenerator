@@ -23,6 +23,7 @@ void AddNodeDialogue::setParent(Node* parent) {
         this->newNode->setValue(this->ui->valueEdit->text());
         this->newNode->row = parent->row + 1;
         this->newNode->column = parent->column;
+        this->newNode->nodeParent->children.push_back(newNode);
         this->spd->hide();
         this->ignoreSignals = true;
         emit this->createNode(newNode);

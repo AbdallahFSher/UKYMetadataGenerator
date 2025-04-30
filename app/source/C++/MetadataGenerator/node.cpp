@@ -1,17 +1,21 @@
 #include "Node.h"
 #include <iostream>
+#include <QMenu>
+#include <QContextMenuEvent>
 
 using namespace std;
 
-// TODO: Give information to schema which delineates nodeVariant (color)
+// CONSTRUCTORS
+// Use this constructor to actually create node inside of QWidget
 Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     : QFrame(parent)
 {
+    this->collapsed = false;
     this->nodeParent = nodeParent;
     this->nodeVariant = nodeVariant;
     this->content = map<QString, QString>(); // dictionary
-    this->children = std::vector<Node>();
-    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    this->children = std::vector<Node*>();
+    this->spacer = new QSpacerItem(1, 1, QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     this->header = new QLineEdit(this);
     this->header->setVisible(true);
@@ -22,10 +26,10 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->bottomBar->setVisible(true);
 
     this->setLayout(new QVBoxLayout());
-    this->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    this->header->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
-    this->bottomBar->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
+    this->header->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    this->bottomBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     connect(header, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
     connect(bottomBar, SIGNAL(textChanged(QString)), this, SLOT(resize_to_text()));
@@ -41,11 +45,13 @@ Node::Node(QWidget *parent, const int nodeVariant, Node* nodeParent)
     this->setVisible(true);
 }
 
+// Create an empty node
 Node::Node() {
+    this->collapsed = false;
     this->nodeParent = nullptr;
     this->nodeVariant = 0;
     this->content = map<QString, QString>(); // dictionary
-    this->children = std::vector<Node>();
+    this->children = std::vector<Node*>();
     this->spacer = new QSpacerItem(1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
     this->header = new QLineEdit(this);
@@ -113,8 +119,8 @@ void Node::setValue(int value) {
     this->value = (QChar)value;
 }
 
-void Node::addChild(Node newChild) {
-//    children.push_back(newChild);
+void Node::addChild(Node* newChild) {
+    this->children.push_back(newChild);
 }
 
 void Node::removeChild(Node oldChild) {
@@ -138,50 +144,95 @@ bool Node::equals(Node Node2) {
     return false;
 }
 
+// Handler to hide nodes on double click
+void Node::mouseDoubleClickEvent(QMouseEvent *event) {
+    if(event->button() == Qt::LeftButton) {
+        hideNodes(this);
+        collapsed = !collapsed;
+    }
+}
+
+void Node::hideNodes(Node* root) {
+    if(root->children.size() != 0) {
+        for(int i = 0; i < root->children.size(); i++) {
+            root->children[i]->setVisible(collapsed);
+            hideNodes(root->children[i]);
+            emit hidden(root->children[i]);
+        }
+    }
+}
+
+// Handler for moving nodes while dragging
+void Node::mouseMoveEvent(QMouseEvent *event) {
+    if ((event->buttons() & Qt::LeftButton) && dragging) {
+        this->move(mapToParent(event->pos()));
+
+        /*
+        QGridLayout* grid = static_cast<QGridLayout*>(this->parent());
+        int row = mapToParent(event->pos()).x() / grid->horizontalSpacing();
+        int col = mapToParent(event->pos()).y() / grid->verticalSpacing();
+        auto hoveredOver = grid->itemAtPosition(row, col);
+        if (hoveredOver && hoveredOver->widget() != this) {
+            hoveredOver->widget()->setStyleSheet("background: white");
+        }
+        */
+
+        emit moved(this);
+    }
+}
+
+// Handler for stopping the dragging of node
+void Node::mouseReleaseEvent(QMouseEvent *event) {
+    if (event->button() == Qt::LeftButton && dragging) {
+        dragging = false;
+        this->setCursor(Qt::ArrowCursor);
+    }
+}
+
+// Handler for initiating dragging
 void Node::mousePressEvent(QMouseEvent *event)
 {
     //cout << "MOUSE CLICKED" << toPlainText().toStdString() << endl;
     if (event->button() == Qt::LeftButton) {
         emit this->beParent(this);
+
+        this->raise();
+        this->setCursor(Qt::BlankCursor);
+        dragging = true;
+        /*
         QPoint startPos = mapFromGlobal(QCursor::pos());
 
 
         QDrag *drag = new QDrag(this);
         QMimeData *mimeData = new QMimeData;
 
-        QImage image(QSize(400,300),QImage::Format_RGB32);
-        QPainter painter(&image);
-        painter.setBrush(QBrush(Qt::green));
-        painter.fillRect(QRectF(0,0,400,300),Qt::green);
-        painter.fillRect(QRectF(100,100,200,100),Qt::white);
-        painter.setPen(QPen(Qt::black));
-        painter.drawText(QRect(100,100,200,100),"Text you want to draw...");
-
-        //QPixmap pixmap = QPixmap(this->size());
-        //this->render(pixmap);
-        //QRect rect = this->rect();
-        //QVariant var = QVariant(rect);
-        //mimeData->setImageData(image);
-
-        mimeData->setText("");
+        mimeData->setImageData(this->grab());
         drag->setMimeData(mimeData);
-        //QImage img = var.value<QImage>();
-        //drag->setPixmap(pixmap);
-        //drag->setPixmap(QPixmap::fromImage(image));
+        drag->setPixmap(this->grab());
 
         Qt::DropAction dropAction = drag->exec(Qt::MoveAction);
         QPoint endPos = mapFromGlobal(QCursor::pos());
         QPoint diff = endPos - startPos;
-        //QPoint diff = endPos;
 
-        //cout << "INITALPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
         this->move(this->pos() + diff);
-        //cout << "ENDPOS: " << (QString("%1x%2").arg(this->pos().x()).arg(this->pos().y())).toStdString() << endl;
-        //cout << "START MOUSE POS: " << (QString("%1x%2").arg(startPos.x()).arg(startPos.y())).toStdString() << endl;
-        //cout << "END MOUSE POS: " << (QString("%1x%2").arg(endPos.x()).arg(endPos.y())).toStdString() << endl;
-        //cout << "DIFF: " << (QString("%1x%2").arg(diff.x()).arg(diff.y())).toStdString() << endl;
+        emit moved(this);
+        */
+    }
+}
 
-        //cout << drag->pixmap().height() << "x" << drag->pixmap().width() << endl;
+void Node::hoveredOver(Node* node) {
+    if (this->name != node->name && this->rect().intersects(node->rect())) {
+        node->setStyleSheet("background: white");
+    }
+}
+
+// Handler for removing nodes with right click
+void Node::contextMenuEvent(QContextMenuEvent* event) {
+    QMenu menu;
+    QAction* del = menu.addAction("Delete Node");
+    QAction* chosen = menu.exec(event->globalPos());
+    if (chosen == del) {
+        emit requestDelete(this);
     }
 }
 
