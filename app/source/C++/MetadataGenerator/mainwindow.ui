@@ -155,7 +155,7 @@
   <customwidget>
    <class>DrawConnection</class>
    <extends>QWidget</extends>
-   <header>../../../../drawconnection.h</header>
+   <header>drawconnection.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

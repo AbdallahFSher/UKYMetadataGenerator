@@ -22,6 +22,7 @@ DatabaseManager::~DatabaseManager() {
     closeDatabase();
 }
 
+// Opens the SQLite database and enables foreign keys
 bool DatabaseManager::openDatabase(const QString& path) {
     db.setDatabaseName(path);
     if (!db.open()) {
@@ -43,17 +44,19 @@ bool DatabaseManager::openDatabase(const QString& path) {
     return true;
 }
 
-
+// Closes the database connection
 void DatabaseManager::closeDatabase() {
     if (db.isOpen()) {
         db.close();
     }
 }
 
+// Provides reference to internal QSqlDatabase
 QSqlDatabase& DatabaseManager::database() {
     return db;
 }
 
+// Inserts a new field into the schema_fields table, avoiding duplicates under the same parent
 int DatabaseManager::insertSchemaField(int parentId, const QString& name, const QString& type)
 {
     // check for duplicate under same parent (NULL means root)
@@ -90,7 +93,7 @@ int DatabaseManager::insertSchemaField(int parentId, const QString& name, const 
     return insertQuery.lastInsertId().toInt();
 }
 
-
+// Inserts a field within a transaction for rollback safety
 bool DatabaseManager::insertSchemaFieldWithTransaction(int parentId, const QString& key, const QString& value)
 {
     if (!db.transaction()) {
@@ -107,10 +110,12 @@ bool DatabaseManager::insertSchemaFieldWithTransaction(int parentId, const QStri
     return db.commit();
 }
 
+// Constructs a full hierarchical tree from schema_fields
 QVariantMap DatabaseManager::buildTreeFromDatabase() {
     return buildSubtree(0); // Root parent_id = 0
 }
 
+// Recursive helper to build tree structure from schema_fields
 QVariantMap DatabaseManager::buildSubtree(int parentId, int depth) {
     QVariantMap tree;
     if (depth > 100) {
@@ -177,7 +182,7 @@ QVariantMap DatabaseManager::buildSubtree(int parentId, int depth) {
     return tree;
 }
 
-
+// Deletes all rows from the schema_fields table
 bool DatabaseManager::clearDatabase() {
     QSqlQuery query(db);
     bool success = query.exec("DELETE FROM schema_fields");
@@ -185,6 +190,7 @@ bool DatabaseManager::clearDatabase() {
     return success;
 }
 
+// Recursively deletes a node and its subtree from schema_fields
 void DatabaseManager::deleteSubtree(int id)
 {
     // first delete all children
@@ -205,6 +211,7 @@ void DatabaseManager::deleteSubtree(int id)
 
 // -------- Export Helpers -------- //
 
+// Exports schema tree to a JSON file
 bool DatabaseManager::exportToJson(const QString& filePath) {
     QVariantMap data = buildTreeFromDatabase();
     if (data.isEmpty()) {
@@ -236,8 +243,7 @@ bool DatabaseManager::exportToJson(const QString& filePath) {
     return true;
 }
 
-
-
+// Exports schema tree to an XML file
 bool DatabaseManager::exportToXml(const QString& filePath) {
     QVariantMap data = buildTreeFromDatabase();
     QFile file(filePath);
@@ -297,7 +303,7 @@ bool DatabaseManager::exportToXml(const QString& filePath) {
     return true;
 }
 
-//maybe correct??
+// Exports schema tree to an GAML file
 bool DatabaseManager::exportToGaml(const QString& filePath) {
     QVariantMap data = buildTreeFromDatabase();
     QFile file(filePath);
@@ -354,6 +360,7 @@ bool DatabaseManager::exportToGaml(const QString& filePath) {
     return true;
 }
 
+// Exports schema tree to an Yaml file
 bool DatabaseManager::exportToYaml(const QString& filePath) {
     QVariantMap data = buildTreeFromDatabase();
     if (data.isEmpty()) {
@@ -409,6 +416,7 @@ bool DatabaseManager::exportToYaml(const QString& filePath) {
     return true;
 }
 
+// Prints the database, used in debugging
 void DatabaseManager::printSchemaTable() {
     QSqlQuery query(db);
     if (!query.exec("SELECT id, parent_id, name, type FROM schema_fields ORDER BY id")) {
